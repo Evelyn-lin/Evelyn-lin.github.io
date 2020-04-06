@@ -1,6 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>使用hexo从零开始搭建博客</title>
+    <url>/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<p>&emsp;&emsp;之前做了一个个人主页，但是由于部署在github，导致国内网打开很慢的原因，因此上网搜索了一些解决的办法。看到很多搭建博客的方法，索性不如也把自己的博客搭建起来，于是乎，特此写一篇笔记记录一下心得以及踩过的大部分坑吧~</p>
+<a id="more"></a> 
+
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h3><p>打开<a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js官网</a>下载安装node.js<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/1.png" alt></p>
+<h3 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h3><p>打开<a href="https://git-scm.com/download" target="_blank" rel="noopener">Git官网</a>,选择下载对应版本安装<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/2.png" alt></p>
+<h3 id="cnpm"><a href="#cnpm" class="headerlink" title="cnpm"></a>cnpm</h3><p>由于npm的服务器位于国外可能影响安装，为了提高下载速度，我们来安装一个cnpm<br><code>npm install cnpm -g --registry=https://registry.npm.taobao.org</code></p>
+<h3 id="全局安装hexo"><a href="#全局安装hexo" class="headerlink" title="全局安装hexo"></a>全局安装hexo</h3><p><code>cnpm install -g hexo</code></p>
+<h2 id="搭建一个博客"><a href="#搭建一个博客" class="headerlink" title="搭建一个博客"></a>搭建一个博客</h2><h3 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h3><p>输入<code>hexo init</code>初始化项目<br>然后会出现这样一个目录<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/3.png" alt></p>
+<h3 id="打包成静态文件"><a href="#打包成静态文件" class="headerlink" title="打包成静态文件"></a>打包成静态文件</h3><p>输入<code>hexo g</code>会将文件编译为静态文件，md格式会编译为html<br>此时文件中会多出一个<code>public</code>文件夹</p>
+<h3 id="本地运行"><a href="#本地运行" class="headerlink" title="本地运行"></a>本地运行</h3><p>输入<code>hexo s</code> 运行，在浏览器中输入 <code>http://localhost:4000</code><br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/4.png" alt></p>
+<h2 id="部署到码云"><a href="#部署到码云" class="headerlink" title="部署到码云"></a>部署到码云</h2><h3 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h3><p>进入<a href="https://gitee.com/" target="_blank" rel="noopener">码云官网</a>，登录账号，创建一个仓库，注意仓库路径必须是<code>&lt;user-name&gt;.github.io</code>,<code>&lt;user-name&gt;</code>是自己的用户名<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/5.png" alt><br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/6.png" alt></p>
+<h3 id="连接仓库"><a href="#连接仓库" class="headerlink" title="连接仓库"></a>连接仓库</h3><p>点击仓库旁的 克隆下载，复制https地址<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/7.png" alt><br>然后打开blog文件夹中的<code>_config.yml</code>文件（项目配置文件），搜索<code>deploy</code><br>将repo:后面的网址改成你复制的地址，保存。<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/8.png" alt></p>
+<h3 id="推送到仓库"><a href="#推送到仓库" class="headerlink" title="推送到仓库"></a>推送到仓库</h3><p>安装<code>hexo-deployer-git</code>模块，gitbash 运行 <code>cnpm install hexo-deployer-git --save</code></p>
+<p>安装好之后，文件夹会多出来一个.deploy_git,然后运行命令 <code>hexo g -d</code>,就可以把内容推送到码云了。</p>
+<h3 id="开启码云Page服务"><a href="#开启码云Page服务" class="headerlink" title="开启码云Page服务"></a>开启码云Page服务</h3><p>点击仓库右上角的服务，然后点击Gitee Pages<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/9.png" alt><br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/10.png" alt><br>注意，以后每次提交至gitee后都要来手动更新哦~~也可以花钱购买自动部署服务</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Next主题优化配置</title>
+    <url>/2020/04/06/Next%E4%B8%BB%E9%A2%98%E4%BC%98%E5%8C%96/</url>
+    <content><![CDATA[<p>&emsp;&emsp;前几天使用Hexo搭了一个博客，在不断优化过程中去不断的搜集教程，在这里我把自己使用到的方面记录下来，方便今后的查阅。</p>
+<a id="more"></a>
+<h2 id="Markdown-语法"><a href="#Markdown-语法" class="headerlink" title="Markdown 语法"></a>Markdown 语法</h2><p>在写博客的过程中，对markdown语法还不是特别熟悉，记录几个语法吧。</p>
+<h3 id="空白符"><a href="#空白符" class="headerlink" title="空白符"></a>空白符</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">半方大的空白   <span class="symbol">&amp;ensp;</span>  或  <span class="symbol">&amp;#8194;</span></span><br><span class="line">全方大的空白   <span class="symbol">&amp;emsp;</span>  或  <span class="symbol">&amp;#8195;</span></span><br><span class="line">不断行的空白格 <span class="symbol">&amp;nbsp;</span>  或  <span class="symbol">&amp;#160;</span></span><br></pre></td></tr></table></figure>
+<h3 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">行内式链接形式：[<span class="string">超链接文字</span>](<span class="link">url</span>) </span><br><span class="line">[百度]https://www.baidu.com)</span><br></pre></td></tr></table></figure>
+<p><strong>在新窗口打开页面</strong></p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">&lt;a <span class="attribute">href</span>=<span class="string">"/work/manager/index.html"</span> <span class="attribute">target</span>=<span class="string">"_blank"</span>&gt;共享单车后台管理系统&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+<p><a href="/work/manager/index.html" target="_blank">共享单车后台管理系统</a></p>
+<h3 id="添加图片"><a href="#添加图片" class="headerlink" title="添加图片"></a>添加图片</h3><figure class="highlight less"><table><tr><td class="code"><pre><span class="line">!<span class="selector-attr">[]</span>(<span class="number">1</span>.jpg)  <span class="comment">//图片放在与文章同名的文件夹中</span></span><br></pre></td></tr></table></figure>
+<h3 id="文字颜色"><a href="#文字颜色" class="headerlink" title="文字颜色"></a>文字颜色</h3><p>这是<label style="color:red">红色</label>字体</p>
+<figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line">这是&lt;<span class="built_in">label</span> <span class="built_in">style</span>=<span class="string">"color:red"</span>&gt;红色&lt;/<span class="built_in">label</span>&gt;字体</span><br></pre></td></tr></table></figure>
+<h2 id="Next主题优化"><a href="#Next主题优化" class="headerlink" title="Next主题优化"></a>Next主题优化</h2><h3 id="设置阅读全文"><a href="#设置阅读全文" class="headerlink" title="设置阅读全文"></a>设置阅读全文</h3><p>&emsp;&emsp;在首页显示一篇文章的部分内容，并提供一个链接跳转到全文页面是一个常见的需求。 NexT 提供三种方式来控制文章在首页的显示方式。 也就是说，在首页显示文章的摘录并显示 <strong>阅读全文</strong> 按钮，可以通过以下方法：<br>1.在文章中使用<code>&lt;!-- more --&gt;</code> 手动进行截断，Hexo 提供的方式<br>2.在文章的 <code>front-matter</code> 中添加 <code>description</code>，并提供文章摘录<br>3.自动形成摘要，在 <strong>主题配置文件</strong> 中添加：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">auto_excerpt:</span></span><br><span class="line"><span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">length:</span> <span class="number">150</span></span><br></pre></td></tr></table></figure>
+<p>默认截取的长度为 150 字符，可以根据需要自行设定</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ES6相关知识点</title>
     <url>/2020/04/05/ES6/</url>
     <content><![CDATA[<p>今天来复习一下ES6的相关知识吧，打好每一个基础吧。那么开始吧</p>
@@ -201,31 +252,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Next主题优化配置</title>
-    <url>/2020/04/06/Next%E4%B8%BB%E9%A2%98%E4%BC%98%E5%8C%96/</url>
-    <content><![CDATA[<p>&emsp;&emsp;前几天使用Hexo搭了一个博客，在不断优化过程中去不断的搜集教程，在这里我把自己使用到的方面记录下来，方便今后的查阅。</p>
-<a id="more"></a>
-<h2 id="Markdown-语法"><a href="#Markdown-语法" class="headerlink" title="Markdown 语法"></a>Markdown 语法</h2><p>在写博客的过程中，对markdown语法还不是特别熟悉，记录几个语法吧。</p>
-<h3 id="空白符"><a href="#空白符" class="headerlink" title="空白符"></a>空白符</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">半方大的空白   <span class="symbol">&amp;ensp;</span>  或  <span class="symbol">&amp;#8194;</span></span><br><span class="line">全方大的空白   <span class="symbol">&amp;emsp;</span>  或  <span class="symbol">&amp;#8195;</span></span><br><span class="line">不断行的空白格 <span class="symbol">&amp;nbsp;</span>  或  <span class="symbol">&amp;#160;</span></span><br></pre></td></tr></table></figure>
-<h3 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">行内式链接形式：[<span class="string">超链接文字</span>](<span class="link">url</span>) </span><br><span class="line">[百度]https://www.baidu.com)</span><br></pre></td></tr></table></figure>
-<p><strong>在新窗口打开页面</strong></p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">&lt;a <span class="attribute">href</span>=<span class="string">"/work/manager/index.html"</span> <span class="attribute">target</span>=<span class="string">"_blank"</span>&gt;共享单车后台管理系统&lt;/a&gt;</span><br></pre></td></tr></table></figure>
-<p><a href="/work/manager/index.html" target="_blank">共享单车后台管理系统</a></p>
-<h3 id="添加图片"><a href="#添加图片" class="headerlink" title="添加图片"></a>添加图片</h3><figure class="highlight less"><table><tr><td class="code"><pre><span class="line">!<span class="selector-attr">[]</span>(<span class="number">1</span>.jpg)  <span class="comment">//图片放在与文章同名的文件夹中</span></span><br></pre></td></tr></table></figure>
-<h3 id="文字颜色"><a href="#文字颜色" class="headerlink" title="文字颜色"></a>文字颜色</h3><p>这是<label style="color:red">红色</label>字体</p>
-<figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line">这是&lt;<span class="built_in">label</span> <span class="built_in">style</span>=<span class="string">"color:red"</span>&gt;红色&lt;/<span class="built_in">label</span>&gt;字体</span><br></pre></td></tr></table></figure>
-<h2 id="Next主题优化"><a href="#Next主题优化" class="headerlink" title="Next主题优化"></a>Next主题优化</h2><h3 id="设置阅读全文"><a href="#设置阅读全文" class="headerlink" title="设置阅读全文"></a>设置阅读全文</h3><p>&emsp;&emsp;在首页显示一篇文章的部分内容，并提供一个链接跳转到全文页面是一个常见的需求。 NexT 提供三种方式来控制文章在首页的显示方式。 也就是说，在首页显示文章的摘录并显示 <strong>阅读全文</strong> 按钮，可以通过以下方法：<br>1.在文章中使用<code>&lt;!-- more --&gt;</code> 手动进行截断，Hexo 提供的方式<br>2.在文章的 <code>front-matter</code> 中添加 <code>description</code>，并提供文章摘录<br>3.自动形成摘要，在 <strong>主题配置文件</strong> 中添加：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">auto_excerpt:</span></span><br><span class="line"><span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">length:</span> <span class="number">150</span></span><br></pre></td></tr></table></figure>
-<p>默认截取的长度为 150 字符，可以根据需要自行设定</p>
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用hexo过程中遇到的坑</title>
     <url>/2020/04/04/hexo%E7%9B%B8%E5%85%B3%E7%9A%84%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<p>&emsp;&emsp;前几天突然心血来潮，想要自己搭建一个博客，正好可以将以前的笔记给系统整理一下。我的博客是使用<a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">Hexo</a>进行搭建的，跟着网上的教程一步一步的来，却不曾想老是碰见一些问题，不得不去查了好多资料来。在这里就记录几个自己在使用hexo过程中遇到的问题以及记录一下解决的方法。</p>
@@ -263,32 +289,6 @@
       <tags>
         <tag>hexo</tag>
         <tag>npm</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用hexo从零开始搭建博客</title>
-    <url>/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<p>&emsp;&emsp;之前做了一个个人主页，但是由于部署在github，导致国内网打开很慢的原因，因此上网搜索了一些解决的办法。看到很多搭建博客的方法，索性不如也把自己的博客搭建起来，于是乎，特此写一篇笔记记录一下心得以及踩过的大部分坑吧~</p>
-<a id="more"></a> 
-
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h3><p>打开<a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js官网</a>下载安装node.js<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/1.png" alt></p>
-<h3 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h3><p>打开<a href="https://git-scm.com/download" target="_blank" rel="noopener">Git官网</a>,选择下载对应版本安装<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/2.png" alt></p>
-<h3 id="cnpm"><a href="#cnpm" class="headerlink" title="cnpm"></a>cnpm</h3><p>由于npm的服务器位于国外可能影响安装，为了提高下载速度，我们来安装一个cnpm<br><code>npm install cnpm -g --registry=https://registry.npm.taobao.org</code></p>
-<h3 id="全局安装hexo"><a href="#全局安装hexo" class="headerlink" title="全局安装hexo"></a>全局安装hexo</h3><p><code>cnpm install -g hexo</code></p>
-<h2 id="搭建一个博客"><a href="#搭建一个博客" class="headerlink" title="搭建一个博客"></a>搭建一个博客</h2><h3 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h3><p>输入<code>hexo init</code>初始化项目<br>然后会出现这样一个目录<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/3.png" alt></p>
-<h3 id="打包成静态文件"><a href="#打包成静态文件" class="headerlink" title="打包成静态文件"></a>打包成静态文件</h3><p>输入<code>hexo g</code>会将文件编译为静态文件，md格式会编译为html<br>此时文件中会多出一个<code>public</code>文件夹</p>
-<h3 id="本地运行"><a href="#本地运行" class="headerlink" title="本地运行"></a>本地运行</h3><p>输入<code>hexo s</code> 运行，在浏览器中输入 <code>http://localhost:4000</code><br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/4.png" alt></p>
-<h2 id="部署到码云"><a href="#部署到码云" class="headerlink" title="部署到码云"></a>部署到码云</h2><h3 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h3><p>进入<a href="https://gitee.com/" target="_blank" rel="noopener">码云官网</a>，登录账号，创建一个仓库，注意仓库路径必须是<code>&lt;user-name&gt;.github.io</code>,<code>&lt;user-name&gt;</code>是自己的用户名<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/5.png" alt><br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/6.png" alt></p>
-<h3 id="连接仓库"><a href="#连接仓库" class="headerlink" title="连接仓库"></a>连接仓库</h3><p>点击仓库旁的 克隆下载，复制https地址<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/7.png" alt><br>然后打开blog文件夹中的<code>_config.yml</code>文件（项目配置文件），搜索<code>deploy</code><br>将repo:后面的网址改成你复制的地址，保存。<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/8.png" alt></p>
-<h3 id="推送到仓库"><a href="#推送到仓库" class="headerlink" title="推送到仓库"></a>推送到仓库</h3><p>安装<code>hexo-deployer-git</code>模块，gitbash 运行 <code>cnpm install hexo-deployer-git --save</code></p>
-<p>安装好之后，文件夹会多出来一个.deploy_git,然后运行命令 <code>hexo g -d</code>,就可以把内容推送到码云了。</p>
-<h3 id="开启码云Page服务"><a href="#开启码云Page服务" class="headerlink" title="开启码云Page服务"></a>开启码云Page服务</h3><p>点击仓库右上角的服务，然后点击Gitee Pages<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/9.png" alt><br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/10.png" alt><br>注意，以后每次提交至gitee后都要来手动更新哦~~也可以花钱购买自动部署服务</p>
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
