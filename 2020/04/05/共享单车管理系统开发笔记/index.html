@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="前一段时间跟着视频的学习一步一步完成了 共享单车管理系统 的开发，本次想要重新再回顾一遍，自己动手开始吧~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="共享单车管理系统之框架之主页面架构设计">
+<meta property="og:url" content="http://yoursite.com/2020/04/05/%E5%85%B1%E4%BA%AB%E5%8D%95%E8%BD%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Evelyn&#39;s Notes">
+<meta property="og:description" content="前一段时间跟着视频的学习一步一步完成了 共享单车管理系统 的开发，本次想要重新再回顾一遍，自己动手开始吧~">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-05T02:32:04.000Z">
+<meta property="article:modified_time" content="2020-04-06T04:46:37.804Z">
+<meta property="article:author" content="Evelyn">
+<meta property="article:tag" content="React">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/04/05/%E5%85%B1%E4%BA%AB%E5%8D%95%E8%BD%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>共享单车管理系统之框架之主页面架构设计 | Evelyn's Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Evelyn's Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">刻下生活的记忆</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-作品">
+
+    <a href="/portfolio/" rel="section"><i class="fa fa-list fa-fw"></i>作品</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">6</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/05/%E5%85%B1%E4%BA%AB%E5%8D%95%E8%BD%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Evelyn">
+      <meta itemprop="description" content="告别无忧无虑">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Evelyn's Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          共享单车管理系统之框架之主页面架构设计
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-05 10:32:04" itemprop="dateCreated datePublished" datetime="2020-04-05T10:32:04+08:00">2020-04-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-06 12:46:37" itemprop="dateModified" datetime="2020-04-06T12:46:37+08:00">2020-04-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/05/%E5%85%B1%E4%BA%AB%E5%8D%95%E8%BD%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/05/%E5%85%B1%E4%BA%AB%E5%8D%95%E8%BD%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>前一段时间跟着视频的学习一步一步完成了 共享单车管理系统 的开发，本次想要重新再回顾一遍，自己动手开始吧~</p>
+<a id="more"></a> 
+
+<h2 id="两种方式创建一个react应用"><a href="#两种方式创建一个react应用" class="headerlink" title="两种方式创建一个react应用"></a>两种方式创建一个react应用</h2><figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">npm </span><span class="string">install </span><span class="built_in">create-react-app</span> -g</span><br><span class="line"><span class="built_in">create-react-app</span> <span class="string">my-app</span></span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">npx </span><span class="string">install </span><span class="built_in">create-react-app</span> <span class="string">my-app</span></span><br></pre></td></tr></table></figure>
+<p>直接使用官方的脚手架吧~<br><code>npm start</code>运行</p>
+<h2 id="安装相关依赖"><a href="#安装相关依赖" class="headerlink" title="安装相关依赖"></a>安装相关依赖</h2><h3 id="全局安装yarn"><a href="#全局安装yarn" class="headerlink" title="全局安装yarn"></a>全局安装yarn</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> yarn -g</span><br></pre></td></tr></table></figure>
+<h3 id="安装react-router"><a href="#安装react-router" class="headerlink" title="安装react-router"></a>安装<code>react-router</code></h3><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn <span class="keyword">add</span><span class="bash"> react-router-dom --save</span></span><br></pre></td></tr></table></figure>
+<h3 id="安装AntD"><a href="#安装AntD" class="headerlink" title="安装AntD"></a>安装AntD</h3><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add <span class="symbol">antd@</span><span class="number">3.4</span><span class="number">.3</span> --save-dev</span><br></pre></td></tr></table></figure>
+<h3 id="安装less-less-loader-因为ant-d是基于less开发的"><a href="#安装less-less-loader-因为ant-d是基于less开发的" class="headerlink" title="安装less less-loader 因为ant-d是基于less开发的"></a>安装less less-loader 因为ant-d是基于less开发的</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add <span class="keyword">less</span> <span class="keyword">less</span>-loader --save-dev</span><br></pre></td></tr></table></figure>
+<h3 id="初始化git并且提交"><a href="#初始化git并且提交" class="headerlink" title="初始化git并且提交"></a>初始化git并且提交</h3><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">git <span class="keyword">add</span><span class="bash"> ./</span></span><br><span class="line">git commit -m <span class="string">'1 commit'</span></span><br></pre></td></tr></table></figure>
+<h3 id="暴露webpack配置文件"><a href="#暴露webpack配置文件" class="headerlink" title="暴露webpack配置文件"></a>暴露webpack配置文件</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yarn eject  <span class="regexp">//</span>执行之前必须先提交,否则会报以下错误</span><br><span class="line"></span><br><span class="line">Remove untracked files, stash or commit any changes, and try again.</span><br><span class="line">error Command failed with <span class="keyword">exit</span> code <span class="number">1</span>.</span><br></pre></td></tr></table></figure>
+<h3 id="修改配置文件，使用less-loader去解析less文件"><a href="#修改配置文件，使用less-loader去解析less文件" class="headerlink" title="修改配置文件，使用less-loader去解析less文件"></a>修改配置文件，使用<code>less-loader</code>去解析<code>less</code>文件</h3><p>  找到<code>config</code>文件下的<code>webpack.config.js</code>文件,找到并修改第48和110行<br>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// style files regexes</span></span><br><span class="line"><span class="keyword">const</span> cssRegex = <span class="regexp">/\.(css|less)$/</span>; <span class="comment">//修改第48行</span></span><br><span class="line"><span class="keyword">const</span> cssModuleRegex = <span class="regexp">/\.module\.css$/</span>;</span><br><span class="line"><span class="keyword">const</span> sassRegex = <span class="regexp">/\.(scss|sass)$/</span>;</span><br><span class="line"><span class="keyword">const</span> sassModuleRegex = <span class="regexp">/\.module\.(scss|sass)$/</span>;</span><br></pre></td></tr></table></figure><br>  <figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Adds PostCSS Normalize as the reset css with default options,</span></span><br><span class="line">           <span class="comment">// so that it honors browserslist config in package.json</span></span><br><span class="line">           <span class="comment">// which in turn let's users customize the target behavior as per their needs.</span></span><br><span class="line">           <span class="selector-tag">postcssNormalize</span>(),</span><br><span class="line">         ],</span><br><span class="line">         <span class="selector-tag">sourceMap</span>: <span class="selector-tag">isEnvProduction</span> <span class="selector-tag">&amp;</span><span class="selector-tag">&amp;</span> <span class="selector-tag">shouldUseSourceMap</span>,</span><br><span class="line">       &#125;,</span><br><span class="line">     &#125;,</span><br><span class="line">     &#123;</span><br><span class="line">       <span class="attribute">loader</span>:require.resolve(<span class="string">'less-loader'</span>)    <span class="comment">//修改行</span></span><br><span class="line">     &#125;</span><br><span class="line">   ]<span class="selector-class">.filter</span>(Boolean);</span><br></pre></td></tr></table></figure><br>由于use数组的执行顺序是从后到前，故在最下方添加<code>less-loader</code>加载则会被最先执行。修改完文件内容后需要重启项目<code>yarn start</code>生效。</p>
+<h2 id="按需加载"><a href="#按需加载" class="headerlink" title="按需加载"></a>按需加载</h2><p>因为每次使用ant-d组件的时候，都要引入ant-d.css样式文件，但实际上我们并不需要所有组件的样式。<br>为了提高性能，我们希望只引入我们使用到的组件的样式，实现<strong>按需加载</strong></p>
+<h3 id="安装-react-app-rewired-插件"><a href="#安装-react-app-rewired-插件" class="headerlink" title="安装 react-app-rewired 插件"></a>安装 react-app-rewired 插件</h3><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn <span class="keyword">add</span><span class="bash"> react-app-rewired customize-cra</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* package.json */</span></span><br><span class="line"><span class="string">"scripts"</span>: &#123;</span><br><span class="line">-   <span class="string">"start"</span>: <span class="string">"react-scripts start"</span>,</span><br><span class="line">+   <span class="string">"start"</span>: <span class="string">"react-app-rewired start"</span>,</span><br><span class="line">-   <span class="string">"build"</span>: <span class="string">"react-scripts build"</span>,</span><br><span class="line">+   <span class="string">"build"</span>: <span class="string">"react-app-rewired build"</span>,</span><br><span class="line">-   <span class="string">"test"</span>: <span class="string">"react-scripts test"</span>,</span><br><span class="line">+   <span class="string">"test"</span>: <span class="string">"react-app-rewired test"</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后在项目根目录创建一个 <code>config-overrides.js</code> 用于修改默认配置。</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span>.exports = function <span class="keyword">override</span>(<span class="built_in">config</span>, env) &#123;</span><br><span class="line">  <span class="comment">// do stuff with the webpack config...</span></span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">config</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>使用 <code>yarn start</code>命令运行之后报错：</p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Error: </span>Cannot find module 'react-scripts/package.json'</span><br></pre></td></tr></table></figure>
+<p><strong>原因</strong>：缺少react-scripts插件<br><strong>解决方案</strong>：安装 react-scripts 插件</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> <span class="comment">--save react-scripts</span></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+    
+    <div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/React/" rel="tag"># React</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/04/hexo%E7%9B%B8%E5%85%B3%E7%9A%84%E9%97%AE%E9%A2%98/" rel="prev" title="使用hexo过程中遇到的坑">
+      <i class="fa fa-chevron-left"></i> 使用hexo过程中遇到的坑
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/05/ES6/" rel="next" title="ES6相关知识点">
+      ES6相关知识点 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#两种方式创建一个react应用"><span class="nav-number">1.</span> <span class="nav-text">两种方式创建一个react应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装相关依赖"><span class="nav-number">2.</span> <span class="nav-text">安装相关依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#全局安装yarn"><span class="nav-number">2.1.</span> <span class="nav-text">全局安装yarn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装react-router"><span class="nav-number">2.2.</span> <span class="nav-text">安装react-router</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装AntD"><span class="nav-number">2.3.</span> <span class="nav-text">安装AntD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装less-less-loader-因为ant-d是基于less开发的"><span class="nav-number">2.4.</span> <span class="nav-text">安装less less-loader 因为ant-d是基于less开发的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化git并且提交"><span class="nav-number">2.5.</span> <span class="nav-text">初始化git并且提交</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#暴露webpack配置文件"><span class="nav-number">2.6.</span> <span class="nav-text">暴露webpack配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改配置文件，使用less-loader去解析less文件"><span class="nav-number">2.7.</span> <span class="nav-text">修改配置文件，使用less-loader去解析less文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#按需加载"><span class="nav-number">3.</span> <span class="nav-text">按需加载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-react-app-rewired-插件"><span class="nav-number">3.1.</span> <span class="nav-text">安装 react-app-rewired 插件</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Evelyn"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Evelyn</p>
+  <div class="site-description" itemprop="description">告别无忧无虑</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Evelyn-lin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Evelyn-lin" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Evelyn</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">13k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">12 分钟</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'eWFwtwTyyAPdc5AT43eYqI7P-gzGzoHsz',
+      appKey     : '9ODylRP56OfCFluCAUcVKXdm',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

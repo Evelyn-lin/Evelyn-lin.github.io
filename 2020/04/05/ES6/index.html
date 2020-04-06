@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="今天来复习一下ES6的相关知识吧，打好每一个基础吧。那么开始吧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6相关知识点">
+<meta property="og:url" content="http://yoursite.com/2020/04/05/ES6/index.html">
+<meta property="og:site_name" content="Evelyn&#39;s Notes">
+<meta property="og:description" content="今天来复习一下ES6的相关知识吧，打好每一个基础吧。那么开始吧">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-05T14:15:40.774Z">
+<meta property="article:modified_time" content="2020-04-06T04:46:09.162Z">
+<meta property="article:author" content="Evelyn">
+<meta property="article:tag" content="ES6">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/04/05/ES6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>ES6相关知识点 | Evelyn's Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Evelyn's Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">刻下生活的记忆</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-作品">
+
+    <a href="/portfolio/" rel="section"><i class="fa fa-list fa-fw"></i>作品</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">6</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/05/ES6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Evelyn">
+      <meta itemprop="description" content="告别无忧无虑">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Evelyn's Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ES6相关知识点
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-05 22:15:40" itemprop="dateCreated datePublished" datetime="2020-04-05T22:15:40+08:00">2020-04-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-06 12:46:09" itemprop="dateModified" datetime="2020-04-06T12:46:09+08:00">2020-04-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/05/ES6/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/05/ES6/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>今天来复习一下ES6的相关知识吧，打好每一个基础吧。那么开始吧</p>
+<a id="more"></a> 
+
+<h2 id="let-与-const"><a href="#let-与-const" class="headerlink" title="let 与 const"></a>let 与 const</h2><h3 id="let"><a href="#let" class="headerlink" title="let"></a>let</h3><ul>
+<li><p>代码块内有效</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;let a = <span class="number">0</span>; var b = <span class="number">2</span>&#125; a <span class="comment">// 报错 ReferenceError: a is not defined b // 2</span></span><br></pre></td></tr></table></figure>
+<p>  在代码块内，let声明的是局部变量；var声明的是全局变量</p>
+</li>
+<li><p>不能重发声明</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let a = <span class="number">1</span>; let a = <span class="number">2</span>; var b = <span class="number">3</span>; var b = <span class="number">4</span>; a  <span class="comment">// Identifier 'a' has already been declared b  // 4</span></span><br></pre></td></tr></table></figure>
+<p>for循环很适合用let，var声明的i是全局变量，因此外部的i等于最后一次i的值。<br>let声明的i在每轮循环中都是新的变量。</p>
+</li>
+<li><p>let不存在变量提升</p>
+</li>
+</ul>
+<h3 id="const"><a href="#const" class="headerlink" title="const"></a>const</h3><ul>
+<li><code>const</code>声明一个只读变量，声明之后不允许改变，一旦声明必须初始化，否则会报错</li>
+<li>暂时性死区<ul>
+<li><code>const</code>和<code>let</code>一样，都是局部作用域的，因此在声明之前使用变量会报错。</li>
+</ul>
+</li>
+<li>注意：<code>const</code>声明之后允许改变。<ul>
+<li>简单数据类型，就是值不许改变。</li>
+<li>复杂数据类型，是指向数据的指针不发生改变，数据结构可以改变，所以复杂数据类型要慎用。</li>
+</ul>
+</li>
+</ul>
+<h2 id="解构赋值"><a href="#解构赋值" class="headerlink" title="解构赋值"></a>解构赋值</h2><h3 id="解构模型"><a href="#解构模型" class="headerlink" title="解构模型"></a>解构模型</h3><ul>
+<li>解构的源：右边部分</li>
+<li>解构的目标：左边部分<h3 id="数组模型的解构（Array）"><a href="#数组模型的解构（Array）" class="headerlink" title="数组模型的解构（Array）"></a>数组模型的解构（Array）</h3></li>
+<li>基本<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let [a,b,c] = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="comment">// a=1,b=2,c=3</span></span><br></pre></td></tr></table></figure></li>
+<li>可嵌套<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let[a,<span class="string">[[b]，c]]</span> = [<span class="number">1</span>,<span class="string">[[2],3]]</span>;</span><br><span class="line">// a=<span class="number">1</span>,b=<span class="number">2</span>,c=<span class="number">3</span></span><br></pre></td></tr></table></figure></li>
+<li>可忽略<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let [a, ,b] = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="comment">//a = 1; b = 3</span></span><br></pre></td></tr></table></figure></li>
+<li>不完全解构<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> [<span class="attr">a</span> = <span class="number">1</span>, b] = [ ];</span><br><span class="line">// <span class="attr">a</span> = <span class="number">1</span> ; <span class="attr">b</span> = undefined;</span><br></pre></td></tr></table></figure></li>
+<li>剩余运算符<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let [a, ...b] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="comment">// a = 1; b = [2, 3]</span></span><br></pre></td></tr></table></figure></li>
+<li>字符串等<br>在数组的解构中，解构的目标若为可遍历对象，皆可进行解构赋值。可遍历对象即实现iterator接口的数据。<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let [a, b, c, d, e] = <span class="string">'hello'</span>;</span><br><span class="line"><span class="regexp">//</span>a = <span class="string">'h'</span>; b = <span class="string">'e'</span>; c = <span class="string">'l'</span>; d = <span class="string">'l'</span>; e = <span class="string">'o'</span></span><br></pre></td></tr></table></figure></li>
+<li>解构默认值<br>当解构模式有匹配结果，且匹配结果是undefined时，会触发默认值作为返回结果。<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> [<span class="attr">a</span> = <span class="number">1</span>] = [undefined]；</span><br><span class="line">//<span class="attr">a</span> = <span class="number">1</span></span><br><span class="line"><span class="keyword">let</span> [<span class="attr">a</span> = <span class="number">3</span>, <span class="attr">b</span> = a] = [];     // <span class="attr">a</span> = <span class="number">3</span>, <span class="attr">b</span> = <span class="number">3</span></span><br><span class="line"><span class="keyword">let</span> [<span class="attr">a</span> = <span class="number">3</span>, <span class="attr">b</span> = a] = [<span class="number">1</span>];    // <span class="attr">a</span> = <span class="number">1</span>, <span class="attr">b</span> = <span class="number">1</span></span><br><span class="line"><span class="keyword">let</span> [<span class="attr">a</span> = <span class="number">3</span>, <span class="attr">b</span> = a] = [<span class="number">1</span>, <span class="number">2</span>]; // <span class="attr">a</span> = <span class="number">1</span>, <span class="attr">b</span> = <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<h3 id="对象模型的解构（Object）"><a href="#对象模型的解构（Object）" class="headerlink" title="对象模型的解构（Object）"></a>对象模型的解构（Object）</h3></li>
+<li>基本<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let &#123; foo, bar &#125; = &#123; foo: <span class="string">'aaa'</span>, bar: <span class="string">'bbb'</span> &#125;; <span class="regexp">//</span> foo = <span class="string">'aaa'</span> <span class="regexp">//</span> bar = <span class="string">'bbb'</span> </span><br><span class="line">let &#123; baz : foo &#125; = &#123; baz : <span class="string">'ddd'</span> &#125;; <span class="regexp">//</span> foo = <span class="string">'ddd'</span></span><br></pre></td></tr></table></figure></li>
+<li>可嵌套可忽略<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;<span class="string">p:</span> [<span class="string">'hello'</span>, &#123;<span class="string">y:</span> <span class="string">'world'</span>&#125;] &#125;; let &#123;<span class="string">p:</span> [x, &#123; y &#125;] &#125; = obj; <span class="comment">// x = 'hello' // y = 'world' </span></span><br><span class="line">let obj = &#123;<span class="string">p:</span> [<span class="string">'hello'</span>, &#123;<span class="string">y:</span> <span class="string">'world'</span>&#125;] &#125;; let &#123;<span class="string">p:</span> [x, &#123;  &#125;] &#125; = obj; <span class="comment">// x = 'hello'</span></span><br></pre></td></tr></table></figure></li>
+<li>不完全解构</li>
+<li>剩余运算符</li>
+<li>默认解构值</li>
+</ul>
+<h2 id="Symbol"><a href="#Symbol" class="headerlink" title="Symbol"></a>Symbol</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>ES6引入新的原始数据类型Symbol，表示独一无二的值，类似字符串，常用作对象的属性名。<br>允许添加一个参数，作为标识。参数相同值也不相同。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> sy = <span class="built_in">Symbol</span>(<span class="string">"KK"</span>)</span><br><span class="line"><span class="built_in">console</span>.log(sy);    <span class="comment">//Symbol(KK)</span></span><br><span class="line"><span class="keyword">typeof</span>(sy);  <span class="comment">// symbol</span></span><br><span class="line">相同参数symbol() 返回的值不相等。</span><br><span class="line"><span class="keyword">let</span> sy1 = <span class="built_in">Symbol</span>(<span class="string">"KK"</span>);</span><br><span class="line">sy === sy1;   <span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+<h3 id="作为属性名"><a href="#作为属性名" class="headerlink" title="作为属性名"></a>作为属性名</h3><p>由于每个Symbol的值都不相等，因此可以用作对象的属性名。以前都是用字符串。</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">sy</span> = Symbol(<span class="string">"key1"</span>);</span><br><span class="line"></span><br><span class="line">写法<span class="number">1</span>   </span><br><span class="line"><span class="keyword">let</span> <span class="attr">syObj</span> = &#123;&#125;;</span><br><span class="line">    syObj[sy] = <span class="string">"kk"</span>;</span><br><span class="line">    console.log(syObj);    </span><br><span class="line">    // &#123;Symbol(key1) : <span class="string">"kk"</span>&#125;</span><br><span class="line"></span><br><span class="line">写法二   </span><br><span class="line"><span class="keyword">let</span> <span class="attr">syObj</span> = &#123;</span><br><span class="line">  ​  [sy]: <span class="string">"kk"</span>                 </span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">写法三    </span><br><span class="line"><span class="keyword">let</span> <span class="attr">syObj</span> = &#123;</span><br><span class="line">  ​  Object.defineProperty(syObj,sy,&#123;value:<span class="string">"kk&#125;)</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>注意：Symbol作为对象属性名时不能用  <strong>.</strong> 运算符，要用 <strong>[]</strong>，因为.运算符后面跟字符串，取到的是字符串属性。</p>
+<h3 id="如何访问Symbol作为属性名的属性"><a href="#如何访问Symbol作为属性名的属性" class="headerlink" title="如何访问Symbol作为属性名的属性"></a>如何访问Symbol作为属性名的属性</h3><p>不会出现在 for…in 、 for…of 的循环中，也不会被·<code>Object.keys() 、 Object.getOwnPropertyNames()</code>返回。如果要读取到一个对象的 Symbol 属性，可以通过<code>Object.getOwnPropertySymbols()</code>和 <code>Reflect.ownKeys()</code>取到。</p>
+<h3 id="Symbol-for"><a href="#Symbol-for" class="headerlink" title="Symbol.for()"></a>Symbol.for()</h3><p>Symbol.for(),首先会在全局搜索被登记的Symbol中是否有该字符串参数作为名称的Symbol值，如果有即返回该Symbol值，如果没有就会创建一个Symbol值并登记。</p>
+<h3 id="Symbol-keyFor"><a href="#Symbol-keyFor" class="headerlink" title="Symbol.keyFor()"></a>Symbol.keyFor()</h3><p>返回一个已登记的Symbol类型值的key，用来检测该字符串参数作为名称的Symbol值是否已被登记。</p>
+<h2 id="Map与Set"><a href="#Map与Set" class="headerlink" title="Map与Set"></a>Map与Set</h2><h3 id="Map对象"><a href="#Map对象" class="headerlink" title="Map对象"></a>Map对象</h3><ul>
+<li>Map对象与Object对象的异同<ul>
+<li>都是由键值对组成的</li>
+<li>Map的键可以是任意类型，Object的键只能是字符串或Symbol</li>
+<li>Map中的键值是有序的，Object的不是</li>
+<li>Map的键值对个数可以从size属性中获取，Object只能手动计算</li>
+<li>Object 都有自己的原型，原型链上的键名有可能和你自己在对象上的设置的键名产生冲突</li>
+</ul>
+</li>
+<li>增删改查<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myMap = <span class="keyword">new</span> <span class="built_in">Map</span>();  <span class="comment">//创建</span></span><br><span class="line">myMap.<span class="keyword">set</span>(<span class="string">"string"</span>,<span class="string">"相关的值"</span>)  <span class="comment">//添加键值对</span></span><br><span class="line">myMap.<span class="keyword">get</span>(<span class="string">"string"</span>)  <span class="comment">//   获取对应key的值 </span></span><br><span class="line">myMap.has(<span class="string">"string"</span>)   <span class="comment">//是否存在key“string”  ：true</span></span><br><span class="line">myMap.delete(<span class="string">"string"</span>)  <span class="comment">//删除key“string”</span></span><br></pre></td></tr></table></figure></li>
+<li>Map中的key<ul>
+<li>字符串</li>
+<li>对象  <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var obj =&#123; &#125;; myMap.<span class="builtin-name">get</span>(obj) !== myMap.<span class="builtin-name">get</span>(&#123;&#125;)</span><br></pre></td></tr></table></figure></li>
+<li>函数<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="function"><span class="keyword">fun</span> =<span class="title">function</span> <span class="params">()</span></span>&#123; &#125;; myMap.<span class="keyword">get</span>(<span class="function"><span class="keyword">fun</span>) !== myMap.<span class="title">get</span><span class="params">(function()</span></span>&#123;&#125;)</span><br></pre></td></tr></table></figure></li>
+<li>NaN<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var myNaN= NaN; myMap.<span class="builtin-name">get</span>(myNaN) === myMap.<span class="builtin-name">get</span>(Number(<span class="string">"string"</span>))</span><br></pre></td></tr></table></figure>
+<h3 id="Set对象"><a href="#Set对象" class="headerlink" title="Set对象"></a>Set对象</h3></li>
+</ul>
+</li>
+<li>Set对象允许存储任何类型的唯一值 。</li>
+<li>Set中的特殊值<ul>
+<li>+0和-0是恒等的，所以不重复</li>
+<li>undefined与undefined是恒等的，不重复</li>
+<li>NaN与Nan是不恒等的，但在Set中只能存在一个</li>
+</ul>
+</li>
+<li>Set设置与读取<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let mySet = <span class="built_in">new</span> <span class="keyword">Set</span>();</span><br><span class="line">mySet.<span class="keyword">add</span>(<span class="number">1</span>);  //<span class="keyword">Set</span>(<span class="number">1</span>)&#123;<span class="number">1</span>&#125;</span><br><span class="line">mySet.<span class="keyword">delete</span>(<span class="number">1</span>) 删除</span><br></pre></td></tr></table></figure></li>
+<li>应用<ul>
+<li>数组去重<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var mySet = new Set([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">4</span>])</span><br><span class="line">[...mySet];  <span class="comment">//[1,2,3,4]</span></span><br></pre></td></tr></table></figure></li>
+<li>并集<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> <span class="keyword">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> <span class="keyword">Set</span>([<span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>]); </span><br><span class="line"><span class="keyword">var</span> <span class="keyword">union</span> = <span class="keyword">new</span> <span class="keyword">Set</span>([...a, ...b]); <span class="comment">// &#123;1, 2, 3, 4&#125;</span></span><br></pre></td></tr></table></figure></li>
+<li>交集<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var a = <span class="keyword">new</span> <span class="constructor">Set([1, 2, 3])</span>;</span><br><span class="line">var b = <span class="keyword">new</span> <span class="constructor">Set([4, 3, 2])</span>; </span><br><span class="line">var intersect = <span class="keyword">new</span> <span class="constructor">Set([<span class="operator">...</span><span class="params">a</span>].<span class="params">filter</span>(<span class="params">x</span> =&gt; <span class="params">b</span>.<span class="params">has</span>(<span class="params">x</span>)</span>)); <span class="comment">// &#123;2, 3&#125;</span></span><br></pre></td></tr></table></figure></li>
+<li>差集<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var a = <span class="keyword">new</span> <span class="constructor">Set([1, 2, 3])</span>;</span><br><span class="line">var b = <span class="keyword">new</span> <span class="constructor">Set([4, 3, 2])</span>; </span><br><span class="line">var difference = <span class="keyword">new</span> <span class="constructor">Set([<span class="operator">...</span><span class="params">a</span>].<span class="params">filter</span>(<span class="params">x</span> =&gt; !<span class="params">b</span>.<span class="params">has</span>(<span class="params">x</span>)</span>)); <span class="comment">// &#123;1&#125;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="正则表达式-regular-expression"><a href="#正则表达式-regular-expression" class="headerlink" title="正则表达式(regular expression)"></a>正则表达式(regular expression)</h2><p>使用场景：匹配（验证用户名、邮箱啊）、替换敏感词、提取文字啊。。</p>
+<h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> rg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="regexp">/abc/</span>);</span><br><span class="line"><span class="keyword">var</span> rg1 = <span class="regexp">/abc/</span>;</span><br></pre></td></tr></table></figure>
+
+<p>一共两种方式，正则表达式必须写在<code>/  /</code>之间。不需要用<code>&#39;   &#39;</code>将字符串包起来。</p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rg.test(<span class="number">123</span>)</span><br></pre></td></tr></table></figure>
+<p>正则表达式<code>.test（检测内容）</code>    返回<code>ture</code>、<code>false</code></p>
+<h3 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h3><p>就是指的特殊字符<br>/abc/只要有abc 连在一起就可以</p>
+<h4 id="边界符"><a href="#边界符" class="headerlink" title="边界符^   $"></a>边界符^   $</h4><ul>
+<li><p>^表示以。。。开头   /^abc/  必须以abc开头</p>
+</li>
+<li><p>$表示以。。。结尾   /abc$/  必须以abc结尾</p>
+</li>
+<li><p>^  $ 表示精确匹配     /^abc$/  必须是abc才是true</p>
+<h4 id="字符类"><a href="#字符类" class="headerlink" title="字符类[ ]"></a>字符类[ ]</h4></li>
+<li><p><code>[ ]</code>表示只能多选一。或者的关系<br> <code>/[abc]/</code>  只要包含有a 或者 包含有 b 或者 包含有c 就可以<br> <code>/^[abc]$/</code>  三选一，只要是有a 或者b 或者c 这三个字母才返回</p>
+</li>
+<li><p><code>[ - ]</code><br> <code>/^[a-z]$/</code>  26个英文字母任何一个字母就可以，必须是英文</p>
+</li>
+<li><p>字符组合<br> <code>/^[a-zA-Z0-9_-]$/</code></p>
+</li>
+<li><p>^取反<br> <code>/^[ ^ 123]$/</code>  <code>[ ]</code>内部的<code>^</code>表示取反，不能有里面的内容</p>
+<h4 id="量词符"><a href="#量词符" class="headerlink" title="量词符"></a>量词符</h4></li>
+<li><p>*相当于&gt;=0  可以出现0次或很多次</p>
+</li>
+<li><p>+相当于&gt;=1  可以出现1次或很多次</p>
+</li>
+<li><p>?相当于1||0      0次或者1次</p>
+</li>
+<li><p>{3}就是重复3次  / ^a{3}$/</p>
+</li>
+<li><p>{3,} 就是大于等于3</p>
+</li>
+<li><p>{3,16} 大于等于3，小于等于16</p>
+</li>
+<li><p><code>/^[a-zA-Z0-9_-]{6,16}$/</code>表示6-16位之间，必须从里面去选择</p>
+</li>
+<li><p><code>/^abc$/</code> 必须是abc</p>
+</li>
+<li><p><code>/^[abc]$/</code>  a或b或c</p>
+</li>
+<li><p><code>/^a{3}$/</code>  必须是aaa</p>
+</li>
+<li><p><code>/^abc{3}$/</code>  必须是abccc</p>
+</li>
+<li><p><code>/^(abc){3}$/</code>  abcabcabc </p>
+</li>
+<li><p>{ } 表示多少次</p>
+</li>
+<li><p>[ ]表示多选一</p>
+</li>
+<li><p>( )表示优先级</p>
+<h3 id="预定义类"><a href="#预定义类" class="headerlink" title="预定义类"></a>预定义类</h3></li>
+<li><p>某些模式的简写方式</p>
+<ul>
+<li><code>\d</code> 匹配0-9之间的任一数字，相当于<code>[0-9]</code></li>
+<li><code>\D</code> 匹配0-9以外的字符，相当于<code>[ ^ 0-9]</code></li>
+<li><code>\w</code> 匹配任意的字母、数字和下划线，相当于<code>[a-zA-Z0-9_]</code></li>
+<li><code>\W</code> 除所有字母数字和下划线以外的字符，相当于<code>[ ^a-zA-Z0-9]</code></li>
+<li><code>\s</code>  匹配空格（包括换行符、制表符、空格符等），相当于<code>[\t\r\n\v\f]</code></li>
+<li><code>\S</code>匹配非空格的字符，相当于[ ^\t\r\n\v\f]</li>
+</ul>
+</li>
+<li><p><code>/\w{6,16}/</code></p>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3></li>
+<li><p>座机号码 两种格式：<code>010-12345678</code>  <code>0120-1234567</code><br><code>/\d{3}-\d{8}|\d{4}-\d{7}/</code></p>
+<h3 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h3><p><code>replace(原内容，新内容)</code></p>
+</li>
+<li><p><code>replace(/激情/，&quot;**&quot;)</code></p>
+</li>
+<li><p>/表达式/[switch]</p>
+<ul>
+<li>g  全局匹配 replace(/激情/g,’**’)   replace(/激情|gay/g,’ * *’)</li>
+<li>i  忽略大小写</li>
+<li>gi 全局匹配和忽略大小写</li>
+</ul>
+</li>
+</ul>
+<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const fn = <span class="function"><span class="params">(name)</span>=&gt;</span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="箭头函数中的this"><a href="#箭头函数中的this" class="headerlink" title="箭头函数中的this"></a>箭头函数中的this</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj =&#123;<span class="attr">name</span>:<span class="string">"张三"</span>&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">​		<span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">​	  <span class="keyword">return</span> <span class="function"><span class="params">( )</span> =&gt;</span> &#123;</span><br><span class="line">​		    <span class="built_in">console</span>.log(<span class="keyword">this</span>)</span><br><span class="line">​	  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span>  resFn = fn.call(obj);</span><br><span class="line">resFn();</span><br></pre></td></tr></table></figure>
+<p>// 第一个this是obj对象，第二个this也是obj对象。<br><strong>箭头函数不绑定this关键字，箭头函数的this，指向的是函数定义位置的上下文this</strong>。</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;</span><br><span class="line">​     age:<span class="number">20</span>;</span><br><span class="line">​			say:<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">​				<span class="built_in">console</span>.log(<span class="keyword">this</span>.age);</span><br><span class="line">​			&#125;</span><br><span class="line">​	&#125;</span><br><span class="line">obj.say()  <span class="regexp">//</span> <span class="literal">undefined</span></span><br></pre></td></tr></table></figure>
+<p>因为箭头函数定义在obj对象里，但是obj对象不能产生作用域，因此，箭头函数被定义在全局作用域下。this指向Window，所以是window对象下的age。如果此时有 var age = 100；则输出装值为100.</p>
+<h3 id="剩余参数"><a href="#剩余参数" class="headerlink" title="剩余参数"></a>剩余参数</h3><p>在箭头函数中，没有arguments哦~~</p>
+<ul>
+<li>收集剩余的参数，<strong>只能放在末尾</strong>！！！</li>
+<li>展开数组，展开后的效果，就跟把数组的内容之间写在这儿一样。<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">sum</span> = (...<span class="keyword">args</span>) =&gt; &#123;</span><br><span class="line">  let <span class="keyword">total</span> = 0;</span><br><span class="line">  <span class="keyword">args</span>.<span class="keyword">forEach</span>(item =&gt; <span class="keyword">total</span> + item )</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">total</span> ;</span><br><span class="line">​&#125;</span><br><span class="line"><span class="built_in">sum</span>(10,20);</span><br><span class="line"><span class="built_in">sum</span>(10,20,30)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="Proxy-和-Reflect"><a href="#Proxy-和-Reflect" class="headerlink" title="Proxy 和 Reflect"></a>Proxy 和 Reflect</h2><p>详情见<a href="https://www.runoob.com/w3cnote/es6-reflect-proxy.html" target="_blank" rel="noopener">菜鸟教程</a></p>
+<h3 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h3><p>一个 Proxy 对象由两个部分组成： <strong>target</strong> 、 <strong>handler</strong> 。在通过 Proxy 构造函数生成实例对象时，需要提供这两个参数。 target 即目标对象， handler 是一个对象，声明了代理 target 的指定行为。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> target = &#123;</span><br><span class="line">    name: <span class="string">'Tom'</span>,</span><br><span class="line">    age: <span class="number">24</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> handler = &#123;</span><br><span class="line">    <span class="keyword">get</span>: function(target, key) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'getting '</span>+key);</span><br><span class="line">        <span class="keyword">return</span> target[key]; <span class="comment">// 不是target.key</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span>: function(target, key, value) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'setting '</span>+key);</span><br><span class="line">        target[key] = value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, handler)</span><br><span class="line">proxy.name     <span class="comment">// 实际执行 handler.get</span></span><br><span class="line">proxy.age = <span class="number">25</span> <span class="comment">// 实际执行 handler.set</span></span><br><span class="line"><span class="comment">// getting name</span></span><br><span class="line"><span class="comment">// setting age</span></span><br><span class="line"><span class="comment">// 25</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// target 可以为空对象</span></span><br><span class="line"><span class="keyword">let</span> targetEpt = &#123;&#125;</span><br><span class="line"><span class="keyword">let</span> proxyEpt = <span class="keyword">new</span> <span class="built_in">Proxy</span>(targetEpt, handler)</span><br><span class="line"><span class="comment">// 调用 get 方法，此时目标对象为空，没有 name 属性</span></span><br><span class="line">proxyEpt.name <span class="comment">// getting name</span></span><br><span class="line"><span class="comment">// 调用 set 方法，向目标对象中添加了 name 属性</span></span><br><span class="line">proxyEpt.name = <span class="string">'Tom'</span></span><br><span class="line"><span class="comment">// setting name</span></span><br><span class="line"><span class="comment">// "Tom"</span></span><br><span class="line"><span class="comment">// 再次调用 get ，此时已经存在 name 属性</span></span><br><span class="line">proxyEpt.name</span><br><span class="line"><span class="comment">// getting name</span></span><br><span class="line"><span class="comment">// "Tom"</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// 通过构造函数新建实例时其实是对目标对象进行了浅拷贝，因此目标对象与代理对象会互相</span></span><br><span class="line"><span class="comment">// 影响</span></span><br><span class="line">targetEpt)</span><br><span class="line"><span class="comment">// &#123;name: "Tom"&#125;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// handler 对象也可以为空，相当于不设置拦截操作，直接访问目标对象</span></span><br><span class="line"><span class="keyword">let</span> targetEmpty = &#123;&#125;</span><br><span class="line"><span class="keyword">let</span> proxyEmpty = <span class="keyword">new</span> <span class="built_in">Proxy</span>(targetEmpty,&#123;&#125;)</span><br><span class="line">proxyEmpty.name = <span class="string">"Tom"</span></span><br><span class="line">targetEmpty) <span class="comment">// &#123;name: "Tom"&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>实例方法</li>
+</ul>
+<p><strong>get(target, propKey, receiver)</strong><br>用于 target 对象上 propKey 的读取操作。get() 方法可以继承。<br><strong>set(target, propKey, value, receiver)</strong><br>用于拦截 target 对象上的 propKey 的赋值操作。如果目标对象自身的某个属性，不可写且不可配置，那么set方法将不起作用。<br><strong>apply(target, ctx, args)</strong><br>用于拦截函数的调用、call 和 reply 操作。target 表示目标对象，ctx 表示目标对象上下文，args 表示目标对象的参数数组。<br><strong>has(target, propKey)</strong><br>用于拦截 HasProperty 操作，即在判断 target 对象是否存在 propKey 属性时，会被这个方法拦截。此方法不判断一个属性是对象自身的属性，还是继承的属性。</p>
+<h4 id="Reflect"><a href="#Reflect" class="headerlink" title="Reflect"></a>Reflect</h4><p>ES6 中将 Object 的一些明显属于语言内部的方法移植到了 Reflect 对象上（当前某些方法会同时存在于 Object 和 Reflect 对象上），未来的新方法会只部署在 Reflect 对象上。</p>
+<h5 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h5><p><strong>Reflect.get(target, name, receiver)</strong><br>查找并返回 target 对象的 name 属性。<br><strong>Reflect.set(target, name, value, receiver)</strong><br>将 target 的 name 属性设置为 value。返回值为 boolean ，true 表示修改成功，false 表示失败。当 target 为不存在的对象时，会报错。<br><strong>Reflect.has(obj, name)</strong><br>是 name in obj 指令的函数化，用于查找 name 属性在 obj 对象中是否存在。返回值为 boolean。如果 obj 不是对象则会报错 TypeError。<br><strong>Reflect.deleteProperty(obj, property)</strong><br>是 delete obj[property] 的函数化，用于删除 obj 对象的 property 属性，返回值为 boolean。如果 obj 不是对象则会报错 TypeError。</p>
+
+    </div>
+
+    
+    
+    
+    
+    <div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ES6/" rel="tag"># ES6</a>
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/05/%E5%85%B1%E4%BA%AB%E5%8D%95%E8%BD%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" rel="prev" title="共享单车管理系统之框架之主页面架构设计">
+      <i class="fa fa-chevron-left"></i> 共享单车管理系统之框架之主页面架构设计
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/06/Next%E4%B8%BB%E9%A2%98%E4%BC%98%E5%8C%96/" rel="next" title="Next主题优化配置">
+      Next主题优化配置 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#let-与-const"><span class="nav-number">1.</span> <span class="nav-text">let 与 const</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#let"><span class="nav-number">1.1.</span> <span class="nav-text">let</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#const"><span class="nav-number">1.2.</span> <span class="nav-text">const</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解构赋值"><span class="nav-number">2.</span> <span class="nav-text">解构赋值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解构模型"><span class="nav-number">2.1.</span> <span class="nav-text">解构模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组模型的解构（Array）"><span class="nav-number">2.2.</span> <span class="nav-text">数组模型的解构（Array）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象模型的解构（Object）"><span class="nav-number">2.3.</span> <span class="nav-text">对象模型的解构（Object）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Symbol"><span class="nav-number">3.</span> <span class="nav-text">Symbol</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">3.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作为属性名"><span class="nav-number">3.2.</span> <span class="nav-text">作为属性名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何访问Symbol作为属性名的属性"><span class="nav-number">3.3.</span> <span class="nav-text">如何访问Symbol作为属性名的属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Symbol-for"><span class="nav-number">3.4.</span> <span class="nav-text">Symbol.for()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Symbol-keyFor"><span class="nav-number">3.5.</span> <span class="nav-text">Symbol.keyFor()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map与Set"><span class="nav-number">4.</span> <span class="nav-text">Map与Set</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Map对象"><span class="nav-number">4.1.</span> <span class="nav-text">Map对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set对象"><span class="nav-number">4.2.</span> <span class="nav-text">Set对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则表达式-regular-expression"><span class="nav-number">5.</span> <span class="nav-text">正则表达式(regular expression)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建"><span class="nav-number">5.1.</span> <span class="nav-text">创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试"><span class="nav-number">5.2.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元字符"><span class="nav-number">5.3.</span> <span class="nav-text">元字符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#边界符"><span class="nav-number">5.3.1.</span> <span class="nav-text">边界符^   $</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符类"><span class="nav-number">5.3.2.</span> <span class="nav-text">字符类[ ]</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#量词符"><span class="nav-number">5.3.3.</span> <span class="nav-text">量词符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预定义类"><span class="nav-number">5.4.</span> <span class="nav-text">预定义类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">5.5.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#替换"><span class="nav-number">5.6.</span> <span class="nav-text">替换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#箭头函数"><span class="nav-number">6.</span> <span class="nav-text">箭头函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#箭头函数中的this"><span class="nav-number">6.1.</span> <span class="nav-text">箭头函数中的this</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#剩余参数"><span class="nav-number">6.2.</span> <span class="nav-text">剩余参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Proxy-和-Reflect"><span class="nav-number">7.</span> <span class="nav-text">Proxy 和 Reflect</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Proxy"><span class="nav-number">7.1.</span> <span class="nav-text">Proxy</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Reflect"><span class="nav-number">7.1.1.</span> <span class="nav-text">Reflect</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#静态方法"><span class="nav-number">7.1.1.1.</span> <span class="nav-text">静态方法</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Evelyn"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Evelyn</p>
+  <div class="site-description" itemprop="description">告别无忧无虑</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Evelyn-lin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Evelyn-lin" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Evelyn</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">13k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">12 分钟</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'eWFwtwTyyAPdc5AT43eYqI7P-gzGzoHsz',
+      appKey     : '9ODylRP56OfCFluCAUcVKXdm',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
