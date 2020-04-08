@@ -1,0 +1,131 @@
+{
+    "code": 0,
+    "message": "",
+    "result": {
+      "list": [
+        {
+          "id": 1,
+          "username": "贺桂英",
+          "userName": "梁静",
+          "sex": 2,
+          "state": 2,
+          "interest": 5,
+          "isMarried": 0,
+          "birthday": "2000-01-01",
+          "address": "北京市海淀区",
+          "time": "09:00:00"
+        },
+        {
+          "id": 2,
+          "username": "侯强",
+          "userName": "谢静",
+          "sex": 2,
+          "state": 4,
+          "interest": 3,
+          "isMarried": 1,
+          "birthday": "2000-01-01",
+          "address": "北京市海淀区",
+          "time": "09:00:00"
+        },
+        {
+          "id": 3,
+          "username": "蒋超",
+          "userName": "阎洋",
+          "sex": 2,
+          "state": 1,
+          "interest": 2,
+          "isMarried": 1,
+          "birthday": "2000-01-01",
+          "address": "北京市海淀区",
+          "time": "09:00:00"
+        },
+        {
+          "id": 4,
+          "username": "彭涛",
+          "userName": "周桂英",
+          "sex": 1,
+          "state": 4,
+          "interest": 2,
+          "isMarried": 0,
+          "birthday": "2000-01-01",
+          "address": "北京市海淀区",
+          "time": "09:00:00"
+        },
+        {
+          "id": 5,
+          "username": "罗芳",
+          "userName": "宋杰",
+          "sex": 2,
+          "state": 1,
+          "interest": 7,
+          "isMarried": 1,
+          "birthday": "2000-01-01",
+          "address": "北京市海淀区",
+          "time": "09:00:00"
+        },
+        {
+          "id": 6,
+          "username": "陆磊",
+          "userName": "尹军",
+          "sex": 2,
+          "state": 4,
+          "interest": 3,
+          "isMarried": 1,
+          "birthday": "2000-01-01",
+          "address": "北京市海淀区",
+          "time": "09:00:00"
+        },
+        {
+          "id": 7,
+          "username": "文勇",
+          "userName": "李敏",
+          "sex": 1,
+          "state": 3,
+          "interest": 5,
+          "isMarried": 1,
+          "birthday": "2000-01-01",
+          "address": "北京市海淀区",
+          "time": "09:00:00"
+        },
+        {
+          "id": 8,
+          "username": "陈涛",
+          "userName": "乔明",
+          "sex": 2,
+          "state": 1,
+          "interest": 5,
+          "isMarried": 1,
+          "birthday": "2000-01-01",
+          "address": "北京市海淀区",
+          "time": "09:00:00"
+        },
+        {
+          "id": 9,
+          "username": "雷静",
+          "userName": "黄静",
+          "sex": 1,
+          "state": 4,
+          "interest": 5,
+          "isMarried": 1,
+          "birthday": "2000-01-01",
+          "address": "北京市海淀区",
+          "time": "09:00:00"
+        },
+        {
+          "id": 10,
+          "username": "戴静",
+          "userName": "郑勇",
+          "sex": 2,
+          "state": 3,
+          "interest": 3,
+          "isMarried": 1,
+          "birthday": "2000-01-01",
+          "address": "北京市海淀区",
+          "time": "09:00:00"
+        }
+      ],
+      "page": 4,
+      "page_size": 10,
+      "total_count": 30
+    }
+  }

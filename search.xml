@@ -1,54 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>使用hexo从零开始搭建博客</title>
-    <url>/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<p>&emsp;&emsp;之前做了一个个人主页，但是由于部署在github，导致国内网打开很慢的原因，因此上网搜索了一些解决的办法。看到很多搭建博客的方法，索性不如也把自己的博客搭建起来，于是乎，特此写一篇笔记记录一下心得以及踩过的大部分坑吧~</p>
+    <title>ES6相关知识点</title>
+    <url>/2020/04/07/ES6%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
+    <content><![CDATA[<p>接着复习一下ES6,总结来自<a href="https://www.runoob.com/w3cnote/es6-string.html" target="_blank" rel="noopener">菜鸟教程</a></p>
 <a id="more"></a> 
 
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h3><p>打开<a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js官网</a>下载安装node.js<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/1.png" alt></p>
-<h3 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h3><p>打开<a href="https://git-scm.com/download" target="_blank" rel="noopener">Git官网</a>,选择下载对应版本安装<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/2.png" alt></p>
-<h3 id="cnpm"><a href="#cnpm" class="headerlink" title="cnpm"></a>cnpm</h3><p>由于npm的服务器位于国外可能影响安装，为了提高下载速度，我们来安装一个cnpm<br><code>npm install cnpm -g --registry=https://registry.npm.taobao.org</code></p>
-<h3 id="全局安装hexo"><a href="#全局安装hexo" class="headerlink" title="全局安装hexo"></a>全局安装hexo</h3><p><code>cnpm install -g hexo</code></p>
-<h2 id="搭建一个博客"><a href="#搭建一个博客" class="headerlink" title="搭建一个博客"></a>搭建一个博客</h2><h3 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h3><p>输入<code>hexo init</code>初始化项目<br>然后会出现这样一个目录<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/3.png" alt></p>
-<h3 id="打包成静态文件"><a href="#打包成静态文件" class="headerlink" title="打包成静态文件"></a>打包成静态文件</h3><p>输入<code>hexo g</code>会将文件编译为静态文件，md格式会编译为html<br>此时文件中会多出一个<code>public</code>文件夹</p>
-<h3 id="本地运行"><a href="#本地运行" class="headerlink" title="本地运行"></a>本地运行</h3><p>输入<code>hexo s</code> 运行，在浏览器中输入 <code>http://localhost:4000</code><br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/4.png" alt></p>
-<h2 id="部署到码云"><a href="#部署到码云" class="headerlink" title="部署到码云"></a>部署到码云</h2><h3 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h3><p>进入<a href="https://gitee.com/" target="_blank" rel="noopener">码云官网</a>，登录账号，创建一个仓库，注意仓库路径必须是<code>&lt;user-name&gt;.github.io</code>,<code>&lt;user-name&gt;</code>是自己的用户名<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/5.png" alt><br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/6.png" alt></p>
-<h3 id="连接仓库"><a href="#连接仓库" class="headerlink" title="连接仓库"></a>连接仓库</h3><p>点击仓库旁的 克隆下载，复制https地址<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/7.png" alt><br>然后打开blog文件夹中的<code>_config.yml</code>文件（项目配置文件），搜索<code>deploy</code><br>将repo:后面的网址改成你复制的地址，保存。<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/8.png" alt></p>
-<h3 id="推送到仓库"><a href="#推送到仓库" class="headerlink" title="推送到仓库"></a>推送到仓库</h3><p>安装<code>hexo-deployer-git</code>模块，gitbash 运行 <code>cnpm install hexo-deployer-git --save</code></p>
-<p>安装好之后，文件夹会多出来一个.deploy_git,然后运行命令 <code>hexo g -d</code>,就可以把内容推送到码云了。</p>
-<h3 id="开启码云Page服务"><a href="#开启码云Page服务" class="headerlink" title="开启码云Page服务"></a>开启码云Page服务</h3><p>点击仓库右上角的服务，然后点击Gitee Pages<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/9.png" alt><br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/10.png" alt><br>注意，以后每次提交至gitee后都要来手动更新哦~~也可以花钱购买自动部署服务</p>
-]]></content>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><h3 id="字符串的识别"><a href="#字符串的识别" class="headerlink" title="字符串的识别"></a>字符串的识别</h3><p>ES6以前的识别方法是 indexOf() 或者 lastIndexOf(),返回参数对应的索引值。<br>ES6新增以下方法：</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">includes</span><span class="params">()</span></span>:返回布尔值，判断是否找到参数字符串</span><br><span class="line"><span class="function"><span class="title">startWith</span><span class="params">()</span></span>:返回布尔值，判断参数字符串是否在原字符串的头部</span><br><span class="line"><span class="function"><span class="title">endWith</span><span class="params">()</span></span>:返回布尔值，判断参数字符串是否在原字符串的尾部</span><br></pre></td></tr></table></figure>
+<p>以上三个方法都可以接受两个参数：需要搜索的字符串，可选的搜素起始位置索引（不包括索引）<br>注意点：<br>    这三个方法只返回布尔值。<br>    这三个方法如果传入了正则表达式，会抛出错误。indexOf会将正则表达式转化为字符串并且搜索</p>
+<h3 id="字符串重复"><a href="#字符串重复" class="headerlink" title="字符串重复"></a>字符串重复</h3><p>repeat():返回新的字符串，表示将字符串重复指定次数返回。</p>
+<figure class="highlight gams"><table><tr><td class="code"><pre><span class="line">console.<span class="built-in">log</span>(<span class="string">'hello,'</span>.<span class="keyword">repeat</span>(<span class="number">2</span>))</span><br><span class="line"><span class="comment">//hello,hello,</span></span><br></pre></td></tr></table></figure>
+<p>如果参数是小数，则会<strong>向下取整</strong></p>
+<figure class="highlight gams"><table><tr><td class="code"><pre><span class="line">console.<span class="built-in">log</span>(<span class="string">'hello,'</span>.<span class="keyword">repeat</span>(<span class="number">3.2</span>))</span><br><span class="line"><span class="comment">//hello,hello,hello,</span></span><br></pre></td></tr></table></figure>
+<p>如果参数是0至-1，则取0,<strong>返回空的字符串</strong><br>如果参数是NaN,也视为repeat零次，<strong>返回空的字符串</strong><br>如果参数是负数或infinity，会报错</p>
+<h3 id="字符串补齐"><a href="#字符串补齐" class="headerlink" title="字符串补齐"></a>字符串补齐</h3><p>padStart:返回新的字符串，表示用参数字符串从头部补齐<br>padEnd:返回新的字符串，表示参数字符串从尾部补齐<br>以上两个方法都接受两个参数，第一个参数是生成字符串的最小长度，第二个参数是指定生成的字符串。如果没有指定第二个参数，默认用空格填充</p>
+<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">console.<span class="built_in">log</span>(<span class="string">"h"</span>.padStart(<span class="number">5</span>,<span class="string">"o"</span>));  <span class="comment">// "ooooh"</span></span><br><span class="line">console.<span class="built_in">log</span>(<span class="string">"h"</span>.padEnd(<span class="number">5</span>,<span class="string">"o"</span>));    <span class="comment">// "hoooo"</span></span><br><span class="line">console.<span class="built_in">log</span>(<span class="string">"h"</span>.padStart(<span class="number">5</span>));      <span class="comment">// "    h"</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong><br>如果指定的长度小于或者等于原字符串的长度，则返回原字符串<br>如果原字符串加上补全的字符串长度大于指定长度，则截去超出位数的<strong>补全字符串</strong></p>
+<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">console.<span class="built_in">log</span>(<span class="string">"hello"</span>.padEnd(<span class="number">10</span>,<span class="string">",world!"</span>));  <span class="comment">// "hello,worl"</span></span><br><span class="line">console.<span class="built_in">log</span>(<span class="string">"hello"</span>.padStart(<span class="number">10</span>,<span class="string">",world!"</span>));  <span class="comment">// ",worlhello"</span></span><br></pre></td></tr></table></figure>
+<p><strong>常用于补全位数</strong></p>
+<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">console.<span class="built_in">log</span>(<span class="string">"123"</span>.padStart(<span class="number">10</span>,<span class="string">"0"</span>));  <span class="comment">// "0000000123"</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="模板字符串"><a href="#模板字符串" class="headerlink" title="模板字符串"></a>模板字符串</h3><p>模板字符串相当于加强版的字符串，用反引号 `,除了作为普通字符串，还可以用来定义多行字符串，还可以在字符串中加入变量和表达式。</p>
+<h4 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h4><p>普通字符串</p>
+<figure class="highlight lasso"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="built_in">string</span> = <span class="string">`Hello'\n'world`</span>;</span><br><span class="line">console.<span class="keyword">log</span>(<span class="built_in">string</span>); </span><br><span class="line"><span class="comment">// "Hello'</span></span><br><span class="line"><span class="comment">// 'world"</span></span><br></pre></td></tr></table></figure>
+<p>多行字符串</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> string1 =  <span class="string">`Hey,</span></span><br><span class="line"><span class="string">can you stop angry now?`</span>;</span><br><span class="line"><span class="built_in">console</span>.log(string1);</span><br><span class="line"><span class="comment">// Hey,</span></span><br><span class="line"><span class="comment">// can you stop angry now?</span></span><br></pre></td></tr></table></figure>
+<p>字符串插入变量和表达式。<br>变量名写在 ${} 中，${} 中可以放入 JavaScript 表达式。</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">let <span class="type">name</span> = "Mike";</span><br><span class="line">let age = <span class="number">27</span>;</span><br><span class="line">let <span class="keyword">info</span> = `My <span class="type">Name</span> <span class="keyword">is</span> $&#123;<span class="type">name</span>&#125;,I am $&#123;age+<span class="number">1</span>&#125; years <span class="built_in">old</span> next year.`</span><br><span class="line">console.log(<span class="keyword">info</span>);</span><br><span class="line">// My <span class="type">Name</span> <span class="keyword">is</span> Mike,I am <span class="number">28</span> years <span class="built_in">old</span> next year.</span><br></pre></td></tr></table></figure>
+<p>字符串中调用函数：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">"have fun!"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> string2= <span class="string">`Game start,<span class="subst">$&#123;f()&#125;</span>`</span>;</span><br><span class="line"><span class="built_in">console</span>.log(string2);  <span class="comment">// Game start,have fun!</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong>模板字符串会保留空格</p>
+<h3 id="标签模板"><a href="#标签模板" class="headerlink" title="标签模板"></a>标签模板</h3><p>标签模板，是一个函数的调用，其中调用的参数是模板字符串。</p>
+<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">alert<span class="string">`Hello world!`</span>;</span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line">alert(<span class="string">'Hello world!'</span>);</span><br></pre></td></tr></table></figure>
+<p>当模板字符串中带有变量，会将模板字符串参数处理成多个参数。</p>
+<figure class="highlight actionscript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span><span class="params">(stringArr,<span class="rest_arg">...values</span>)</span></span>&#123;</span><br><span class="line"> let result = <span class="string">""</span>;</span><br><span class="line"> <span class="keyword">for</span>(let i=<span class="number">0</span>;i&lt;stringArr.length;i++)&#123;</span><br><span class="line">  result += stringArr[i];</span><br><span class="line">  <span class="keyword">if</span>(values[i])&#123;</span><br><span class="line">   result += values[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line">let name = <span class="string">'Mike'</span>;</span><br><span class="line">let age = <span class="number">27</span>;</span><br><span class="line">f`My Name <span class="keyword">is</span> $&#123;name&#125;,I am $&#123;age+<span class="number">1</span>&#125; years old next year.`;</span><br><span class="line"><span class="comment">// "My Name is Mike,I am 28 years old next year."</span></span><br><span class="line"> </span><br><span class="line">f`My Name <span class="keyword">is</span> $&#123;name&#125;,I am $&#123;age+<span class="number">1</span>&#125; years old next year.`;</span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line">f([<span class="string">'My Name is'</span>,<span class="string">',I am '</span>,<span class="string">' years old next year.'</span>],<span class="string">'Mike'</span>,<span class="number">28</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>应用</strong><br>过滤 HTML 字符串，防止用户输入恶意内容。</p>
+<figure class="highlight actionscript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span><span class="params">(stringArr,<span class="rest_arg">...values</span>)</span></span>&#123;</span><br><span class="line"> let result = <span class="string">""</span>;</span><br><span class="line"> <span class="keyword">for</span>(let i=<span class="number">0</span>;i&lt;stringArr.length;i++)&#123;</span><br><span class="line">  result += stringArr[i];</span><br><span class="line">   <span class="keyword">if</span>(values[i])&#123;</span><br><span class="line">     result += String(values[i]).replace(/&amp;/g, <span class="string">"&amp;amp;"</span>)</span><br><span class="line">               .replace(/&lt;/g, <span class="string">"&amp;lt;"</span>)</span><br><span class="line">               .replace(/&gt;/g, <span class="string">"&amp;gt;"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line">name = <span class="string">'&lt;Amy&amp;MIke&gt;'</span>;</span><br><span class="line">f`&lt;p&gt;Hi, $&#123;name&#125;.I would like send you some message.&lt;/p&gt;`;</span><br><span class="line"><span class="comment">// &lt;p&gt;Hi, &amp;lt;Amy&amp;amp;MIke&amp;gt;.I would like send you some message.&lt;/p&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>笔记</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Next主题优化配置</title>
-    <url>/2020/04/06/Next%E4%B8%BB%E9%A2%98%E4%BC%98%E5%8C%96/</url>
-    <content><![CDATA[<p>&emsp;&emsp;前几天使用Hexo搭了一个博客，在不断优化过程中去不断的搜集教程，在这里我把自己使用到的方面记录下来，方便今后的查阅。</p>
-<a id="more"></a>
-<h2 id="Markdown-语法"><a href="#Markdown-语法" class="headerlink" title="Markdown 语法"></a>Markdown 语法</h2><p>在写博客的过程中，对markdown语法还不是特别熟悉，记录几个语法吧。</p>
-<h3 id="空白符"><a href="#空白符" class="headerlink" title="空白符"></a>空白符</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">半方大的空白   <span class="symbol">&amp;ensp;</span>  或  <span class="symbol">&amp;#8194;</span></span><br><span class="line">全方大的空白   <span class="symbol">&amp;emsp;</span>  或  <span class="symbol">&amp;#8195;</span></span><br><span class="line">不断行的空白格 <span class="symbol">&amp;nbsp;</span>  或  <span class="symbol">&amp;#160;</span></span><br></pre></td></tr></table></figure>
-<h3 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">行内式链接形式：[<span class="string">超链接文字</span>](<span class="link">url</span>) </span><br><span class="line">[百度]https://www.baidu.com)</span><br></pre></td></tr></table></figure>
-<p><strong>在新窗口打开页面</strong></p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">&lt;a <span class="attribute">href</span>=<span class="string">"/work/manager/index.html"</span> <span class="attribute">target</span>=<span class="string">"_blank"</span>&gt;共享单车后台管理系统&lt;/a&gt;</span><br></pre></td></tr></table></figure>
-<p><a href="/work/manager/index.html" target="_blank">共享单车后台管理系统</a></p>
-<h3 id="添加图片"><a href="#添加图片" class="headerlink" title="添加图片"></a>添加图片</h3><figure class="highlight less"><table><tr><td class="code"><pre><span class="line">!<span class="selector-attr">[]</span>(<span class="number">1</span>.jpg)  <span class="comment">//图片放在与文章同名的文件夹中</span></span><br></pre></td></tr></table></figure>
-<h3 id="文字颜色"><a href="#文字颜色" class="headerlink" title="文字颜色"></a>文字颜色</h3><p>这是<label style="color:red">红色</label>字体</p>
-<figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line">这是&lt;<span class="built_in">label</span> <span class="built_in">style</span>=<span class="string">"color:red"</span>&gt;红色&lt;/<span class="built_in">label</span>&gt;字体</span><br></pre></td></tr></table></figure>
-<h2 id="Next主题优化"><a href="#Next主题优化" class="headerlink" title="Next主题优化"></a>Next主题优化</h2><h3 id="设置阅读全文"><a href="#设置阅读全文" class="headerlink" title="设置阅读全文"></a>设置阅读全文</h3><p>&emsp;&emsp;在首页显示一篇文章的部分内容，并提供一个链接跳转到全文页面是一个常见的需求。 NexT 提供三种方式来控制文章在首页的显示方式。 也就是说，在首页显示文章的摘录并显示 <strong>阅读全文</strong> 按钮，可以通过以下方法：<br>1.在文章中使用<code>&lt;!-- more --&gt;</code> 手动进行截断，Hexo 提供的方式<br>2.在文章的 <code>front-matter</code> 中添加 <code>description</code>，并提供文章摘录<br>3.自动形成摘要，在 <strong>主题配置文件</strong> 中添加：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">auto_excerpt:</span></span><br><span class="line"><span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">length:</span> <span class="number">150</span></span><br></pre></td></tr></table></figure>
-<p>默认截取的长度为 150 字符，可以根据需要自行设定</p>
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
+        <tag>ES6（二）</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -247,8 +241,59 @@
         <category>笔记</category>
       </categories>
       <tags>
-        <tag>ES6</tag>
         <tag>JavaScript</tag>
+        <tag>ES6（一）</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用hexo从零开始搭建博客</title>
+    <url>/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<p>&emsp;&emsp;之前做了一个个人主页，但是由于部署在github，导致国内网打开很慢的原因，因此上网搜索了一些解决的办法。看到很多搭建博客的方法，索性不如也把自己的博客搭建起来，于是乎，特此写一篇笔记记录一下心得以及踩过的大部分坑吧~</p>
+<a id="more"></a> 
+
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h3><p>打开<a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js官网</a>下载安装node.js<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/1.png" alt></p>
+<h3 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h3><p>打开<a href="https://git-scm.com/download" target="_blank" rel="noopener">Git官网</a>,选择下载对应版本安装<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/2.png" alt></p>
+<h3 id="cnpm"><a href="#cnpm" class="headerlink" title="cnpm"></a>cnpm</h3><p>由于npm的服务器位于国外可能影响安装，为了提高下载速度，我们来安装一个cnpm<br><code>npm install cnpm -g --registry=https://registry.npm.taobao.org</code></p>
+<h3 id="全局安装hexo"><a href="#全局安装hexo" class="headerlink" title="全局安装hexo"></a>全局安装hexo</h3><p><code>cnpm install -g hexo</code></p>
+<h2 id="搭建一个博客"><a href="#搭建一个博客" class="headerlink" title="搭建一个博客"></a>搭建一个博客</h2><h3 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h3><p>输入<code>hexo init</code>初始化项目<br>然后会出现这样一个目录<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/3.png" alt></p>
+<h3 id="打包成静态文件"><a href="#打包成静态文件" class="headerlink" title="打包成静态文件"></a>打包成静态文件</h3><p>输入<code>hexo g</code>会将文件编译为静态文件，md格式会编译为html<br>此时文件中会多出一个<code>public</code>文件夹</p>
+<h3 id="本地运行"><a href="#本地运行" class="headerlink" title="本地运行"></a>本地运行</h3><p>输入<code>hexo s</code> 运行，在浏览器中输入 <code>http://localhost:4000</code><br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/4.png" alt></p>
+<h2 id="部署到码云"><a href="#部署到码云" class="headerlink" title="部署到码云"></a>部署到码云</h2><h3 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h3><p>进入<a href="https://gitee.com/" target="_blank" rel="noopener">码云官网</a>，登录账号，创建一个仓库，注意仓库路径必须是<code>&lt;user-name&gt;.github.io</code>,<code>&lt;user-name&gt;</code>是自己的用户名<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/5.png" alt><br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/6.png" alt></p>
+<h3 id="连接仓库"><a href="#连接仓库" class="headerlink" title="连接仓库"></a>连接仓库</h3><p>点击仓库旁的 克隆下载，复制https地址<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/7.png" alt><br>然后打开blog文件夹中的<code>_config.yml</code>文件（项目配置文件），搜索<code>deploy</code><br>将repo:后面的网址改成你复制的地址，保存。<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/8.png" alt></p>
+<h3 id="推送到仓库"><a href="#推送到仓库" class="headerlink" title="推送到仓库"></a>推送到仓库</h3><p>安装<code>hexo-deployer-git</code>模块，gitbash 运行 <code>cnpm install hexo-deployer-git --save</code></p>
+<p>安装好之后，文件夹会多出来一个.deploy_git,然后运行命令 <code>hexo g -d</code>,就可以把内容推送到码云了。</p>
+<h3 id="开启码云Page服务"><a href="#开启码云Page服务" class="headerlink" title="开启码云Page服务"></a>开启码云Page服务</h3><p>点击仓库右上角的服务，然后点击Gitee Pages<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/9.png" alt><br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/10.png" alt><br>注意，以后每次提交至gitee后都要来手动更新哦~~也可以花钱购买自动部署服务</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Next主题优化配置</title>
+    <url>/2020/04/06/Next%E4%B8%BB%E9%A2%98%E4%BC%98%E5%8C%96/</url>
+    <content><![CDATA[<p>&emsp;&emsp;前几天使用Hexo搭了一个博客，在不断优化过程中去不断的搜集教程，在这里我把自己使用到的方面记录下来，方便今后的查阅。</p>
+<a id="more"></a>
+<h2 id="Markdown-语法"><a href="#Markdown-语法" class="headerlink" title="Markdown 语法"></a>Markdown 语法</h2><p>在写博客的过程中，对markdown语法还不是特别熟悉，记录几个语法吧。</p>
+<h3 id="空白符"><a href="#空白符" class="headerlink" title="空白符"></a>空白符</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">半方大的空白   <span class="symbol">&amp;ensp;</span>  或  <span class="symbol">&amp;#8194;</span></span><br><span class="line">全方大的空白   <span class="symbol">&amp;emsp;</span>  或  <span class="symbol">&amp;#8195;</span></span><br><span class="line">不断行的空白格 <span class="symbol">&amp;nbsp;</span>  或  <span class="symbol">&amp;#160;</span></span><br></pre></td></tr></table></figure>
+<h3 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">行内式链接形式：[<span class="string">超链接文字</span>](<span class="link">url</span>) </span><br><span class="line">[百度]https://www.baidu.com)</span><br></pre></td></tr></table></figure>
+<p><strong>在新窗口打开页面</strong></p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">&lt;a <span class="attribute">href</span>=<span class="string">"/work/manager/index.html"</span> <span class="attribute">target</span>=<span class="string">"_blank"</span>&gt;共享单车后台管理系统&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+<p><a href="/work/manager/index.html" target="_blank">共享单车后台管理系统</a></p>
+<h3 id="添加图片"><a href="#添加图片" class="headerlink" title="添加图片"></a>添加图片</h3><figure class="highlight less"><table><tr><td class="code"><pre><span class="line">!<span class="selector-attr">[]</span>(<span class="number">1</span>.jpg)  <span class="comment">//图片放在与文章同名的文件夹中</span></span><br></pre></td></tr></table></figure>
+<h3 id="文字颜色"><a href="#文字颜色" class="headerlink" title="文字颜色"></a>文字颜色</h3><p>这是<label style="color:red">红色</label>字体</p>
+<figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line">这是&lt;<span class="built_in">label</span> <span class="built_in">style</span>=<span class="string">"color:red"</span>&gt;红色&lt;/<span class="built_in">label</span>&gt;字体</span><br></pre></td></tr></table></figure>
+<h2 id="Next主题优化"><a href="#Next主题优化" class="headerlink" title="Next主题优化"></a>Next主题优化</h2><h3 id="设置阅读全文"><a href="#设置阅读全文" class="headerlink" title="设置阅读全文"></a>设置阅读全文</h3><p>&emsp;&emsp;在首页显示一篇文章的部分内容，并提供一个链接跳转到全文页面是一个常见的需求。 NexT 提供三种方式来控制文章在首页的显示方式。 也就是说，在首页显示文章的摘录并显示 <strong>阅读全文</strong> 按钮，可以通过以下方法：<br>1.在文章中使用<code>&lt;!-- more --&gt;</code> 手动进行截断，Hexo 提供的方式<br>2.在文章的 <code>front-matter</code> 中添加 <code>description</code>，并提供文章摘录<br>3.自动形成摘要，在 <strong>主题配置文件</strong> 中添加：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">auto_excerpt:</span></span><br><span class="line"><span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">length:</span> <span class="number">150</span></span><br></pre></td></tr></table></figure>
+<p>默认截取的长度为 150 字符，可以根据需要自行设定</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>

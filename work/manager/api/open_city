@@ -1,0 +1,201 @@
+{
+  "code": "0",
+  "result": {
+    "page": 6,
+    "page_size": 10,
+    "total_count": 60,
+    "page_count": 6,
+    "item_list": [
+      {
+        "id": 1,
+        "name": "鄂尔多斯市",
+        "mode": 1,
+        "op_mode": 2,
+        "franchisee_id": 77,
+        "franchisee_name": "松果自营",
+        "city_admins": [
+          {
+            "user_name": "顾艳",
+            "user_id": 10001
+          }
+        ],
+        "open_time": "2005-03-21 16:25:40",
+        "sys_user_name": "杨超",
+        "update_time": 1520476737000
+      },
+      {
+        "id": 2,
+        "name": "德州市",
+        "mode": 2,
+        "op_mode": 1,
+        "franchisee_id": 77,
+        "franchisee_name": "松果自营",
+        "city_admins": [
+          {
+            "user_name": "万霞",
+            "user_id": 10002
+          },
+          {
+            "user_name": "常洋",
+            "user_id": 10003
+          }
+        ],
+        "open_time": "1990-08-31 05:25:41",
+        "sys_user_name": "尹洋",
+        "update_time": 1520476737000
+      },
+      {
+        "id": 3,
+        "name": "巴彦淖尔市",
+        "mode": 2,
+        "op_mode": 2,
+        "franchisee_id": 77,
+        "franchisee_name": "松果自营",
+        "city_admins": [
+          {
+            "user_name": "龚艳",
+            "user_id": 10004
+          }
+        ],
+        "open_time": "1978-02-22 18:33:35",
+        "sys_user_name": "徐军",
+        "update_time": 1520476737000
+      },
+      {
+        "id": 4,
+        "name": "三明市",
+        "mode": 2,
+        "op_mode": 1,
+        "franchisee_id": 77,
+        "franchisee_name": "松果自营",
+        "city_admins": [
+          {
+            "user_name": "余艳",
+            "user_id": 10005
+          },
+          {
+            "user_name": "冯超",
+            "user_id": 10006
+          }
+        ],
+        "open_time": "1985-12-06 05:49:32",
+        "sys_user_name": "汪娜",
+        "update_time": 1520476737000
+      },
+      {
+        "id": 5,
+        "name": "香港岛",
+        "mode": 1,
+        "op_mode": 1,
+        "franchisee_id": 77,
+        "franchisee_name": "松果自营",
+        "city_admins": [
+          {
+            "user_name": "汤刚",
+            "user_id": 10007
+          }
+        ],
+        "open_time": "2003-04-08 16:12:44",
+        "sys_user_name": "钱敏",
+        "update_time": 1520476737000
+      },
+      {
+        "id": 6,
+        "name": "鄂州市",
+        "mode": 1,
+        "op_mode": 1,
+        "franchisee_id": 77,
+        "franchisee_name": "松果自营",
+        "city_admins": [
+          {
+            "user_name": "贺明",
+            "user_id": 10008
+          },
+          {
+            "user_name": "任娟",
+            "user_id": 10009
+          }
+        ],
+        "open_time": "1995-04-25 10:07:36",
+        "sys_user_name": "石勇",
+        "update_time": 1520476737000
+      },
+      {
+        "id": 7,
+        "name": "中卫市",
+        "mode": 2,
+        "op_mode": 1,
+        "franchisee_id": 77,
+        "franchisee_name": "松果自营",
+        "city_admins": [
+          {
+            "user_name": "张刚",
+            "user_id": 10010
+          },
+          {
+            "user_name": "郑霞",
+            "user_id": 10011
+          }
+        ],
+        "open_time": "1975-04-28 11:54:18",
+        "sys_user_name": "邹霞",
+        "update_time": 1520476737000
+      },
+      {
+        "id": 8,
+        "name": "榆林市",
+        "mode": 2,
+        "op_mode": 1,
+        "franchisee_id": 77,
+        "franchisee_name": "松果自营",
+        "city_admins": [
+          {
+            "user_name": "韩静",
+            "user_id": 10012
+          },
+          {
+            "user_name": "袁磊",
+            "user_id": 10013
+          }
+        ],
+        "open_time": "1976-09-21 02:50:24",
+        "sys_user_name": "郭静",
+        "update_time": 1520476737000
+      },
+      {
+        "id": 9,
+        "name": "益阳市",
+        "mode": 2,
+        "op_mode": 2,
+        "franchisee_id": 77,
+        "franchisee_name": "松果自营",
+        "city_admins": [
+          {
+            "user_name": "林涛",
+            "user_id": 10014
+          }
+        ],
+        "open_time": "2001-06-24 12:22:30",
+        "sys_user_name": "易洋",
+        "update_time": 1520476737000
+      },
+      {
+        "id": 10,
+        "name": "吴忠市",
+        "mode": 2,
+        "op_mode": 1,
+        "franchisee_id": 77,
+        "franchisee_name": "松果自营",
+        "city_admins": [
+          {
+            "user_name": "蔡军",
+            "user_id": 10015
+          }
+        ],
+        "open_time": "1985-01-23 01:23:45",
+        "sys_user_name": "宋霞",
+        "update_time": 1520476737000
+      }
+    ]
+  }
+}
