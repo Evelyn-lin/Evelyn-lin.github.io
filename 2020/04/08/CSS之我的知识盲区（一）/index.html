@@ -42,7 +42,7 @@
 <meta property="og:image" content="https://www.runoob.com/wp-content/uploads/2015/07/3791e575c48b3698be6a94ae1dbff79d.png">
 <meta property="og:image" content="https://www.runoob.com/wp-content/uploads/2015/07/f10918ccb8a13247c9d47715a2bd2c33.png">
 <meta property="article:published_time" content="2020-04-08T15:53:08.821Z">
-<meta property="article:modified_time" content="2020-04-09T00:40:49.051Z">
+<meta property="article:modified_time" content="2020-04-10T16:10:02.261Z">
 <meta property="article:author" content="Evelyn">
 <meta property="article:tag" content="CSS">
 <meta name="twitter:card" content="summary">
@@ -142,17 +142,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">7</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">5</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">7</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">9</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">12</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -240,7 +240,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-09 08:40:49" itemprop="dateModified" datetime="2020-04-09T08:40:49+08:00">2020-04-09</time>
+                <time title="修改时间：2020-04-11 00:10:02" itemprop="dateModified" datetime="2020-04-11T00:10:02+08:00">2020-04-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -279,7 +279,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.5k</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -301,28 +301,29 @@
         <p>记录关于CSS的遗忘知识点。</p>
 <a id="more"></a>
 
-<h2 id="Flex-布局"><a href="#Flex-布局" class="headerlink" title="Flex 布局"></a>Flex 布局</h2><h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>采用Flex布局的元素，称为Flex容器，它的所有子元素自动称为容器成员，称为flex项目（flex item）</p>
+<h2 id="Flex-布局"><a href="#Flex-布局" class="headerlink" title="Flex 布局"></a>Flex 布局</h2><p>转自阮一峰老师: <a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html</a></p>
+<h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>采用Flex布局的元素，称为Flex容器，它的所有子元素自动称为容器成员，称为flex项目（flex item）</p>
 <p><img src="https://www.runoob.com/wp-content/uploads/2015/07/3791e575c48b3698be6a94ae1dbff79d.png" alt="img"></p>
-<h4 id="容器属性"><a href="#容器属性" class="headerlink" title="容器属性"></a>容器属性</h4><p> flexdirection     定义主轴的方向，即项目排列的方向。</p>
-<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">row：默认值，主轴为水平方向，从左到右</span><br><span class="line"><span class="symbol">rowreverse:</span>主轴为水平方向，从右到左</span><br><span class="line"><span class="symbol">column:</span>主轴为垂直方向，从上到下</span><br><span class="line">columnreverse：主轴为垂直方向，从下到上</span><br></pre></td></tr></table></figure>
-<p> flexwrap   定义换行</p>
-<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">nowrap:</span> 默认值，不换行</span><br><span class="line">wrap：换行，第一行在上方</span><br><span class="line">wrapreverse：换行，第一行在下方</span><br></pre></td></tr></table></figure>
-<p> flexflow  是flexdirection和flexwrap的简写形式</p>
+<h4 id="容器属性"><a href="#容器属性" class="headerlink" title="容器属性"></a>容器属性</h4><p> flex-direction     定义主轴的方向，即项目排列的方向。</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">row</span>：默认值，主轴为水平方向，从左到右</span><br><span class="line"><span class="keyword">row</span>-<span class="keyword">reverse</span>:主轴为水平方向，从右到左</span><br><span class="line"><span class="keyword">column</span>:主轴为垂直方向，从上到下</span><br><span class="line"><span class="keyword">column</span>-<span class="keyword">reverse</span>：主轴为垂直方向，从下到上</span><br></pre></td></tr></table></figure>
+<p> flex-wrap   定义换行</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nowrap: 默认值，不换行</span><br><span class="line"><span class="built_in">wrap</span>：换行，第一行在上方</span><br><span class="line"><span class="built_in">wrap</span>-<span class="built_in">reverse</span>：换行，第一行在下方</span><br></pre></td></tr></table></figure>
+<p> flex-flow  是flex-direction和flex-wrap的简写形式</p>
 <p>   默认row nowrap；</p>
-<p> justifycontent  定义项目在主轴上的对齐方式</p>
-<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">flexstart</span>  <span class="string">对齐开始的一端</span></span><br><span class="line"><span class="attr">flexend</span>   <span class="string">对齐结束的一端</span></span><br><span class="line"><span class="attr">center</span>   <span class="string">居中对齐</span></span><br><span class="line"><span class="attr">spacebetween</span>  <span class="string">两端对齐</span></span><br><span class="line"><span class="attr">spacearound</span>   <span class="string">每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。</span></span><br></pre></td></tr></table></figure>
-<p> alignitems  定义项目在交叉轴上如何对齐</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">flexstart</span><br><span class="line">flexend</span><br><span class="line">center</span><br><span class="line">stretch默认值：如果<span class="built_in">item</span>未设置交叉轴上的高度/宽度，将沾满整个容器的高/宽</span><br><span class="line">baseline：项目的第一行文字的基线对齐</span><br></pre></td></tr></table></figure>
-<p> aligncontent  定义多根轴线的对齐方式</p>
+<p> justify-content  定义项目在主轴上的对齐方式</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">flex-start  对齐开始的一端</span><br><span class="line">flex-<span class="keyword">end</span>   对齐结束的一端</span><br><span class="line">center   居中对齐</span><br><span class="line"><span class="literal">space</span>-<span class="keyword">between</span>  两端对齐</span><br><span class="line"><span class="literal">space</span>-<span class="keyword">around</span>   每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。</span><br></pre></td></tr></table></figure>
+<p> align-items  定义项目在交叉轴上如何对齐</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">flex-<span class="built_in">start</span></span><br><span class="line">flex-<span class="keyword">end</span></span><br><span class="line">center</span><br><span class="line">stretch默认值：如果<span class="keyword">item</span>未设置交叉轴上的高度/宽度，将沾满整个容器的高/宽</span><br><span class="line">baseline：项目的第一行文字的基线对齐</span><br></pre></td></tr></table></figure>
+<p> align-content  定义多根轴线的对齐方式</p>
 <p>  <img src="https://www.runoob.com/wp-content/uploads/2015/07/f10918ccb8a13247c9d47715a2bd2c33.png" alt="img"></p>
-<h4 id="项目的属性"><a href="#项目的属性" class="headerlink" title="项目的属性"></a>项目的属性</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">order 定义项目的排列顺序  数值越小，排列越靠前</span><br><span class="line">flexgrow  定义项目的放大比例，默认为<span class="number">0</span>，如果所有项目都有此属性，则会按比例放大</span><br><span class="line">flexshrink 定义项目的缩小比例，默认为<span class="number">1.</span></span><br><span class="line">如果所有项目比例为<span class="number">1</span>，一个为<span class="number">0</span>；那么空间不足时，为<span class="number">0</span>的不会缩小，其他的会缩小。</span><br><span class="line">flexbasis  定义在分配多余空间之前，项目占据的主轴空间，默认是<span class="built_in">auto</span>，即项目本来大小</span><br><span class="line">flex  是flexgrow，flexshrink，flexbasis的简写，默认是<span class="number">0</span> <span class="number">1</span> <span class="built_in">auto</span></span><br><span class="line">alignself  允许单个项目有与其他项目不一样的对齐方式，可覆盖alignitems属性</span><br></pre></td></tr></table></figure>
+<h4 id="项目的属性"><a href="#项目的属性" class="headerlink" title="项目的属性"></a>项目的属性</h4><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">order</span> 定义项目的排列顺序  数值越小，排列越靠前</span><br><span class="line"><span class="attribute">flex-grow</span>  定义项目的放大比例，默认为0，如果所有项目都有此属性，则会按比例放大</span><br><span class="line"><span class="attribute">flex-shrink</span> 定义项目的缩小比例，默认为1.</span><br><span class="line">如果所有项目比例为1，一个为0；那么空间不足时，为0的不会缩小，其他的会缩小。</span><br><span class="line"><span class="attribute">flex-basis</span>  定义在分配多余空间之前，项目占据的主轴空间，默认是<span class="attribute">auto</span>，即项目本来大小</span><br><span class="line"><span class="attribute">flex</span>  是<span class="attribute">flex-grow</span>，<span class="attribute">flex-shrink</span>，<span class="attribute">flex-basis</span>的简写，默认是0 1 <span class="attribute">auto</span></span><br><span class="line"><span class="attribute">align-self</span>  允许单个项目有与其他项目不一样的对齐方式，可覆盖alignitems属性</span><br></pre></td></tr></table></figure>
 
-<h2 id="隐藏滚动条"><a href="#隐藏滚动条" class="headerlink" title="隐藏滚动条"></a>隐藏滚动条</h2><p>原本的内容超出盒子的大小，给盒子设置overflowy:scroll;              overflowx:hidden;<br>可以在盒子外面再包裹一个div盒子，给这个盒子设置同样的宽高，然后设置overflow:hidden即可。这样子盒子的滚动条被隐藏，但是滚动条依然还在的奥。</p>
-<p> overflow属性    overflowx   overflowy</p>
+<h2 id="隐藏滚动条"><a href="#隐藏滚动条" class="headerlink" title="隐藏滚动条"></a>隐藏滚动条</h2><p>原本的内容超出盒子的大小，给盒子设置overflow-y:scroll;              overflow-x:hidden;<br>可以在盒子外面再包裹一个div盒子，给这个盒子设置同样的宽高，然后设置overflow:hidden即可。这样子盒子的滚动条被隐藏，但是滚动条依然还在的奥。</p>
+<p> overflow属性    overflow-x   overflow-y</p>
 <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">visible：默认值，超出的内容不会被修剪，会出现在元素框外</span><br><span class="line">hidden：超出的部分会被修剪</span><br><span class="line">scroll：内容会被修剪，但是在宽的旁边会生成一个滚动条</span><br><span class="line"><span class="attribute">auto</span>：内容如果被修剪，就会出现滚动条</span><br><span class="line"><span class="attribute">inherit</span>：继承父元素属性值</span><br></pre></td></tr></table></figure>
 
 
-<h2 id="borderimage属性"><a href="#borderimage属性" class="headerlink" title="borderimage属性"></a>borderimage属性</h2><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">borderimage(URL)</span></span><br><span class="line">  <span class="attr">borderimageslice</span>:<span class="string">裁剪位置 ，单位px</span></span><br><span class="line">  <span class="attr">borderimagerepeat</span>:<span class="string">重复性</span></span><br><span class="line">    <span class="attr">stretch</span>  <span class="string">默认值，拉伸</span></span><br><span class="line">    <span class="attr">round</span>  <span class="string">平铺</span></span><br><span class="line">    <span class="attr">none不重复</span></span><br><span class="line">    <span class="attr">repeat</span>  <span class="string">重复</span></span><br></pre></td></tr></table></figure>
+<h2 id="borderimage属性"><a href="#borderimage属性" class="headerlink" title="borderimage属性"></a>borderimage属性</h2><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">border</span>-<span class="built_in">image</span>(URL)</span><br><span class="line">  <span class="built_in">border</span>-<span class="built_in">image</span>-slice:裁剪位置 ，单位px</span><br><span class="line">  <span class="built_in">border</span>-<span class="built_in">image</span>-repeat:重复性</span><br><span class="line">    stretch  默认值，拉伸</span><br><span class="line">    <span class="built_in">round</span>  平铺</span><br><span class="line">    none不重复</span><br><span class="line">    repeat  重复</span><br></pre></td></tr></table></figure>
 <h2 id="animation动画"><a href="#animation动画" class="headerlink" title="animation动画"></a>animation动画</h2><p>  定义动画<br>  <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">@keyframes</span> name&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="attribute">animation</span>:name <span class="number">2s</span> linear infinite;</span><br></pre></td></tr></table></figure></p>
 <h2 id="3d效果"><a href="#3d效果" class="headerlink" title="3d效果"></a>3d效果</h2><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">需要为元素添加 </span><br><span class="line"><span class="attribute">transform-style</span>:preserve-<span class="number">3</span>d;</span><br><span class="line">父元素添加</span><br><span class="line"><span class="attribute">perspective</span>:<span class="number">2000px</span>;</span><br></pre></td></tr></table></figure>
 <h2 id="重排-和-重绘"><a href="#重排-和-重绘" class="headerlink" title="重排 和 重绘"></a>重排 和 重绘</h2><p> <strong>重排</strong><br>   DOM的变化影响到元素的属性变化，例如宽高，浏览器重新计算元素的几何属性，其他元素的几何属性也会受到影响，浏览器需要重新构建渲染树<br> <strong>重绘</strong><br>   浏览器将受到影响的部分重新绘制在屏幕上。</p>
@@ -436,20 +437,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -490,12 +491,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">18k</span>
+    <span title="站点总字数">21k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">16 分钟</span>
+    <span title="站点阅读时长">19 分钟</span>
 </div>
 
         
