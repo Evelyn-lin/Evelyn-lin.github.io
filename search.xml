@@ -3,58 +3,76 @@
   <entry>
     <title>重新认识Ajax</title>
     <url>/2020/04/10/AJAX%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<p>总结ES6中的promise的用法，以及相关的概念。</p>
+    <content><![CDATA[<p>总结Ajax的用法，以及相关的概念。</p>
 <a id="more"></a>
 
-<h3 id="Ajax的由来"><a href="#Ajax的由来" class="headerlink" title="Ajax的由来"></a>Ajax的由来</h3><p>在了解Ajax由来之前，先从一个小案例说起。上网浏览的页面都是浏览器先服务端发起请求，服务端得到请求之后，读取并处理数据返回给客户端并且呈现出来。一个请求对应一个页面，传统的页面交互功能，也是通过请求回执的信息去更新一个页面。</p>
+<h3 id="一、Ajax的由来"><a href="#一、Ajax的由来" class="headerlink" title="一、Ajax的由来"></a>一、Ajax的由来</h3><p>在了解Ajax由来之前，先从一个小案例说起。上网浏览的页面都是浏览器先服务端发起请求，服务端得到请求之后，读取并处理数据返回给客户端并且呈现出来。一个请求对应一个页面，传统的页面交互功能，也是通过请求回执的信息去更新一个页面。</p>
 <p>如果在庞大的页面中，只需要更新一小块内容，但是每次都必须更新一个页面，是不是过于浪费呢？<br>以及，在请求过程中，页面的等待时间过长也会带来不好的体验，因此想要进行局部更新，并且不会产生等待页面，即不会阻塞后面代码的运行，就产生了Ajax，通过<strong>异步</strong>方式发出请求，并实现页面的<strong>局部更新</strong>。也就是Ajax的由来以及最主要的用法。</p>
 <p>Ajax的核心是XMLHttpRequest（简称XHR），XHR为浏览器<strong>发送请求</strong>和<strong>解析服务器响应</strong>提供了流畅的接口。现在的浏览器基本都支持原生的XHR对象。</p>
-<h3 id="原生js实现ajax"><a href="#原生js实现ajax" class="headerlink" title="原生js实现ajax"></a>原生js实现ajax</h3><figure class="highlight haxe"><table><tr><td class="code"><pre><span class="line"><span class="comment">//创建XMLHttpRequest对象</span></span><br><span class="line"><span class="keyword">var</span> xmlhttp;</span><br><span class="line"><span class="keyword">if</span> (window.XMLHttpRequest)&#123;</span><br><span class="line">    <span class="comment">//IE7+,Firefox,Chrome,Opera,Safari</span></span><br><span class="line">    xmlhttp = <span class="keyword">new</span> <span class="type">XMLHttpRequest</span>();</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// IE6,IE5浏览器执行代码</span></span><br><span class="line">    xmlhttp = <span class="keyword">new</span> <span class="type">ActiveXObject</span>(<span class="string">"Microsoft.XMLHTTP"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+<h3 id="二、原生js实现ajax"><a href="#二、原生js实现ajax" class="headerlink" title="二、原生js实现ajax"></a>二、原生js实现ajax</h3><p>总结来自 W3school <a href="https://www.w3school.com.cn/ajax/index.asp" target="_blank" rel="noopener">https://www.w3school.com.cn/ajax/index.asp</a></p>
+<p><strong>创建XMLHttpRequest对象</strong></p>
+<figure class="highlight haxe"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> xmlhttp;</span><br><span class="line"><span class="keyword">if</span> (window.XMLHttpRequest)&#123;</span><br><span class="line">    <span class="comment">//IE7+,Firefox,Chrome,Opera,Safari</span></span><br><span class="line">    xmlhttp = <span class="keyword">new</span> <span class="type">XMLHttpRequest</span>();</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// IE6,IE5浏览器执行代码</span></span><br><span class="line">    xmlhttp = <span class="keyword">new</span> <span class="type">ActiveXObject</span>(<span class="string">"Microsoft.XMLHTTP"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>向服务器发送请求</strong></p>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">xmlhtttp.<span class="keyword">open</span>(<span class="keyword">method</span>, url , async); </span><br><span class="line"><span class="comment">//method：请求的类型；GET 或 POST</span></span><br><span class="line"><span class="comment">//method：请求的类型；GET 或 POST</span></span><br><span class="line"><span class="comment">//async：true（异步）或 false（同步）</span></span><br><span class="line">xmlhttp.send(<span class="built_in">string</span>)  <span class="comment">//string仅用于post请求</span></span><br><span class="line"></span><br><span class="line">get请求：</span><br><span class="line">xmlhttp.<span class="keyword">open</span>(<span class="string">"GET"</span>, <span class="string">"/try/ajax/demo_get.php?t="</span> + <span class="module-access"><span class="module"><span class="identifier">Math</span>.</span></span>random<span class="literal">()</span>, <span class="literal">true</span>);</span><br><span class="line">xmlhttp.send<span class="literal">()</span>;</span><br><span class="line"></span><br><span class="line">post请求：</span><br><span class="line">xmlhttp.<span class="keyword">open</span>(<span class="string">"POST"</span>,<span class="string">"/try/ajax/demo_post2.php"</span>,<span class="literal">true</span>);</span><br><span class="line"><span class="comment">//使用 setRequestHeader() 来添加 HTTP 头;</span></span><br><span class="line">xmlhttp.set<span class="constructor">RequestHeader(<span class="string">"Content-type"</span>,<span class="string">"application/x-www-form-urlencoded"</span>)</span>;</span><br><span class="line">xmlhttp.send(<span class="string">"fname=Henry&amp;lname=Ford"</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>服务器响应</strong><br>如需获得来自服务器的响应，请使用 XMLHttpRequest 对象的 responseText 或 responseXML 属性。</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>responseText</td>
+<td>获得字符串式的响应数据</td>
+</tr>
+<tr>
+<td>responseXML</td>
+<td>获得XML形式的响应数据</td>
+</tr>
+</tbody></table>
+<p>responseText 属性</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">document.getElementById(<span class="string">"myDiv"</span>).<span class="attribute">innerHTML</span>=xmlhttp.responseText;</span><br></pre></td></tr></table></figure>
+<p>responseXML 属性</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="attribute">xmlDoc</span>=xmlhttp.responseXML;</span><br><span class="line"><span class="attribute">txt</span>=<span class="string">""</span>;</span><br><span class="line"><span class="attribute">x</span>=xmlDoc.getElementsByTagName("ARTIST");</span><br><span class="line"><span class="keyword">for</span> (<span class="attribute">i</span>=0;i&lt;x.length;i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attribute">txt</span>=txt + x[i].childNodes[0].nodeValue + <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">&#125;</span><br><span class="line">document.getElementById(<span class="string">"myDiv"</span>).<span class="attribute">innerHTML</span>=txt;</span><br></pre></td></tr></table></figure>
+<p><strong>onreadystatechange 事件</strong><br>当请求被发送到服务器时，我们需要执行一些基于响应的任务。<br>每当 readyState 改变时，就会触发 onreadystatechange 事件。</p>
+<table>
+    <tr>
+        <th> 属性 </th>
+        <th> 描述 </th>
+    </tr>
+    <tr>
+        <td> onreadystatechange </td>
+        <td> 存储函数或函数名，每当readyState变化shift，就会触发函数 </td>
+    </tr>
+     <tr>
+        <td> readyState </td>
+        <td> 存有 XMLHttpRequest 的状态。从 0 到 4 发生变化。
+            <ul>
+                <li> 0: 请求未初始化 </li>
+                <li> 1: 服务器连接已建立 </li>
+                <li> 2: 请求已接收 </li>
+                <li> 3: 请求处理中 </li>
+                <li> 4: 请求已完成，且响应已就绪 </li>
+            </ul>
+         </td>
+    </tr>
+    <tr>
+        <td> status </td>
+        <td> 200: "OK" <br>
+            404: 未找到页面 </td>
+    </tr>
+</table>
+在 onreadystatechange 事件中，我们规定当服务器响应已做好被处理的准备时所执行的任务。
+当 readyState 等于 4 且状态为 200 时，表示响应已就绪：
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">xmlhttp.<span class="attribute">onreadystatechange</span>=function()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (xmlhttp.<span class="attribute">readyState</span>==4 &amp;&amp; xmlhttp.<span class="attribute">status</span>==200)</span><br><span class="line">    &#123;</span><br><span class="line">        document.getElementById(<span class="string">"myDiv"</span>).<span class="attribute">innerHTML</span>=xmlhttp.responseText;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、封装一个ajax吧"><a href="#三、封装一个ajax吧" class="headerlink" title="三、封装一个ajax吧"></a>三、封装一个ajax吧</h3><figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> obj2str(data)&#123;</span><br><span class="line">    data = data<span class="operator"> || </span>&#123;&#125;;<span class="comment">// 如果没有传参, 为了添加随机因子,必须自己创建一个对象</span></span><br><span class="line">    data.t = <span class="keyword">new</span> <span class="constructor">Date()</span>.get<span class="constructor">Time()</span>;</span><br><span class="line">    var res = <span class="literal">[]</span>;</span><br><span class="line">    for (var key <span class="keyword">in</span> data) &#123;</span><br><span class="line">        res.push(encode<span class="constructor">URLComponent(<span class="params">key</span>)</span> + <span class="string">"="</span> encode<span class="constructor">URLComponent(<span class="params">data</span>[<span class="params">key</span>])</span>);<span class="comment">//中文转码</span></span><br><span class="line">    &#125;</span><br><span class="line">    return res.join(<span class="string">"&amp;"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> ajax(options)&#123;</span><br><span class="line">    <span class="comment">//创建一个XMLHttpRequest对象</span></span><br><span class="line">    var xmlhttp,timer;</span><br><span class="line">    <span class="keyword">if</span> (window.XMLHttpRequest) &#123;</span><br><span class="line">        xmlhttp = <span class="keyword">new</span> <span class="constructor">XMLHttpRequest()</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        xml = <span class="keyword">new</span> <span class="constructor">ActiveXObject(<span class="string">"Microsoft.XMLHTTP"</span>)</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//请求</span></span><br><span class="line">    <span class="keyword">let</span> str = onj2str(options.data);</span><br><span class="line">    <span class="keyword">if</span> (options.<span class="keyword">type</span>.<span class="keyword">to</span><span class="constructor">LowerCase()</span><span class="operator"> === </span><span class="string">"get"</span>) &#123;</span><br><span class="line">        xmlhttp.<span class="keyword">open</span>(<span class="string">"GET"</span>, options.url + <span class="string">"?"</span> + str, <span class="literal">true</span>);</span><br><span class="line">        xmlhttp.send<span class="literal">()</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        xmlhttp.<span class="keyword">open</span>(<span class="string">"POST"</span>, options.url, <span class="literal">true</span>);</span><br><span class="line">        xmlhttp.set<span class="constructor">RequestHeader(<span class="string">"Content-type"</span>,<span class="string">"application/x-www-form-urlencoded"</span>)</span>;</span><br><span class="line">        xmlhttp.send(str);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//响应</span></span><br><span class="line">    xmlhttp.onreadystatechange = <span class="keyword">function</span> (ev2) &#123;</span><br><span class="line">        <span class="keyword">if</span> (xmlhttp.readyState<span class="operator"> === </span><span class="number">4</span>)&#123;</span><br><span class="line">            clear<span class="constructor">Interval(<span class="params">timer</span>)</span>;</span><br><span class="line">            <span class="comment">//判断是否请求成功(Http状态码大于等于200，且小于300，和状态码等于304为请求成功)</span></span><br><span class="line">            <span class="keyword">if</span> (xmlhttp.status &gt;= <span class="number">200</span><span class="operator"> &amp;&amp; </span>xmlhttp.status &lt; <span class="number">300</span><span class="operator"> || </span>xmlhttp.status<span class="operator"> === </span><span class="number">304</span>) &#123;</span><br><span class="line">                option.success(xmlhttp);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                option.error(xmlhttp);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (option.timeout)&#123;</span><br><span class="line">        timer = set<span class="constructor">Interval(<span class="params">function</span> ()</span> &#123;</span><br><span class="line">            console.log(<span class="string">"中断请求"</span>);</span><br><span class="line">            xmlhttp.abort<span class="literal">()</span>;</span><br><span class="line">            clear<span class="constructor">Interval(<span class="params">timer</span>)</span>;</span><br><span class="line">        &#125;,option.timeout);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>promise</category>
+        <category>Ajax</category>
       </categories>
       <tags>
-        <tag>promise</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CSS之我的知识盲区系列（一）</title>
-    <url>/2020/04/08/CSS%E4%B9%8B%E6%88%91%E7%9A%84%E7%9F%A5%E8%AF%86%E7%9B%B2%E5%8C%BA%EF%BC%88%E4%B8%80%EF%BC%89/</url>
-    <content><![CDATA[<p>记录关于CSS的遗忘知识点。</p>
-<a id="more"></a>
-
-<h2 id="Flex-布局"><a href="#Flex-布局" class="headerlink" title="Flex 布局"></a>Flex 布局</h2><p>转自阮一峰老师: <a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html</a></p>
-<h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>采用Flex布局的元素，称为Flex容器，它的所有子元素自动称为容器成员，称为flex项目（flex item）</p>
-<p><img src="https://www.runoob.com/wp-content/uploads/2015/07/3791e575c48b3698be6a94ae1dbff79d.png" alt="img"></p>
-<h4 id="容器属性"><a href="#容器属性" class="headerlink" title="容器属性"></a>容器属性</h4><p> flex-direction     定义主轴的方向，即项目排列的方向。</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">row</span>：默认值，主轴为水平方向，从左到右</span><br><span class="line"><span class="keyword">row</span>-<span class="keyword">reverse</span>:主轴为水平方向，从右到左</span><br><span class="line"><span class="keyword">column</span>:主轴为垂直方向，从上到下</span><br><span class="line"><span class="keyword">column</span>-<span class="keyword">reverse</span>：主轴为垂直方向，从下到上</span><br></pre></td></tr></table></figure>
-<p> flex-wrap   定义换行</p>
-<figure class="highlight lua"><table><tr><td class="code"><pre><span class="line">nowrap: 默认值，不换行</span><br><span class="line"><span class="built_in">wrap</span>：换行，第一行在上方</span><br><span class="line"><span class="built_in">wrap</span>-<span class="built_in">reverse</span>：换行，第一行在下方</span><br></pre></td></tr></table></figure>
-<p> flex-flow  是flex-direction和flex-wrap的简写形式</p>
-<p>   默认row nowrap；</p>
-<p> justify-content  定义项目在主轴上的对齐方式</p>
-<figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">flex-start  对齐开始的一端</span><br><span class="line">flex-<span class="keyword">end</span>   对齐结束的一端</span><br><span class="line">center   居中对齐</span><br><span class="line"><span class="literal">space</span>-<span class="keyword">between</span>  两端对齐</span><br><span class="line"><span class="literal">space</span>-<span class="keyword">around</span>   每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。</span><br></pre></td></tr></table></figure>
-<p> align-items  定义项目在交叉轴上如何对齐</p>
-<figure class="highlight livecodeserver"><table><tr><td class="code"><pre><span class="line">flex-<span class="built_in">start</span></span><br><span class="line">flex-<span class="keyword">end</span></span><br><span class="line">center</span><br><span class="line">stretch默认值：如果<span class="keyword">item</span>未设置交叉轴上的高度/宽度，将沾满整个容器的高/宽</span><br><span class="line">baseline：项目的第一行文字的基线对齐</span><br></pre></td></tr></table></figure>
-<p> align-content  定义多根轴线的对齐方式</p>
-<p>  <img src="https://www.runoob.com/wp-content/uploads/2015/07/f10918ccb8a13247c9d47715a2bd2c33.png" alt="img"></p>
-<h4 id="项目的属性"><a href="#项目的属性" class="headerlink" title="项目的属性"></a>项目的属性</h4><figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="attribute">order</span> 定义项目的排列顺序  数值越小，排列越靠前</span><br><span class="line"><span class="attribute">flex-grow</span>  定义项目的放大比例，默认为0，如果所有项目都有此属性，则会按比例放大</span><br><span class="line"><span class="attribute">flex-shrink</span> 定义项目的缩小比例，默认为1.</span><br><span class="line">如果所有项目比例为1，一个为0；那么空间不足时，为0的不会缩小，其他的会缩小。</span><br><span class="line"><span class="attribute">flex-basis</span>  定义在分配多余空间之前，项目占据的主轴空间，默认是<span class="attribute">auto</span>，即项目本来大小</span><br><span class="line"><span class="attribute">flex</span>  是<span class="attribute">flex-grow</span>，<span class="attribute">flex-shrink</span>，<span class="attribute">flex-basis</span>的简写，默认是0 1 <span class="attribute">auto</span></span><br><span class="line"><span class="attribute">align-self</span>  允许单个项目有与其他项目不一样的对齐方式，可覆盖alignitems属性</span><br></pre></td></tr></table></figure>
-
-<h2 id="隐藏滚动条"><a href="#隐藏滚动条" class="headerlink" title="隐藏滚动条"></a>隐藏滚动条</h2><p>原本的内容超出盒子的大小，给盒子设置overflow-y:scroll;              overflow-x:hidden;<br>可以在盒子外面再包裹一个div盒子，给这个盒子设置同样的宽高，然后设置overflow:hidden即可。这样子盒子的滚动条被隐藏，但是滚动条依然还在的奥。</p>
-<p> overflow属性    overflow-x   overflow-y</p>
-<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line">visible：默认值，超出的内容不会被修剪，会出现在元素框外</span><br><span class="line">hidden：超出的部分会被修剪</span><br><span class="line">scroll：内容会被修剪，但是在宽的旁边会生成一个滚动条</span><br><span class="line"><span class="attribute">auto</span>：内容如果被修剪，就会出现滚动条</span><br><span class="line"><span class="attribute">inherit</span>：继承父元素属性值</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="borderimage属性"><a href="#borderimage属性" class="headerlink" title="borderimage属性"></a>borderimage属性</h2><figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line"><span class="built_in">border</span>-<span class="built_in">image</span>(URL)</span><br><span class="line">  <span class="built_in">border</span>-<span class="built_in">image</span>-slice:裁剪位置 ，单位px</span><br><span class="line">  <span class="built_in">border</span>-<span class="built_in">image</span>-repeat:重复性</span><br><span class="line">    stretch  默认值，拉伸</span><br><span class="line">    <span class="built_in">round</span>  平铺</span><br><span class="line">    none不重复</span><br><span class="line">    repeat  重复</span><br></pre></td></tr></table></figure>
-<h2 id="animation动画"><a href="#animation动画" class="headerlink" title="animation动画"></a>animation动画</h2><p>  定义动画<br>  <figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"> <span class="keyword">@keyframes</span> name&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="attribute">animation</span>:name <span class="number">2s</span> linear infinite;</span><br></pre></td></tr></table></figure></p>
-<h2 id="3d效果"><a href="#3d效果" class="headerlink" title="3d效果"></a>3d效果</h2><figure class="highlight scss"><table><tr><td class="code"><pre><span class="line">需要为元素添加 </span><br><span class="line"><span class="attribute">transform-style</span>:preserve-<span class="number">3</span>d;</span><br><span class="line">父元素添加</span><br><span class="line"><span class="attribute">perspective</span>:<span class="number">2000px</span>;</span><br></pre></td></tr></table></figure>
-<h2 id="重排-和-重绘"><a href="#重排-和-重绘" class="headerlink" title="重排 和 重绘"></a>重排 和 重绘</h2><p> <strong>重排</strong><br>   DOM的变化影响到元素的属性变化，例如宽高，浏览器重新计算元素的几何属性，其他元素的几何属性也会受到影响，浏览器需要重新构建渲染树<br> <strong>重绘</strong><br>   浏览器将受到影响的部分重新绘制在屏幕上。</p>
-]]></content>
-      <categories>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>CSS</tag>
+        <tag>Ajax</tag>
       </tags>
   </entry>
   <entry>
@@ -258,61 +276,6 @@
       </tags>
   </entry>
   <entry>
-    <title>CSS之我的知识盲区系列（二）</title>
-    <url>/2020/04/09/CSS%E4%B9%8B%E6%88%91%E7%9A%84%E7%9F%A5%E8%AF%86%E7%9B%B2%E5%8C%BA%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
-    <content><![CDATA[<p>记录关于CSS的遗忘知识点。</p>
-<a id="more"></a>
-
-<h2 id="CSS文本"><a href="#CSS文本" class="headerlink" title="CSS文本"></a>CSS文本</h2><h3 id="装饰文字"><a href="#装饰文字" class="headerlink" title="装饰文字"></a>装饰文字</h3><figure class="highlight scss"><table><tr><td class="code"><pre><span class="line">text-decoraton:underline; <span class="comment">//下划线</span></span><br><span class="line">text-decoraton:overline; <span class="comment">//上划线</span></span><br><span class="line">text-decoraton:overthrough; <span class="comment">//删除线</span></span><br><span class="line">text-decoraton:none; <span class="comment">//无</span></span><br></pre></td></tr></table></figure>
-<h3 id="文字大小写转换"><a href="#文字大小写转换" class="headerlink" title="文字大小写转换"></a>文字大小写转换</h3><figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="type">text</span>-<span class="keyword">transform</span>:uppercase;</span><br><span class="line"><span class="type">text</span>-<span class="keyword">transform</span>:lowercase;</span><br><span class="line"><span class="type">text</span>-<span class="keyword">transform</span>:uppercase;</span><br></pre></td></tr></table></figure>
-<h3 id="文本缩进"><a href="#文本缩进" class="headerlink" title="文本缩进"></a>文本缩进</h3><figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="attribute">text-indent</span>:<span class="number">50px</span>;</span><br></pre></td></tr></table></figure>
-<h3 id="字符之间的空间"><a href="#字符之间的空间" class="headerlink" title="字符之间的空间"></a>字符之间的空间</h3><figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="attribute">letter-spacing</span>:<span class="number">5px</span>;</span><br><span class="line"><span class="attribute">letter-spacing</span>:-<span class="number">3px</span>;</span><br></pre></td></tr></table></figure>
-<h3 id="行高"><a href="#行高" class="headerlink" title="行高"></a>行高</h3><figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="built_in">line</span>-<span class="built_in">height</span>:<span class="number">30</span>px;</span><br></pre></td></tr></table></figure>
-<h3 id="文字方向"><a href="#文字方向" class="headerlink" title="文字方向"></a>文字方向</h3><figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="attribute">direction</span>:rtl;  <span class="comment">//right to left</span></span><br><span class="line"><span class="attribute">direction</span>:ltr;  <span class="comment">//left to right</span></span><br></pre></td></tr></table></figure>
-<p><strong>注意后者，如果结尾有标点符号，会移动至最左边奥~因为开头不能有标点吧！</strong></p>
-<h3 id="禁用文字换行"><a href="#禁用文字换行" class="headerlink" title="禁用文字换行"></a>禁用文字换行</h3><figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">white-<span class="literal">space</span>:nowrap</span><br></pre></td></tr></table></figure>
-<h3 id="位于同一行的文字与图片的居中对齐"><a href="#位于同一行的文字与图片的居中对齐" class="headerlink" title="位于同一行的文字与图片的居中对齐"></a>位于同一行的文字与图片的居中对齐</h3><figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">vertical-align:<span class="keyword">middle</span></span><br></pre></td></tr></table></figure>
-<h2 id="CSS文字"><a href="#CSS文字" class="headerlink" title="CSS文字"></a>CSS文字</h2><h3 id="文字异体"><a href="#文字异体" class="headerlink" title="文字异体"></a>文字异体</h3><p>将小写字母转为小型的大写</p>
-<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="attribute">font-variant</span>:small-caps</span><br><span class="line">&lt;<span class="selector-tag">span</span> style=<span class="string">"font-variant:small-caps"</span>&gt;Small&lt;/span&gt; <span class="comment">//效果如下所示</span></span><br></pre></td></tr></table></figure>
-<p><span style="font-variant:small-caps">Small</span></p>
-<h2 id="CSS列表"><a href="#CSS列表" class="headerlink" title="CSS列表"></a>CSS列表</h2><h3 id="列表的标记类型"><a href="#列表的标记类型" class="headerlink" title="列表的标记类型"></a>列表的标记类型</h3><figure class="highlight elm"><table><tr><td class="code"><pre><span class="line"><span class="title">list</span>-style-<span class="keyword">type</span></span><br></pre></td></tr></table></figure>
-<p>具体样式可查阅 <a href="https://www.runoob.com/cssref/pr-list-style-type.html" target="_blank" rel="noopener">菜鸟教程</a></p>
-<h3 id="自定义标记类型"><a href="#自定义标记类型" class="headerlink" title="自定义标记类型"></a>自定义标记类型</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">list-style-image</span><span class="selector-pseudo">:url()</span></span><br><span class="line"><span class="selector-tag">background-img</span><span class="selector-pseudo">:url()</span> 也可以实现</span><br><span class="line">使用伪元素：</span><br><span class="line"><span class="selector-tag">li</span><span class="selector-pseudo">:before</span>&#123;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">""</span>;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#000</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="CSS表格"><a href="#CSS表格" class="headerlink" title="CSS表格"></a>CSS表格</h2><h3 id="标题位置"><a href="#标题位置" class="headerlink" title="标题位置"></a>标题位置</h3><figure class="highlight coq"><table><tr><td class="code"><pre><span class="line">caption-side:<span class="built_in">bottom</span>/<span class="built_in">top</span>/inherit</span><br></pre></td></tr></table></figure>
-<h2 id="CSS定位"><a href="#CSS定位" class="headerlink" title="CSS定位"></a>CSS定位</h2><h3 id="裁剪图片"><a href="#裁剪图片" class="headerlink" title="裁剪图片"></a>裁剪图片</h3><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">img </span><br><span class="line">&#123;</span><br><span class="line">position:absolute;  <span class="comment">//必须设置绝对定位</span></span><br><span class="line">clip:rect(<span class="number">0</span>px,<span class="number">60</span>px,<span class="number">200</span>px,<span class="number">0</span>px); <span class="comment">//四个值表示：上右下左裁剪线</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>CSS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Next主题优化配置</title>
-    <url>/2020/04/06/Next%E4%B8%BB%E9%A2%98%E4%BC%98%E5%8C%96/</url>
-    <content><![CDATA[<p>&emsp;&emsp;前几天使用Hexo搭了一个博客，在不断优化过程中去不断的搜集教程，在这里我把自己使用到的方面记录下来，方便今后的查阅。</p>
-<a id="more"></a>
-<h2 id="Markdown-语法"><a href="#Markdown-语法" class="headerlink" title="Markdown 语法"></a>Markdown 语法</h2><p>在写博客的过程中，对markdown语法还不是特别熟悉，记录几个语法吧。</p>
-<h3 id="空白符"><a href="#空白符" class="headerlink" title="空白符"></a>空白符</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">半方大的空白   <span class="symbol">&amp;ensp;</span>  或  <span class="symbol">&amp;#8194;</span></span><br><span class="line">全方大的空白   <span class="symbol">&amp;emsp;</span>  或  <span class="symbol">&amp;#8195;</span></span><br><span class="line">不断行的空白格 <span class="symbol">&amp;nbsp;</span>  或  <span class="symbol">&amp;#160;</span></span><br></pre></td></tr></table></figure>
-<h3 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">行内式链接形式：[<span class="string">超链接文字</span>](<span class="link">url</span>) </span><br><span class="line">[百度]https://www.baidu.com)</span><br></pre></td></tr></table></figure>
-<p><strong>在新窗口打开页面</strong></p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">&lt;a <span class="attribute">href</span>=<span class="string">"/work/manager/index.html"</span> <span class="attribute">target</span>=<span class="string">"_blank"</span>&gt;共享单车后台管理系统&lt;/a&gt;</span><br></pre></td></tr></table></figure>
-<p><a href="/work/manager/index.html" target="_blank">共享单车后台管理系统</a></p>
-<h3 id="添加图片"><a href="#添加图片" class="headerlink" title="添加图片"></a>添加图片</h3><figure class="highlight less"><table><tr><td class="code"><pre><span class="line">!<span class="selector-attr">[]</span>(<span class="number">1</span>.jpg)  <span class="comment">//图片放在与文章同名的文件夹中</span></span><br></pre></td></tr></table></figure>
-<h3 id="文字颜色"><a href="#文字颜色" class="headerlink" title="文字颜色"></a>文字颜色</h3><p>这是<label style="color:red">红色</label>字体</p>
-<figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line">这是&lt;<span class="built_in">label</span> <span class="built_in">style</span>=<span class="string">"color:red"</span>&gt;红色&lt;/<span class="built_in">label</span>&gt;字体</span><br></pre></td></tr></table></figure>
-<h2 id="Next主题优化"><a href="#Next主题优化" class="headerlink" title="Next主题优化"></a>Next主题优化</h2><h3 id="设置阅读全文"><a href="#设置阅读全文" class="headerlink" title="设置阅读全文"></a>设置阅读全文</h3><p>&emsp;&emsp;在首页显示一篇文章的部分内容，并提供一个链接跳转到全文页面是一个常见的需求。 NexT 提供三种方式来控制文章在首页的显示方式。 也就是说，在首页显示文章的摘录并显示 <strong>阅读全文</strong> 按钮，可以通过以下方法：<br>1.在文章中使用<code>&lt;!-- more --&gt;</code> 手动进行截断，Hexo 提供的方式<br>2.在文章的 <code>front-matter</code> 中添加 <code>description</code>，并提供文章摘录<br>3.自动形成摘要，在 <strong>主题配置文件</strong> 中添加：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">auto_excerpt:</span></span><br><span class="line"><span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">length:</span> <span class="number">150</span></span><br></pre></td></tr></table></figure>
-<p>默认截取的长度为 150 字符，可以根据需要自行设定</p>
-]]></content>
-      <categories>
-        <category>hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ES6（二）</title>
     <url>/2020/04/07/ES6%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
     <content><![CDATA[<p>接着复习一下ES6,总结来自<a href="https://www.runoob.com/w3cnote/es6-string.html" target="_blank" rel="noopener">菜鸟教程</a></p>
@@ -358,29 +321,33 @@
       </tags>
   </entry>
   <entry>
-    <title>使用hexo从零开始搭建博客</title>
-    <url>/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<p>&emsp;&emsp;之前做了一个个人主页，但是由于部署在github，导致国内网打开很慢的原因，因此上网搜索了一些解决的办法。看到很多搭建博客的方法，索性不如也把自己的博客搭建起来，于是乎，特此写一篇笔记记录一下心得以及踩过的大部分坑吧~</p>
-<a id="more"></a> 
+    <title>CSS之我的知识盲区系列（二）</title>
+    <url>/2020/04/09/CSS%E4%B9%8B%E6%88%91%E7%9A%84%E7%9F%A5%E8%AF%86%E7%9B%B2%E5%8C%BA%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
+    <content><![CDATA[<p>记录关于CSS的遗忘知识点。</p>
+<a id="more"></a>
 
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h3><p>打开<a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js官网</a>下载安装node.js<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/1.png" alt></p>
-<h3 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h3><p>打开<a href="https://git-scm.com/download" target="_blank" rel="noopener">Git官网</a>,选择下载对应版本安装<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/2.png" alt></p>
-<h3 id="cnpm"><a href="#cnpm" class="headerlink" title="cnpm"></a>cnpm</h3><p>由于npm的服务器位于国外可能影响安装，为了提高下载速度，我们来安装一个cnpm<br><code>npm install cnpm -g --registry=https://registry.npm.taobao.org</code></p>
-<h3 id="全局安装hexo"><a href="#全局安装hexo" class="headerlink" title="全局安装hexo"></a>全局安装hexo</h3><p><code>cnpm install -g hexo</code></p>
-<h2 id="搭建一个博客"><a href="#搭建一个博客" class="headerlink" title="搭建一个博客"></a>搭建一个博客</h2><h3 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h3><p>输入<code>hexo init</code>初始化项目<br>然后会出现这样一个目录<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/3.png" alt></p>
-<h3 id="打包成静态文件"><a href="#打包成静态文件" class="headerlink" title="打包成静态文件"></a>打包成静态文件</h3><p>输入<code>hexo g</code>会将文件编译为静态文件，md格式会编译为html<br>此时文件中会多出一个<code>public</code>文件夹</p>
-<h3 id="本地运行"><a href="#本地运行" class="headerlink" title="本地运行"></a>本地运行</h3><p>输入<code>hexo s</code> 运行，在浏览器中输入 <code>http://localhost:4000</code><br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/4.png" alt></p>
-<h2 id="部署到码云"><a href="#部署到码云" class="headerlink" title="部署到码云"></a>部署到码云</h2><h3 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h3><p>进入<a href="https://gitee.com/" target="_blank" rel="noopener">码云官网</a>，登录账号，创建一个仓库，注意仓库路径必须是<code>&lt;user-name&gt;.github.io</code>,<code>&lt;user-name&gt;</code>是自己的用户名<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/5.png" alt><br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/6.png" alt></p>
-<h3 id="连接仓库"><a href="#连接仓库" class="headerlink" title="连接仓库"></a>连接仓库</h3><p>点击仓库旁的 克隆下载，复制https地址<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/7.png" alt><br>然后打开blog文件夹中的<code>_config.yml</code>文件（项目配置文件），搜索<code>deploy</code><br>将repo:后面的网址改成你复制的地址，保存。<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/8.png" alt></p>
-<h3 id="推送到仓库"><a href="#推送到仓库" class="headerlink" title="推送到仓库"></a>推送到仓库</h3><p>安装<code>hexo-deployer-git</code>模块，gitbash 运行 <code>cnpm install hexo-deployer-git --save</code></p>
-<p>安装好之后，文件夹会多出来一个.deploy_git,然后运行命令 <code>hexo g -d</code>,就可以把内容推送到码云了。</p>
-<h3 id="开启码云Page服务"><a href="#开启码云Page服务" class="headerlink" title="开启码云Page服务"></a>开启码云Page服务</h3><p>点击仓库右上角的服务，然后点击Gitee Pages<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/9.png" alt><br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/10.png" alt><br>注意，以后每次提交至gitee后都要来手动更新哦~~也可以花钱购买自动部署服务</p>
-]]></content>
+<h2 id="CSS文本"><a href="#CSS文本" class="headerlink" title="CSS文本"></a>CSS文本</h2><h3 id="装饰文字"><a href="#装饰文字" class="headerlink" title="装饰文字"></a>装饰文字</h3><figure class="highlight scss"><table><tr><td class="code"><pre><span class="line">text-decoraton:underline; <span class="comment">//下划线</span></span><br><span class="line">text-decoraton:overline; <span class="comment">//上划线</span></span><br><span class="line">text-decoraton:overthrough; <span class="comment">//删除线</span></span><br><span class="line">text-decoraton:none; <span class="comment">//无</span></span><br></pre></td></tr></table></figure>
+<h3 id="文字大小写转换"><a href="#文字大小写转换" class="headerlink" title="文字大小写转换"></a>文字大小写转换</h3><figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="type">text</span>-<span class="keyword">transform</span>:uppercase;</span><br><span class="line"><span class="type">text</span>-<span class="keyword">transform</span>:lowercase;</span><br><span class="line"><span class="type">text</span>-<span class="keyword">transform</span>:uppercase;</span><br></pre></td></tr></table></figure>
+<h3 id="文本缩进"><a href="#文本缩进" class="headerlink" title="文本缩进"></a>文本缩进</h3><figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="attribute">text-indent</span>:<span class="number">50px</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="字符之间的空间"><a href="#字符之间的空间" class="headerlink" title="字符之间的空间"></a>字符之间的空间</h3><figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="attribute">letter-spacing</span>:<span class="number">5px</span>;</span><br><span class="line"><span class="attribute">letter-spacing</span>:-<span class="number">3px</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="行高"><a href="#行高" class="headerlink" title="行高"></a>行高</h3><figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="built_in">line</span>-<span class="built_in">height</span>:<span class="number">30</span>px;</span><br></pre></td></tr></table></figure>
+<h3 id="文字方向"><a href="#文字方向" class="headerlink" title="文字方向"></a>文字方向</h3><figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="attribute">direction</span>:rtl;  <span class="comment">//right to left</span></span><br><span class="line"><span class="attribute">direction</span>:ltr;  <span class="comment">//left to right</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意后者，如果结尾有标点符号，会移动至最左边奥~因为开头不能有标点吧！</strong></p>
+<h3 id="禁用文字换行"><a href="#禁用文字换行" class="headerlink" title="禁用文字换行"></a>禁用文字换行</h3><figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">white-<span class="literal">space</span>:nowrap</span><br></pre></td></tr></table></figure>
+<h3 id="位于同一行的文字与图片的居中对齐"><a href="#位于同一行的文字与图片的居中对齐" class="headerlink" title="位于同一行的文字与图片的居中对齐"></a>位于同一行的文字与图片的居中对齐</h3><figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">vertical-align:<span class="keyword">middle</span></span><br></pre></td></tr></table></figure>
+<h2 id="CSS文字"><a href="#CSS文字" class="headerlink" title="CSS文字"></a>CSS文字</h2><h3 id="文字异体"><a href="#文字异体" class="headerlink" title="文字异体"></a>文字异体</h3><p>将小写字母转为小型的大写</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="attribute">font-variant</span>:small-caps</span><br><span class="line">&lt;<span class="selector-tag">span</span> style=<span class="string">"font-variant:small-caps"</span>&gt;Small&lt;/span&gt; <span class="comment">//效果如下所示</span></span><br></pre></td></tr></table></figure>
+<p><span style="font-variant:small-caps">Small</span></p>
+<h2 id="CSS列表"><a href="#CSS列表" class="headerlink" title="CSS列表"></a>CSS列表</h2><h3 id="列表的标记类型"><a href="#列表的标记类型" class="headerlink" title="列表的标记类型"></a>列表的标记类型</h3><figure class="highlight elm"><table><tr><td class="code"><pre><span class="line"><span class="title">list</span>-style-<span class="keyword">type</span></span><br></pre></td></tr></table></figure>
+<p>具体样式可查阅 <a href="https://www.runoob.com/cssref/pr-list-style-type.html" target="_blank" rel="noopener">菜鸟教程</a></p>
+<h3 id="自定义标记类型"><a href="#自定义标记类型" class="headerlink" title="自定义标记类型"></a>自定义标记类型</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">list-style-image</span><span class="selector-pseudo">:url()</span></span><br><span class="line"><span class="selector-tag">background-img</span><span class="selector-pseudo">:url()</span> 也可以实现</span><br><span class="line">使用伪元素：</span><br><span class="line"><span class="selector-tag">li</span><span class="selector-pseudo">:before</span>&#123;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">""</span>;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#000</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="CSS表格"><a href="#CSS表格" class="headerlink" title="CSS表格"></a>CSS表格</h2><h3 id="标题位置"><a href="#标题位置" class="headerlink" title="标题位置"></a>标题位置</h3><figure class="highlight coq"><table><tr><td class="code"><pre><span class="line">caption-side:<span class="built_in">bottom</span>/<span class="built_in">top</span>/inherit</span><br></pre></td></tr></table></figure>
+<h2 id="CSS定位"><a href="#CSS定位" class="headerlink" title="CSS定位"></a>CSS定位</h2><h3 id="裁剪图片"><a href="#裁剪图片" class="headerlink" title="裁剪图片"></a>裁剪图片</h3><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">img </span><br><span class="line">&#123;</span><br><span class="line">position:absolute;  <span class="comment">//必须设置绝对定位</span></span><br><span class="line">clip:rect(<span class="number">0</span>px,<span class="number">60</span>px,<span class="number">200</span>px,<span class="number">0</span>px); <span class="comment">//四个值表示：上右下左裁剪线</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>hexo</category>
+        <category>CSS</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
+        <tag>CSS</tag>
       </tags>
   </entry>
   <entry>
@@ -424,6 +391,60 @@
       </tags>
   </entry>
   <entry>
+    <title>CSS之我的知识盲区系列（一）</title>
+    <url>/2020/04/08/CSS%E4%B9%8B%E6%88%91%E7%9A%84%E7%9F%A5%E8%AF%86%E7%9B%B2%E5%8C%BA%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+    <content><![CDATA[<p>记录关于CSS的遗忘知识点。</p>
+<a id="more"></a>
+
+<h2 id="Flex-布局"><a href="#Flex-布局" class="headerlink" title="Flex 布局"></a>Flex 布局</h2><p>转自阮一峰老师: <a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html</a></p>
+<h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>采用Flex布局的元素，称为Flex容器，它的所有子元素自动称为容器成员，称为flex项目（flex item）</p>
+<p><img src="https://www.runoob.com/wp-content/uploads/2015/07/3791e575c48b3698be6a94ae1dbff79d.png" alt="img"></p>
+<h4 id="容器属性"><a href="#容器属性" class="headerlink" title="容器属性"></a>容器属性</h4><p> flex-direction     定义主轴的方向，即项目排列的方向。</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">row</span>：默认值，主轴为水平方向，从左到右</span><br><span class="line"><span class="keyword">row</span>-<span class="keyword">reverse</span>:主轴为水平方向，从右到左</span><br><span class="line"><span class="keyword">column</span>:主轴为垂直方向，从上到下</span><br><span class="line"><span class="keyword">column</span>-<span class="keyword">reverse</span>：主轴为垂直方向，从下到上</span><br></pre></td></tr></table></figure>
+<p> flex-wrap   定义换行</p>
+<figure class="highlight lua"><table><tr><td class="code"><pre><span class="line">nowrap: 默认值，不换行</span><br><span class="line"><span class="built_in">wrap</span>：换行，第一行在上方</span><br><span class="line"><span class="built_in">wrap</span>-<span class="built_in">reverse</span>：换行，第一行在下方</span><br></pre></td></tr></table></figure>
+<p> flex-flow  是flex-direction和flex-wrap的简写形式</p>
+<p>   默认row nowrap；</p>
+<p> justify-content  定义项目在主轴上的对齐方式</p>
+<figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">flex-start  对齐开始的一端</span><br><span class="line">flex-<span class="keyword">end</span>   对齐结束的一端</span><br><span class="line">center   居中对齐</span><br><span class="line"><span class="literal">space</span>-<span class="keyword">between</span>  两端对齐</span><br><span class="line"><span class="literal">space</span>-<span class="keyword">around</span>   每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。</span><br></pre></td></tr></table></figure>
+<p> align-items  定义项目在交叉轴上如何对齐</p>
+<figure class="highlight livecodeserver"><table><tr><td class="code"><pre><span class="line">flex-<span class="built_in">start</span></span><br><span class="line">flex-<span class="keyword">end</span></span><br><span class="line">center</span><br><span class="line">stretch默认值：如果<span class="keyword">item</span>未设置交叉轴上的高度/宽度，将沾满整个容器的高/宽</span><br><span class="line">baseline：项目的第一行文字的基线对齐</span><br></pre></td></tr></table></figure>
+<p> align-content  定义多根轴线的对齐方式</p>
+<p>  <img src="https://www.runoob.com/wp-content/uploads/2015/07/f10918ccb8a13247c9d47715a2bd2c33.png" alt="img"></p>
+<h4 id="项目的属性"><a href="#项目的属性" class="headerlink" title="项目的属性"></a>项目的属性</h4><figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="attribute">order</span> 定义项目的排列顺序  数值越小，排列越靠前</span><br><span class="line"><span class="attribute">flex-grow</span>  定义项目的放大比例，默认为0，如果所有项目都有此属性，则会按比例放大</span><br><span class="line"><span class="attribute">flex-shrink</span> 定义项目的缩小比例，默认为1.</span><br><span class="line">如果所有项目比例为1，一个为0；那么空间不足时，为0的不会缩小，其他的会缩小。</span><br><span class="line"><span class="attribute">flex-basis</span>  定义在分配多余空间之前，项目占据的主轴空间，默认是<span class="attribute">auto</span>，即项目本来大小</span><br><span class="line"><span class="attribute">flex</span>  是<span class="attribute">flex-grow</span>，<span class="attribute">flex-shrink</span>，<span class="attribute">flex-basis</span>的简写，默认是0 1 <span class="attribute">auto</span></span><br><span class="line"><span class="attribute">align-self</span>  允许单个项目有与其他项目不一样的对齐方式，可覆盖alignitems属性</span><br></pre></td></tr></table></figure>
+
+<h2 id="隐藏滚动条"><a href="#隐藏滚动条" class="headerlink" title="隐藏滚动条"></a>隐藏滚动条</h2><p>原本的内容超出盒子的大小，给盒子设置overflow-y:scroll;              overflow-x:hidden;<br>可以在盒子外面再包裹一个div盒子，给这个盒子设置同样的宽高，然后设置overflow:hidden即可。这样子盒子的滚动条被隐藏，但是滚动条依然还在的奥。</p>
+<p> overflow属性    overflow-x   overflow-y</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line">visible：默认值，超出的内容不会被修剪，会出现在元素框外</span><br><span class="line">hidden：超出的部分会被修剪</span><br><span class="line">scroll：内容会被修剪，但是在宽的旁边会生成一个滚动条</span><br><span class="line"><span class="attribute">auto</span>：内容如果被修剪，就会出现滚动条</span><br><span class="line"><span class="attribute">inherit</span>：继承父元素属性值</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="borderimage属性"><a href="#borderimage属性" class="headerlink" title="borderimage属性"></a>borderimage属性</h2><figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line"><span class="built_in">border</span>-<span class="built_in">image</span>(URL)</span><br><span class="line">  <span class="built_in">border</span>-<span class="built_in">image</span>-slice:裁剪位置 ，单位px</span><br><span class="line">  <span class="built_in">border</span>-<span class="built_in">image</span>-repeat:重复性</span><br><span class="line">    stretch  默认值，拉伸</span><br><span class="line">    <span class="built_in">round</span>  平铺</span><br><span class="line">    none不重复</span><br><span class="line">    repeat  重复</span><br></pre></td></tr></table></figure>
+<h2 id="animation动画"><a href="#animation动画" class="headerlink" title="animation动画"></a>animation动画</h2><p>  定义动画<br>  <figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"> <span class="keyword">@keyframes</span> name&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="attribute">animation</span>:name <span class="number">2s</span> linear infinite;</span><br></pre></td></tr></table></figure></p>
+<h2 id="3d效果"><a href="#3d效果" class="headerlink" title="3d效果"></a>3d效果</h2><figure class="highlight scss"><table><tr><td class="code"><pre><span class="line">需要为元素添加 </span><br><span class="line"><span class="attribute">transform-style</span>:preserve-<span class="number">3</span>d;</span><br><span class="line">父元素添加</span><br><span class="line"><span class="attribute">perspective</span>:<span class="number">2000px</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="重排-和-重绘"><a href="#重排-和-重绘" class="headerlink" title="重排 和 重绘"></a>重排 和 重绘</h2><p> <strong>重排</strong><br>   DOM的变化影响到元素的属性变化，例如宽高，浏览器重新计算元素的几何属性，其他元素的几何属性也会受到影响，浏览器需要重新构建渲染树<br> <strong>重绘</strong><br>   浏览器将受到影响的部分重新绘制在屏幕上。</p>
+]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>promise</title>
+    <url>/2020/04/10/%E6%80%BB%E7%BB%93%E5%87%A0%E4%B8%AA%E5%AE%B9%E6%98%93%E9%81%97%E5%BF%98%E7%9A%84%E7%82%B9/</url>
+    <content><![CDATA[<p>总结ES6中的promise的用法，以及相关的概念。</p>
+<a id="more"></a>
+
+<h2 id><a href="#" class="headerlink" title></a></h2>]]></content>
+      <categories>
+        <category>promise</category>
+      </categories>
+      <tags>
+        <tag>promise</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>共享单车管理系统之框架之主页面架构设计</title>
     <url>/2020/04/05/%E5%85%B1%E4%BA%AB%E5%8D%95%E8%BD%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>前一段时间跟着视频的学习一步一步完成了 共享单车管理系统 的开发，本次想要重新再回顾一遍，自己动手开始吧~</p>
@@ -457,17 +478,54 @@
       </tags>
   </entry>
   <entry>
-    <title>promise</title>
-    <url>/2020/04/10/%E6%80%BB%E7%BB%93%E5%87%A0%E4%B8%AA%E5%AE%B9%E6%98%93%E9%81%97%E5%BF%98%E7%9A%84%E7%82%B9/</url>
-    <content><![CDATA[<p>总结ES6中的promise的用法，以及相关的概念。</p>
+    <title>Next主题优化配置</title>
+    <url>/2020/04/06/Next%E4%B8%BB%E9%A2%98%E4%BC%98%E5%8C%96/</url>
+    <content><![CDATA[<p>&emsp;&emsp;前几天使用Hexo搭了一个博客，在不断优化过程中去不断的搜集教程，在这里我把自己使用到的方面记录下来，方便今后的查阅。</p>
 <a id="more"></a>
-
-<h2 id><a href="#" class="headerlink" title></a></h2>]]></content>
+<h2 id="Markdown-语法"><a href="#Markdown-语法" class="headerlink" title="Markdown 语法"></a>Markdown 语法</h2><p>在写博客的过程中，对markdown语法还不是特别熟悉，记录几个语法吧。</p>
+<h3 id="空白符"><a href="#空白符" class="headerlink" title="空白符"></a>空白符</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">半方大的空白   <span class="symbol">&amp;ensp;</span>  或  <span class="symbol">&amp;#8194;</span></span><br><span class="line">全方大的空白   <span class="symbol">&amp;emsp;</span>  或  <span class="symbol">&amp;#8195;</span></span><br><span class="line">不断行的空白格 <span class="symbol">&amp;nbsp;</span>  或  <span class="symbol">&amp;#160;</span></span><br></pre></td></tr></table></figure>
+<h3 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">行内式链接形式：[<span class="string">超链接文字</span>](<span class="link">url</span>) </span><br><span class="line">[百度]https://www.baidu.com)</span><br></pre></td></tr></table></figure>
+<p><strong>在新窗口打开页面</strong></p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">&lt;a <span class="attribute">href</span>=<span class="string">"/work/manager/index.html"</span> <span class="attribute">target</span>=<span class="string">"_blank"</span>&gt;共享单车后台管理系统&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+<p><a href="/work/manager/index.html" target="_blank">共享单车后台管理系统</a></p>
+<h3 id="添加图片"><a href="#添加图片" class="headerlink" title="添加图片"></a>添加图片</h3><figure class="highlight less"><table><tr><td class="code"><pre><span class="line">!<span class="selector-attr">[]</span>(<span class="number">1</span>.jpg)  <span class="comment">//图片放在与文章同名的文件夹中</span></span><br></pre></td></tr></table></figure>
+<h3 id="文字颜色"><a href="#文字颜色" class="headerlink" title="文字颜色"></a>文字颜色</h3><p>这是<label style="color:red">红色</label>字体</p>
+<figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line">这是&lt;<span class="built_in">label</span> <span class="built_in">style</span>=<span class="string">"color:red"</span>&gt;红色&lt;/<span class="built_in">label</span>&gt;字体</span><br></pre></td></tr></table></figure>
+<h2 id="Next主题优化"><a href="#Next主题优化" class="headerlink" title="Next主题优化"></a>Next主题优化</h2><h3 id="设置阅读全文"><a href="#设置阅读全文" class="headerlink" title="设置阅读全文"></a>设置阅读全文</h3><p>&emsp;&emsp;在首页显示一篇文章的部分内容，并提供一个链接跳转到全文页面是一个常见的需求。 NexT 提供三种方式来控制文章在首页的显示方式。 也就是说，在首页显示文章的摘录并显示 <strong>阅读全文</strong> 按钮，可以通过以下方法：<br>1.在文章中使用<code>&lt;!-- more --&gt;</code> 手动进行截断，Hexo 提供的方式<br>2.在文章的 <code>front-matter</code> 中添加 <code>description</code>，并提供文章摘录<br>3.自动形成摘要，在 <strong>主题配置文件</strong> 中添加：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">auto_excerpt:</span></span><br><span class="line"><span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">length:</span> <span class="number">150</span></span><br></pre></td></tr></table></figure>
+<p>默认截取的长度为 150 字符，可以根据需要自行设定</p>
+]]></content>
       <categories>
-        <category>promise</category>
+        <category>hexo</category>
       </categories>
       <tags>
-        <tag>promise</tag>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用hexo从零开始搭建博客</title>
+    <url>/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<p>&emsp;&emsp;之前做了一个个人主页，但是由于部署在github，导致国内网打开很慢的原因，因此上网搜索了一些解决的办法。看到很多搭建博客的方法，索性不如也把自己的博客搭建起来，于是乎，特此写一篇笔记记录一下心得以及踩过的大部分坑吧~</p>
+<a id="more"></a> 
+
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h3><p>打开<a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js官网</a>下载安装node.js<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/1.png" alt></p>
+<h3 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h3><p>打开<a href="https://git-scm.com/download" target="_blank" rel="noopener">Git官网</a>,选择下载对应版本安装<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/2.png" alt></p>
+<h3 id="cnpm"><a href="#cnpm" class="headerlink" title="cnpm"></a>cnpm</h3><p>由于npm的服务器位于国外可能影响安装，为了提高下载速度，我们来安装一个cnpm<br><code>npm install cnpm -g --registry=https://registry.npm.taobao.org</code></p>
+<h3 id="全局安装hexo"><a href="#全局安装hexo" class="headerlink" title="全局安装hexo"></a>全局安装hexo</h3><p><code>cnpm install -g hexo</code></p>
+<h2 id="搭建一个博客"><a href="#搭建一个博客" class="headerlink" title="搭建一个博客"></a>搭建一个博客</h2><h3 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h3><p>输入<code>hexo init</code>初始化项目<br>然后会出现这样一个目录<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/3.png" alt></p>
+<h3 id="打包成静态文件"><a href="#打包成静态文件" class="headerlink" title="打包成静态文件"></a>打包成静态文件</h3><p>输入<code>hexo g</code>会将文件编译为静态文件，md格式会编译为html<br>此时文件中会多出一个<code>public</code>文件夹</p>
+<h3 id="本地运行"><a href="#本地运行" class="headerlink" title="本地运行"></a>本地运行</h3><p>输入<code>hexo s</code> 运行，在浏览器中输入 <code>http://localhost:4000</code><br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/4.png" alt></p>
+<h2 id="部署到码云"><a href="#部署到码云" class="headerlink" title="部署到码云"></a>部署到码云</h2><h3 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h3><p>进入<a href="https://gitee.com/" target="_blank" rel="noopener">码云官网</a>，登录账号，创建一个仓库，注意仓库路径必须是<code>&lt;user-name&gt;.github.io</code>,<code>&lt;user-name&gt;</code>是自己的用户名<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/5.png" alt><br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/6.png" alt></p>
+<h3 id="连接仓库"><a href="#连接仓库" class="headerlink" title="连接仓库"></a>连接仓库</h3><p>点击仓库旁的 克隆下载，复制https地址<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/7.png" alt><br>然后打开blog文件夹中的<code>_config.yml</code>文件（项目配置文件），搜索<code>deploy</code><br>将repo:后面的网址改成你复制的地址，保存。<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/8.png" alt></p>
+<h3 id="推送到仓库"><a href="#推送到仓库" class="headerlink" title="推送到仓库"></a>推送到仓库</h3><p>安装<code>hexo-deployer-git</code>模块，gitbash 运行 <code>cnpm install hexo-deployer-git --save</code></p>
+<p>安装好之后，文件夹会多出来一个.deploy_git,然后运行命令 <code>hexo g -d</code>,就可以把内容推送到码云了。</p>
+<h3 id="开启码云Page服务"><a href="#开启码云Page服务" class="headerlink" title="开启码云Page服务"></a>开启码云Page服务</h3><p>点击仓库右上角的服务，然后点击Gitee Pages<br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/9.png" alt><br><img src="/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/10.png" alt><br>注意，以后每次提交至gitee后都要来手动更新哦~~也可以花钱购买自动部署服务</p>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -485,6 +543,34 @@
 <h3 id="Math-max"><a href="#Math-max" class="headerlink" title="Math.max()"></a>Math.max()</h3><p>Math.max(value1[,value2, …]);<br>Math.max.apply(null, numberArray);<br>Math.max.call(null, value1[,value2,…]);<br>返回给定的一组数字中的最大值。如果给定的参数中至少有一个参数无法被转换成数字，则会返回 NaN。<br>由于 max 是 Math 的静态方法，所以应该像这样使用：Math.max()，而不是创建的 Math 实例的方法（Math 不是构造函数）。<br>如果没有参数，则结果为 - Infinity。</p>
 <figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">console.log(Math.max(<span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>)); <span class="comment">//3</span></span><br><span class="line">console.log(Math.max([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])); <span class="comment">//NaN</span></span><br><span class="line">console.log(Math.max.apply(<span class="literal">null</span>,[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])); <span class="comment">//3</span></span><br><span class="line">console.log(Math.max.call(<span class="literal">null</span>, <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)); <span class="comment">//3</span></span><br></pre></td></tr></table></figure>
 <h3 id="flex-flow是哪两个属性"><a href="#flex-flow是哪两个属性" class="headerlink" title="flex-flow是哪两个属性"></a>flex-flow是哪两个属性</h3><p>详见另外一篇css讲解：<a href="https://evelyn-lin.gitee.io/2020/04/08/CSS%E4%B9%8B%E6%88%91%E7%9A%84%E7%9F%A5%E8%AF%86%E7%9B%B2%E5%8C%BA%EF%BC%88%E4%B8%80%EF%BC%89/" target="_blank" rel="noopener">CSS之我的知识盲区(一)</a></p>
+<h3 id="ip地址的分类和子网掩码"><a href="#ip地址的分类和子网掩码" class="headerlink" title="ip地址的分类和子网掩码"></a>ip地址的分类和子网掩码</h3><table>
+<thead>
+<tr>
+<th>类别</th>
+<th>IP地址范围</th>
+<th>私网IP地址范围</th>
+<th>子网掩码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>1.0.0.1-127.255.255.254</td>
+<td>10.0.0.0-10.255.255.255</td>
+<td>255.0.0.0</td>
+</tr>
+<tr>
+<td>B</td>
+<td>128.0.0.1-191.255.255.254</td>
+<td>172.16.0.0-172.31.255.255</td>
+<td>255.255.0.0</td>
+</tr>
+<tr>
+<td>C</td>
+<td>192.0.0.1-223.255.255.254</td>
+<td>192.168.0.0-192.168.255.255</td>
+<td>255.255.255.0</td>
+</tr>
+</tbody></table>
 <h2 id="填空题"><a href="#填空题" class="headerlink" title="填空题"></a>填空题</h2><h3 id="浏览器本地存储的三种方式"><a href="#浏览器本地存储的三种方式" class="headerlink" title="浏览器本地存储的三种方式"></a>浏览器本地存储的三种方式</h3><p>cookie localStorage  sessionStorage<br><a href="https://segmentfault.com/a/1190000012607546" target="_blank" rel="noopener">总结本地存储的几种方式</a><br><a href="https://mp.weixin.qq.com/s/oOGIuJCplPVW3BuIx9tNQg" target="_blank" rel="noopener">这一次带你彻底了解cookie</a></p>
 <h3 id="字符串和数值的加法运算"><a href="#字符串和数值的加法运算" class="headerlink" title="字符串和数值的加法运算"></a>字符串和数值的加法运算</h3><p>在加法/减法运算中，true和false会转换为1和0，null也是0，undefined参与的运算为NaN</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">5</span> + <span class="number">5</span>); <span class="comment">//10</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">5</span> + <span class="string">'5'</span>); <span class="comment">// '55'</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">5</span> + <span class="literal">true</span>); <span class="comment">//6</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">5</span> + <span class="literal">false</span>); <span class="comment">//5</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">5</span> + <span class="literal">undefined</span>); <span class="comment">//NaN</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">5</span> + <span class="literal">null</span>); <span class="comment">//5</span></span><br></pre></td></tr></table></figure>
@@ -499,8 +585,10 @@
 <p>方法三：对数组每一项循环，判断它的第一个位置和最后一个位置只要不一样就是重复值，然后在判断放置重复值的数组有没有这个值</p>
 <figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> res(arr) &#123;</span><br><span class="line">    var temp = <span class="literal">[]</span>;</span><br><span class="line">    arr.for<span class="constructor">Each(<span class="params">function</span> (<span class="params">item</span>)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (arr.index<span class="constructor">Of(<span class="params">item</span>)</span> !== arr.last<span class="constructor">IndexOf(<span class="params">item</span>)</span><span class="operator"> &amp;&amp; </span>temp.index<span class="constructor">Of(<span class="params">item</span>)</span><span class="operator"> === </span>-<span class="number">1</span>) &#123;</span><br><span class="line">            temp.push(item)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    return temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="线性结构与树形结构相互转换"><a href="#线性结构与树形结构相互转换" class="headerlink" title="线性结构与树形结构相互转换"></a>线性结构与树形结构相互转换</h3><p>太困了，，明天继续</p>
-]]></content>
+<h3 id="线性结构与树形结构相互转换"><a href="#线性结构与树形结构相互转换" class="headerlink" title="线性结构与树形结构相互转换"></a>线性结构与树形结构相互转换</h3><p>当树形结构的层级越来越深时，操作某一节点会变得越来越费劲，维护成本不断增加。所以线性结构与树形的相互转换变得异常重要。</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">树形结构</span></span><br><span class="line"></span><br><span class="line"><span class="string">list</span> <span class="string">=</span> <span class="string">[</span></span><br><span class="line">   <span class="string">&#123;</span> <span class="attr">id:</span> <span class="string">number,</span> <span class="attr">parentId:</span> <span class="string">number,</span> <span class="attr">name:</span> <span class="string">string</span> <span class="string">&#125;,</span> </span><br><span class="line">   <span class="string">&#123;</span> <span class="attr">id:</span> <span class="string">number,</span> <span class="attr">parentId:</span> <span class="string">number,</span> <span class="attr">name:</span> <span class="string">string</span> <span class="string">&#125;,</span></span><br><span class="line"><span class="string">];</span></span><br><span class="line"><span class="string">面的树形结构并不是很完美，当遇到菜单或者分类等业务场景时，每个顶级节点的parentId约定为0，当存在多个顶级节点，显得不是一个完整的树。所以在这类特殊情况下，我们需要构造一个顶级节点。将菜单或者分类的原有顶级节点存储至该节点的children中。</span> <span class="string">所以最后约定顶级节点如下。</span></span><br><span class="line"><span class="string">node</span> <span class="string">=</span> <span class="string">&#123;</span></span><br><span class="line">  <span class="attr">id:</span> <span class="string">number,</span>  <span class="string">//</span> <span class="string">数值</span></span><br><span class="line">  <span class="attr">parentId:</span> <span class="string">number,</span>  <span class="string">//</span> <span class="string">数值</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">string,</span></span><br><span class="line">  <span class="attr">children:</span> <span class="string">[]</span> <span class="string">||</span> <span class="literal">null</span><span class="string">,</span>  <span class="string">//</span> <span class="string">用数组的方式保存子节点，适合更多业务场景</span>  </span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="string">线性结构</span></span><br><span class="line"><span class="string">root</span> <span class="string">=</span> <span class="literal">null</span> <span class="string">||</span> <span class="string">&#123;</span></span><br><span class="line">  <span class="attr">id:</span> <span class="number">0</span><span class="string">,</span></span><br><span class="line">  <span class="attr">parentId:</span> <span class="literal">null</span><span class="string">,</span></span><br><span class="line">  <span class="attr">children:</span> <span class="string">[node1,</span> <span class="string">node2,</span> <span class="string">...],</span>  </span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+<p><strong>线性结构转树形结构</strong></p>
+<figure class="highlight qml"><table><tr><td class="code"><pre><span class="line">方法一：</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">listConvertTree</span> (<span class="params">list</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> root = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">list</span> &amp;&amp; <span class="built_in">list</span>.length) &#123;</span><br><span class="line">        root = &#123;<span class="attribute">id:</span><span class="string"> 0, parent</span>: <span class="literal">null</span>, <span class="attribute">children</span>: [] &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> group = &#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="built_in">list</span>.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">list</span>[i].parentId !== <span class="literal">null</span> &amp;&amp; <span class="built_in">list</span>[i].parentId !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!group[<span class="built_in">list</span>[i].parentId]) &#123;</span><br><span class="line">                group[<span class="built_in">list</span>[i].parentId] = []; <span class="comment">//group=&#123;[]&#125;</span></span><br><span class="line">            &#125;</span><br><span class="line">            group[<span class="built_in">list</span>[i].parentId].push(<span class="built_in">list</span>[i]); <span class="comment">//group=&#123;[&#123; id: number, parentId: number, name: string &#125; ]&#125;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> queue = [];</span><br><span class="line">    queue.push(root);</span><br><span class="line">    <span class="keyword">while</span> (queue.length) &#123;</span><br><span class="line">        <span class="keyword">const</span> node = queue.shift();</span><br><span class="line">        node.children = group[node.id] &amp;&amp; group[node.id].length ? group[node.id] : <span class="literal">null</span>;</span><br><span class="line">            <span class="keyword">if</span> (node.children) &#123;</span><br><span class="line">                queue.push(...node.children);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">方法二：</span><br><span class="line"><span class="keyword">let</span> <span class="built_in">list</span> = [ </span><br><span class="line">    &#123; <span class="attribute">parentId</span>: <span class="number">0</span>, <span class="attribute">id:</span><span class="string"> 1, value</span>: <span class="string">'1'</span> &#125;,</span><br><span class="line">    &#123; <span class="attribute">parentId</span>: <span class="number">3</span>, <span class="attribute">id:</span><span class="string"> 2, value</span>: <span class="string">'2'</span> &#125;, </span><br><span class="line">    &#123; <span class="attribute">parentId</span>: <span class="number">0</span>, <span class="attribute">id:</span><span class="string"> 3, value</span>: <span class="string">'3'</span> &#125;,</span><br><span class="line">    &#123; <span class="attribute">parentId</span>: <span class="number">1</span>, <span class="attribute">id:</span><span class="string"> 4, value</span>: <span class="string">'4'</span> &#125;, </span><br><span class="line">    &#123; <span class="attribute">parentId</span>: <span class="number">1</span>, <span class="attribute">id:</span><span class="string"> 5, value</span>: <span class="string">'5'</span> &#125;, </span><br><span class="line">]; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">listToTree</span>(<span class="params">list</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//遍历整个列表</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span>.filter(cur=&gt;&#123; </span><br><span class="line">        <span class="comment">// 获取当前节点的子节点</span></span><br><span class="line">        <span class="keyword">let</span> children= <span class="built_in">list</span>.filter(item=&gt; item.parentId == cur.id ); </span><br><span class="line">        <span class="keyword">if</span>(children.length&gt;<span class="number">0</span>)&#123;</span><br><span class="line">             cur.children=children;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//只返回顶级节点</span></span><br><span class="line">        <span class="keyword">return</span> cur.parentId==<span class="number">0</span>; </span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>笔试</category>
       </categories>

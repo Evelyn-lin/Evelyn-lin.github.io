@@ -40,7 +40,7 @@
 <meta property="og:description" content="今日份的笔试总结，凭记忆啦~">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-04-10T12:42:29.497Z">
-<meta property="article:modified_time" content="2020-04-10T16:35:33.680Z">
+<meta property="article:modified_time" content="2020-04-11T05:23:54.632Z">
 <meta property="article:author" content="Evelyn">
 <meta name="twitter:card" content="summary">
 
@@ -138,12 +138,12 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">9</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">7</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
@@ -236,7 +236,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-11 00:35:33" itemprop="dateModified" datetime="2020-04-11T00:35:33+08:00">2020-04-11</time>
+                <time title="修改时间：2020-04-11 13:23:54" itemprop="dateModified" datetime="2020-04-11T13:23:54+08:00">2020-04-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -275,14 +275,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.3k</span>
+              <span>4.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -306,6 +306,34 @@
 <h3 id="Math-max"><a href="#Math-max" class="headerlink" title="Math.max()"></a>Math.max()</h3><p>Math.max(value1[,value2, …]);<br>Math.max.apply(null, numberArray);<br>Math.max.call(null, value1[,value2,…]);<br>返回给定的一组数字中的最大值。如果给定的参数中至少有一个参数无法被转换成数字，则会返回 NaN。<br>由于 max 是 Math 的静态方法，所以应该像这样使用：Math.max()，而不是创建的 Math 实例的方法（Math 不是构造函数）。<br>如果没有参数，则结果为 - Infinity。</p>
 <figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">console.log(Math.max(<span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>)); <span class="comment">//3</span></span><br><span class="line">console.log(Math.max([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])); <span class="comment">//NaN</span></span><br><span class="line">console.log(Math.max.apply(<span class="literal">null</span>,[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])); <span class="comment">//3</span></span><br><span class="line">console.log(Math.max.call(<span class="literal">null</span>, <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)); <span class="comment">//3</span></span><br></pre></td></tr></table></figure>
 <h3 id="flex-flow是哪两个属性"><a href="#flex-flow是哪两个属性" class="headerlink" title="flex-flow是哪两个属性"></a>flex-flow是哪两个属性</h3><p>详见另外一篇css讲解：<a href="https://evelyn-lin.gitee.io/2020/04/08/CSS%E4%B9%8B%E6%88%91%E7%9A%84%E7%9F%A5%E8%AF%86%E7%9B%B2%E5%8C%BA%EF%BC%88%E4%B8%80%EF%BC%89/" target="_blank" rel="noopener">CSS之我的知识盲区(一)</a></p>
+<h3 id="ip地址的分类和子网掩码"><a href="#ip地址的分类和子网掩码" class="headerlink" title="ip地址的分类和子网掩码"></a>ip地址的分类和子网掩码</h3><table>
+<thead>
+<tr>
+<th>类别</th>
+<th>IP地址范围</th>
+<th>私网IP地址范围</th>
+<th>子网掩码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>1.0.0.1-127.255.255.254</td>
+<td>10.0.0.0-10.255.255.255</td>
+<td>255.0.0.0</td>
+</tr>
+<tr>
+<td>B</td>
+<td>128.0.0.1-191.255.255.254</td>
+<td>172.16.0.0-172.31.255.255</td>
+<td>255.255.0.0</td>
+</tr>
+<tr>
+<td>C</td>
+<td>192.0.0.1-223.255.255.254</td>
+<td>192.168.0.0-192.168.255.255</td>
+<td>255.255.255.0</td>
+</tr>
+</tbody></table>
 <h2 id="填空题"><a href="#填空题" class="headerlink" title="填空题"></a>填空题</h2><h3 id="浏览器本地存储的三种方式"><a href="#浏览器本地存储的三种方式" class="headerlink" title="浏览器本地存储的三种方式"></a>浏览器本地存储的三种方式</h3><p>cookie localStorage  sessionStorage<br><a href="https://segmentfault.com/a/1190000012607546" target="_blank" rel="noopener">总结本地存储的几种方式</a><br><a href="https://mp.weixin.qq.com/s/oOGIuJCplPVW3BuIx9tNQg" target="_blank" rel="noopener">这一次带你彻底了解cookie</a></p>
 <h3 id="字符串和数值的加法运算"><a href="#字符串和数值的加法运算" class="headerlink" title="字符串和数值的加法运算"></a>字符串和数值的加法运算</h3><p>在加法/减法运算中，true和false会转换为1和0，null也是0，undefined参与的运算为NaN</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">5</span> + <span class="number">5</span>); <span class="comment">//10</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">5</span> + <span class="string">'5'</span>); <span class="comment">// '55'</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">5</span> + <span class="literal">true</span>); <span class="comment">//6</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">5</span> + <span class="literal">false</span>); <span class="comment">//5</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">5</span> + <span class="literal">undefined</span>); <span class="comment">//NaN</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">5</span> + <span class="literal">null</span>); <span class="comment">//5</span></span><br></pre></td></tr></table></figure>
@@ -320,8 +348,10 @@
 <p>方法三：对数组每一项循环，判断它的第一个位置和最后一个位置只要不一样就是重复值，然后在判断放置重复值的数组有没有这个值</p>
 <figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> res(arr) &#123;</span><br><span class="line">    var temp = <span class="literal">[]</span>;</span><br><span class="line">    arr.for<span class="constructor">Each(<span class="params">function</span> (<span class="params">item</span>)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (arr.index<span class="constructor">Of(<span class="params">item</span>)</span> !== arr.last<span class="constructor">IndexOf(<span class="params">item</span>)</span><span class="operator"> &amp;&amp; </span>temp.index<span class="constructor">Of(<span class="params">item</span>)</span><span class="operator"> === </span>-<span class="number">1</span>) &#123;</span><br><span class="line">            temp.push(item)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    return temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="线性结构与树形结构相互转换"><a href="#线性结构与树形结构相互转换" class="headerlink" title="线性结构与树形结构相互转换"></a>线性结构与树形结构相互转换</h3><p>太困了，，明天继续</p>
-
+<h3 id="线性结构与树形结构相互转换"><a href="#线性结构与树形结构相互转换" class="headerlink" title="线性结构与树形结构相互转换"></a>线性结构与树形结构相互转换</h3><p>当树形结构的层级越来越深时，操作某一节点会变得越来越费劲，维护成本不断增加。所以线性结构与树形的相互转换变得异常重要。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">树形结构</span></span><br><span class="line"></span><br><span class="line"><span class="string">list</span> <span class="string">=</span> <span class="string">[</span></span><br><span class="line">   <span class="string">&#123;</span> <span class="attr">id:</span> <span class="string">number,</span> <span class="attr">parentId:</span> <span class="string">number,</span> <span class="attr">name:</span> <span class="string">string</span> <span class="string">&#125;,</span> </span><br><span class="line">   <span class="string">&#123;</span> <span class="attr">id:</span> <span class="string">number,</span> <span class="attr">parentId:</span> <span class="string">number,</span> <span class="attr">name:</span> <span class="string">string</span> <span class="string">&#125;,</span></span><br><span class="line"><span class="string">];</span></span><br><span class="line"><span class="string">面的树形结构并不是很完美，当遇到菜单或者分类等业务场景时，每个顶级节点的parentId约定为0，当存在多个顶级节点，显得不是一个完整的树。所以在这类特殊情况下，我们需要构造一个顶级节点。将菜单或者分类的原有顶级节点存储至该节点的children中。</span> <span class="string">所以最后约定顶级节点如下。</span></span><br><span class="line"><span class="string">node</span> <span class="string">=</span> <span class="string">&#123;</span></span><br><span class="line">  <span class="attr">id:</span> <span class="string">number,</span>  <span class="string">//</span> <span class="string">数值</span></span><br><span class="line">  <span class="attr">parentId:</span> <span class="string">number,</span>  <span class="string">//</span> <span class="string">数值</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">string,</span></span><br><span class="line">  <span class="attr">children:</span> <span class="string">[]</span> <span class="string">||</span> <span class="literal">null</span><span class="string">,</span>  <span class="string">//</span> <span class="string">用数组的方式保存子节点，适合更多业务场景</span>  </span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="string">线性结构</span></span><br><span class="line"><span class="string">root</span> <span class="string">=</span> <span class="literal">null</span> <span class="string">||</span> <span class="string">&#123;</span></span><br><span class="line">  <span class="attr">id:</span> <span class="number">0</span><span class="string">,</span></span><br><span class="line">  <span class="attr">parentId:</span> <span class="literal">null</span><span class="string">,</span></span><br><span class="line">  <span class="attr">children:</span> <span class="string">[node1,</span> <span class="string">node2,</span> <span class="string">...],</span>  </span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+<p><strong>线性结构转树形结构</strong></p>
+<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">方法一：</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">listConvertTree</span> (<span class="params">list</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> root = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">list</span> &amp;&amp; <span class="built_in">list</span>.length) &#123;</span><br><span class="line">        root = &#123;<span class="attribute">id:</span><span class="string"> 0, parent</span>: <span class="literal">null</span>, <span class="attribute">children</span>: [] &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> group = &#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="built_in">list</span>.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">list</span>[i].parentId !== <span class="literal">null</span> &amp;&amp; <span class="built_in">list</span>[i].parentId !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!group[<span class="built_in">list</span>[i].parentId]) &#123;</span><br><span class="line">                group[<span class="built_in">list</span>[i].parentId] = []; <span class="comment">//group=&#123;[]&#125;</span></span><br><span class="line">            &#125;</span><br><span class="line">            group[<span class="built_in">list</span>[i].parentId].push(<span class="built_in">list</span>[i]); <span class="comment">//group=&#123;[&#123; id: number, parentId: number, name: string &#125; ]&#125;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> queue = [];</span><br><span class="line">    queue.push(root);</span><br><span class="line">    <span class="keyword">while</span> (queue.length) &#123;</span><br><span class="line">        <span class="keyword">const</span> node = queue.shift();</span><br><span class="line">        node.children = group[node.id] &amp;&amp; group[node.id].length ? group[node.id] : <span class="literal">null</span>;</span><br><span class="line">            <span class="keyword">if</span> (node.children) &#123;</span><br><span class="line">                queue.push(...node.children);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">方法二：</span><br><span class="line"><span class="keyword">let</span> <span class="built_in">list</span> = [ </span><br><span class="line">    &#123; <span class="attribute">parentId</span>: <span class="number">0</span>, <span class="attribute">id:</span><span class="string"> 1, value</span>: <span class="string">'1'</span> &#125;,</span><br><span class="line">    &#123; <span class="attribute">parentId</span>: <span class="number">3</span>, <span class="attribute">id:</span><span class="string"> 2, value</span>: <span class="string">'2'</span> &#125;, </span><br><span class="line">    &#123; <span class="attribute">parentId</span>: <span class="number">0</span>, <span class="attribute">id:</span><span class="string"> 3, value</span>: <span class="string">'3'</span> &#125;,</span><br><span class="line">    &#123; <span class="attribute">parentId</span>: <span class="number">1</span>, <span class="attribute">id:</span><span class="string"> 4, value</span>: <span class="string">'4'</span> &#125;, </span><br><span class="line">    &#123; <span class="attribute">parentId</span>: <span class="number">1</span>, <span class="attribute">id:</span><span class="string"> 5, value</span>: <span class="string">'5'</span> &#125;, </span><br><span class="line">]; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">listToTree</span>(<span class="params">list</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//遍历整个列表</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span>.filter(cur=&gt;&#123; </span><br><span class="line">        <span class="comment">// 获取当前节点的子节点</span></span><br><span class="line">        <span class="keyword">let</span> children= <span class="built_in">list</span>.filter(item=&gt; item.parentId == cur.id ); </span><br><span class="line">        <span class="keyword">if</span>(children.length&gt;<span class="number">0</span>)&#123;</span><br><span class="line">             cur.children=children;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//只返回顶级节点</span></span><br><span class="line">        <span class="keyword">return</span> cur.parentId==<span class="number">0</span>; </span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -409,7 +439,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#选择题"><span class="nav-number">1.</span> <span class="nav-text">选择题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#http的特点"><span class="nav-number">1.1.</span> <span class="nav-text">http的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Math-max"><span class="nav-number">1.2.</span> <span class="nav-text">Math.max()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-flow是哪两个属性"><span class="nav-number">1.3.</span> <span class="nav-text">flex-flow是哪两个属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#填空题"><span class="nav-number">2.</span> <span class="nav-text">填空题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器本地存储的三种方式"><span class="nav-number">2.1.</span> <span class="nav-text">浏览器本地存储的三种方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串和数值的加法运算"><span class="nav-number">2.2.</span> <span class="nav-text">字符串和数值的加法运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重排与重绘"><span class="nav-number">2.3.</span> <span class="nav-text">重排与重绘</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程题"><span class="nav-number">3.</span> <span class="nav-text">编程题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#js执行机制"><span class="nav-number">3.1.</span> <span class="nav-text">js执行机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数this指向问题，包括匿名函数、ES6对象方法简写中的this、自执行函数"><span class="nav-number">3.2.</span> <span class="nav-text">函数this指向问题，包括匿名函数、ES6对象方法简写中的this、自执行函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#写出能返回数组中相同元素的方法"><span class="nav-number">3.3.</span> <span class="nav-text">写出能返回数组中相同元素的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性结构与树形结构相互转换"><span class="nav-number">3.4.</span> <span class="nav-text">线性结构与树形结构相互转换</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#选择题"><span class="nav-number">1.</span> <span class="nav-text">选择题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#http的特点"><span class="nav-number">1.1.</span> <span class="nav-text">http的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Math-max"><span class="nav-number">1.2.</span> <span class="nav-text">Math.max()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-flow是哪两个属性"><span class="nav-number">1.3.</span> <span class="nav-text">flex-flow是哪两个属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ip地址的分类和子网掩码"><span class="nav-number">1.4.</span> <span class="nav-text">ip地址的分类和子网掩码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#填空题"><span class="nav-number">2.</span> <span class="nav-text">填空题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器本地存储的三种方式"><span class="nav-number">2.1.</span> <span class="nav-text">浏览器本地存储的三种方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串和数值的加法运算"><span class="nav-number">2.2.</span> <span class="nav-text">字符串和数值的加法运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重排与重绘"><span class="nav-number">2.3.</span> <span class="nav-text">重排与重绘</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程题"><span class="nav-number">3.</span> <span class="nav-text">编程题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#js执行机制"><span class="nav-number">3.1.</span> <span class="nav-text">js执行机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数this指向问题，包括匿名函数、ES6对象方法简写中的this、自执行函数"><span class="nav-number">3.2.</span> <span class="nav-text">函数this指向问题，包括匿名函数、ES6对象方法简写中的this、自执行函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#写出能返回数组中相同元素的方法"><span class="nav-number">3.3.</span> <span class="nav-text">写出能返回数组中相同元素的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性结构与树形结构相互转换"><span class="nav-number">3.4.</span> <span class="nav-text">线性结构与树形结构相互转换</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -432,13 +462,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -479,12 +509,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">21k</span>
+    <span title="站点总字数">26k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">19 分钟</span>
+    <span title="站点阅读时长">23 分钟</span>
 </div>
 
         
