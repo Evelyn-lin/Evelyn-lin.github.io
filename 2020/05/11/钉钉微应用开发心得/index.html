@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="钉钉微应用Todolist总结前言本次考核题目是做一个钉钉微应用，看了技术要求，除了前端部分好像都比较陌生，于是只能一边学习一边开发。根据考核要求，使用不同的技术进行开发，先看官方文档，然后跟着文档进行开发。 钉钉微应用创建根据钉钉官网有关微应用的开发文档进行操作，登录开发者后台，点击&#x3D;&#x3D;应用开发&#x3D;&#x3D;，创建H5微应用，点击http:&#x2F;&#x2F;ddns.oray.com&#x2F;checkip可以查看当前的&#x3D;&#x3D;服">
+<meta property="og:type" content="article">
+<meta property="og:title" content="钉钉微应用开发心得">
+<meta property="og:url" content="http://yoursite.com/2020/05/11/%E9%92%89%E9%92%89%E5%BE%AE%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E5%BF%83%E5%BE%97/index.html">
+<meta property="og:site_name" content="Evelyn&#39;s Notes">
+<meta property="og:description" content="钉钉微应用Todolist总结前言本次考核题目是做一个钉钉微应用，看了技术要求，除了前端部分好像都比较陌生，于是只能一边学习一边开发。根据考核要求，使用不同的技术进行开发，先看官方文档，然后跟着文档进行开发。 钉钉微应用创建根据钉钉官网有关微应用的开发文档进行操作，登录开发者后台，点击&#x3D;&#x3D;应用开发&#x3D;&#x3D;，创建H5微应用，点击http:&#x2F;&#x2F;ddns.oray.com&#x2F;checkip可以查看当前的&#x3D;&#x3D;服">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/.com//1.png">
+<meta property="og:image" content="http://yoursite.com/.com//2.png">
+<meta property="article:published_time" content="2020-05-11T15:29:21.592Z">
+<meta property="article:modified_time" content="2020-05-12T08:27:17.450Z">
+<meta property="article:author" content="Evelyn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/.com//1.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/05/11/%E9%92%89%E9%92%89%E5%BE%AE%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E5%BF%83%E5%BE%97/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>钉钉微应用开发心得 | Evelyn's Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Evelyn's Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录随笔</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-作品">
+
+    <a href="/portfolio/" rel="section"><i class="fa fa-list fa-fw"></i>作品</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">11</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">17</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/11/%E9%92%89%E9%92%89%E5%BE%AE%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E5%BF%83%E5%BE%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Evelyn">
+      <meta itemprop="description" content="每天进步一点点">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Evelyn's Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          钉钉微应用开发心得
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-11 23:29:21" itemprop="dateCreated datePublished" datetime="2020-05-11T23:29:21+08:00">2020-05-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-12 16:27:17" itemprop="dateModified" datetime="2020-05-12T16:27:17+08:00">2020-05-12</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/11/%E9%92%89%E9%92%89%E5%BE%AE%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E5%BF%83%E5%BE%97/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/11/%E9%92%89%E9%92%89%E5%BE%AE%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E5%BF%83%E5%BE%97/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="钉钉微应用Todolist总结"><a href="#钉钉微应用Todolist总结" class="headerlink" title="钉钉微应用Todolist总结"></a>钉钉微应用Todolist总结</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>本次考核题目是做一个钉钉微应用，看了技术要求，除了前端部分好像都比较陌生，于是只能一边学习一边开发。根据考核要求，使用不同的技术进行开发，先看官方文档，然后跟着文档进行开发。</p>
+<h3 id="钉钉微应用"><a href="#钉钉微应用" class="headerlink" title="钉钉微应用"></a>钉钉微应用</h3><h4 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h4><p>根据钉钉官网有关微应用的开发文档进行操作，登录开发者后台，点击==应用开发==，创建H5微应用，点击<a href="https://note.youdao.com/" target="_blank" rel="noopener">http://ddns.oray.com/checkip</a>可以查看当前的==服务器出口ip==，填写==应用首页地址==，对应的就是客户端点击进入微应用的界面。创建完成之后，生成的AppKey和AgentId可以获取access_token进行鉴权。</p>
+<h4 id="免登"><a href="#免登" class="headerlink" title="免登"></a>免登</h4><p>实现方法：在页面加载时可以通过调用官方的<a href="https://ding-doc.dingtalk.com/doc#/dev/about#hc3esk" target="_blank" rel="noopener">获取免登授权码</a>API，可以实现免登，同时获取用户身份，发送到后端获取对应身份的todolist数据，再返回前端进行显示。</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">dd.ready(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    dd.runtime.permission.requestAuthCode(&#123;</span><br><span class="line">        corpId: _config.corpId, <span class="comment">// 企业id</span></span><br><span class="line">        onSuccess: <span class="function"><span class="keyword">function</span> <span class="params">(info)</span> </span>&#123;</span><br><span class="line">                  code = info.code <span class="comment">// 通过该免登授权码可以获取用户身份</span></span><br><span class="line">        &#125;&#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="前端-vue-element-ui"><a href="#前端-vue-element-ui" class="headerlink" title="前端:vue+element ui"></a>前端:vue+element ui</h3><p>根据Todolist的功能，我将微应用分为两个页面，通过==路由==实现页面跳转。<br>一个是用于展示总的todolist，可以勾选是否完成，以及分类查看的页面，另一个是用来编辑和查看详情的页面。</p>
+<h4 id="主展示页面"><a href="#主展示页面" class="headerlink" title="主展示页面"></a>主展示页面</h4><p><img src="/.com//1.png" alt></p>
+<p>页面主要是上中下结构，使用的是 element ui的==Container 布局容器==进行布局，上下定宽，中间自适应。</p>
+<ul>
+<li><strong>头部显示时间</strong>：通过==Date==对象的相关api实现。</li>
+</ul>
+<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">getDate () &#123;</span><br><span class="line">      <span class="keyword">let</span> m = <span class="keyword">new</span> <span class="built_in">Date</span>().getMonth() + <span class="number">1</span></span><br><span class="line">      m = m &lt; <span class="number">10</span> ? <span class="string">'0'</span> + <span class="attribute">m</span> : m</span><br><span class="line">      <span class="keyword">let</span> d = <span class="keyword">new</span> <span class="built_in">Date</span>().getDate()</span><br><span class="line">      d = d &lt; <span class="number">10</span> ? <span class="string">'0'</span> + <span class="attribute">d</span> : d</span><br><span class="line">      <span class="keyword">let</span> day = <span class="keyword">new</span> <span class="built_in">Date</span>().getDay()</span><br><span class="line">      day = [<span class="string">'周一'</span>, <span class="string">'周二'</span>, <span class="string">'周三'</span>, <span class="string">'周四'</span>, <span class="string">'周五'</span>, <span class="string">'周六'</span>, <span class="string">'周日'</span>][day]</span><br><span class="line">      <span class="keyword">let</span> <span class="built_in">date</span> = m + <span class="string">'/'</span> + d + <span class="string">' '</span> + day</span><br><span class="line">      <span class="keyword">this</span>.date = <span class="built_in">date</span></span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>获取todolist数据</strong>：在vue的==create==生命周期函数中，使用==axios==发送请求获取用户的todolist；</li>
+<li><strong>todo是否完成</strong>：在页面展示todo的组件中，使用了==Icon、Checkbox==组件，点击复选框勾选todo，表示todo已完成，反之未完成。每次勾选都会发送请求到服务端，修改数据库信息。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用.stop修饰符防止事件冒泡</span></span><br><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"checkbox"</span> @click.stop = <span class="string">"handleCompleted(item)"</span>&gt;</span><br><span class="line">    &lt;el-checkbox v-model=<span class="string">"item.completed"</span> &gt;&lt;<span class="regexp">/el-checkbox&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>筛选todo</strong>：在页面底部，使用==Button==组件，对todolist进行筛选。在data中使用filter记录筛选模式，0代表全部，1代表已完成，2代表未完成。使用==computed计算属性==，用==filter==方法对总的todolist进行筛选，再使用==v-for==将筛选结果循环展示在页面中。</li>
+</ul>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">//template</span><br><span class="line"><span class="symbol">&lt;el-footer&gt;</span></span><br><span class="line">    &lt;<span class="keyword">el</span>-button <span class="built_in">type</span>=<span class="string">"info"</span> plain  @click=<span class="string">"filter = 0"</span>&gt;全部&lt;/<span class="keyword">el</span>-button&gt;</span><br><span class="line">    &lt;<span class="keyword">el</span>-button <span class="built_in">type</span>=<span class="string">"info"</span> plain @click=<span class="string">"filter = 1"</span>&gt;已完成&lt;/<span class="keyword">el</span>-button&gt;</span><br><span class="line">    &lt;<span class="keyword">el</span>-button <span class="built_in">type</span>=<span class="string">"info"</span> plain  @click=<span class="string">"filter = 2"</span>&gt;未完成&lt;/<span class="keyword">el</span>-button&gt;</span><br><span class="line">  &lt;/<span class="keyword">el</span>-footer&gt;</span><br><span class="line">  </span><br><span class="line">  //script</span><br><span class="line">  computed: &#123;</span><br><span class="line">    // 筛选toto</span><br><span class="line">    filterTodo: <span class="function"><span class="keyword">function</span> <span class="params">()</span> &#123;</span></span><br><span class="line">      <span class="keyword">let</span> <span class="keyword">mode</span> = this.<span class="built_in">filter</span></span><br><span class="line">      <span class="keyword">let</span> todos = this.todo</span><br><span class="line">      // 如果不是全部，则判断是筛选完成还是未完成，返回对应数据</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">mode</span>) &#123;</span><br><span class="line">        todos = todos.<span class="built_in">filter</span>(item =&gt; &#123;</span><br><span class="line">          <span class="keyword">if</span> (<span class="keyword">mode</span> === <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> item.completed</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> !item.completed</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> todos</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>删除toodo</strong>：长按todo项，会弹出删除和取消的按钮，添加==touchstart==事件，使用定时器==setTimeout==定时弹出按钮。==v-show==来控制按钮的显隐。点击删除按钮，将todoid和userid作为params，并发送对应的请求到服务端，服务端根据userid和todoid再对数据库进行删除操作。删除之后再次请求就可以拿到最新的todolist数据，再进行前面的操作展示页面。</li>
+</ul>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 操作按钮代码，使用v-show来控制显隐</span></span><br><span class="line">    &lt;ul <span class="keyword">class</span>=<span class="string">"operate"</span> v-show=<span class="string">"item.operateVisible"</span>&gt;</span><br><span class="line">        &lt;li @click.stop=<span class="string">"deleteTodo(item)"</span>&gt;删除&lt;/li&gt;</span><br><span class="line">        &lt;li @click.stop=<span class="string">"item.operateVisible = false"</span>&gt;取消&lt;/li&gt;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//为todoitem添加touchstart、touchend、touchmove事件后</span></span><br><span class="line">    </span><br><span class="line">    gotouchstart (item) &#123;</span><br><span class="line">      clear<span class="constructor">Timeout(<span class="params">timeOutEvent</span>)</span> <span class="comment">// 清除定时器</span></span><br><span class="line">      timeOutEvent = <span class="number">0</span></span><br><span class="line">      timeOutEvent = set<span class="constructor">Timeout(<span class="params">function</span> ()</span> &#123;</span><br><span class="line">      <span class="comment">// 执行长按要执行的内容，显示操作按钮</span></span><br><span class="line">        item.operateVisible = <span class="literal">true</span></span><br><span class="line">      &#125;, <span class="number">600</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    gotouchend <span class="literal">()</span> &#123;</span><br><span class="line">      clear<span class="constructor">Timeout(<span class="params">timeOutEvent</span>)</span></span><br><span class="line">      <span class="keyword">if</span> (timeOutEvent !== <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="comment">// 这里写要执行的内容（尤如onclick事件）</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    gotouchmove <span class="literal">()</span> &#123;</span><br><span class="line">      clear<span class="constructor">Timeout(<span class="params">timeOutEvent</span>)</span> <span class="comment">// 清除定时器</span></span><br><span class="line">      timeOutEvent = <span class="number">0</span></span><br><span class="line">    &#125;,</span><br><span class="line">    deleteTodo (item) &#123;</span><br><span class="line">      <span class="comment">//隐藏操作按钮</span></span><br><span class="line">      item.operateVisible = <span class="literal">false</span></span><br><span class="line">      <span class="comment">// 删除数据</span></span><br><span class="line">      delete<span class="constructor">TodoList('<span class="operator">/</span><span class="params">delete</span>', &#123;<span class="params">id</span>: <span class="params">item</span>.<span class="params">id</span>&#125;)</span></span><br><span class="line">      <span class="comment">// 重新获取数据渲染</span></span><br><span class="line">      this.get<span class="constructor">Todo()</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="编辑页面"><a href="#编辑页面" class="headerlink" title="编辑页面"></a>编辑页面</h4><p><img src="/.com//2.png" alt></p>
+<p>编辑页面和展示详情的页面是同一个页面。主页面中点击每一项todo或者点击右下角的+可以跳转到编辑页面，同时通过==路由传参==传递userid和todoid。</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">export</span> <span class="selector-tag">default</span> <span class="selector-tag">new</span> <span class="selector-tag">Router</span>(&#123;</span><br><span class="line">  <span class="attribute">routes</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="comment">// todo首页</span></span><br><span class="line">      <span class="attribute">path</span>: <span class="string">'/'</span>,</span><br><span class="line">      <span class="attribute">name</span>: <span class="string">'Todo'</span>,</span><br><span class="line">      <span class="attribute">component</span>: Todo</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123; </span><br><span class="line">      <span class="comment">// todo编辑/查看页面</span></span><br><span class="line">      <span class="attribute">path</span>: <span class="string">'/edit'</span>,</span><br><span class="line">      <span class="attribute">name</span>: <span class="string">'Edit'</span>,</span><br><span class="line">      <span class="attribute">component</span>: Edit</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>组件选用</strong>：编辑页面使用了==Input==输入框、==Select==选择器、==DatePicker== 日期选择器、==Upload==上传组件，在原有组件的基础上进行css的修改。</p>
+</li>
+<li><p><strong>选择参与同事</strong>：可以使用平台提供的的接口==dd.biz.contact.complexPicker==通过钉钉通讯录选择参与同事。目前是使用的一个下拉框代替选择功能。</p>
+</li>
+<li><p><strong>判断是修改查看还是新增</strong>：在编辑页面的==create==函数中中，拿到路由传递的参数并进行判断，如果为空，则表示为添加todo，如果有参数，则表示为查看详情，此时再向服务端发送请求，获取对应的todo详情并进行展示。</p>
+</li>
+<li><p><strong>新增或修改</strong>：点击保存按钮，首先判断路由传递的参数，如果为空，则表示此项todo为新增，则将userid和todoid作为params，调用添加todo的接口；如果有参数，就调用修改todo的接口。</p>
+</li>
+</ul>
+<h3 id="MySQL数据库"><a href="#MySQL数据库" class="headerlink" title="MySQL数据库"></a>MySQL数据库</h3><p>下载安装数据库并进行配置，使用workbench进行图形化管理，创建表格，添加columns。</p>
+<h3 id="后端：egg-js"><a href="#后端：egg-js" class="headerlink" title="后端：egg.js"></a>后端：egg.js</h3><p>根据egg.js的官方文档进行开发，首先使用脚手架搭建一个egg.js项目。然后再安装==egg-mysql==插件，配置好数据库。</p>
+<p>首先在router.js中定义路由规则，再在controller中定义对应方法，service中去访问SQL数据库并对数据进行操作，然后返回结果。</p>
+<h3 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h3><p>因为同源策略，此时前端无法请求到数据，可以使用nginx用来==反向代理==，就可以实现前端向后端发起请求了。在nginx.conf配置文件中增加配置：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">server</span> &#123;</span><br><span class="line">        <span class="keyword">listen</span>       <span class="number">8080</span>;</span><br><span class="line">        server_name  localhost;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">location</span> /<span class="keyword">get</span> &#123;</span><br><span class="line">            proxy_pass <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">7001</span>;</span><br><span class="line">            <span class="keyword">index</span>  <span class="keyword">index</span>.html <span class="keyword">index</span>.htm <span class="keyword">index</span>.jsp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>由于服务端以及部署相关内容第一次接触，所以总的开发进度较慢。暂时呈现的页面也有很多不足的地方，比如在长按todo的时候会选中文字，弹出的删除按钮可能使用钉钉微应用提供的弹框(dd.device.notification.confirm)会更好。希望以后的开发中，能够注意细节和体验。</p>
+<p>通过此次的练习，我对有关钉钉微应用API的JSAPI有了初步的了解，对钉钉微应用的开发流程有了进一步的认识，以后对于微应用的开发会也更加熟练啦~如果有前辈们的指点，相信我能够做得更好的！！</p>
+
+    </div>
+
+    
+    
+    
+    
+    <div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/15/JS%E7%BC%96%E7%A8%8B%E9%A2%98%E7%B3%BB%E5%88%97%EF%BC%88%E4%B8%80%EF%BC%89/" rel="prev" title="js 编程题系列（一）">
+      <i class="fa fa-chevron-left"></i> js 编程题系列（一）
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#钉钉微应用Todolist总结"><span class="nav-number">1.</span> <span class="nav-text">钉钉微应用Todolist总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#钉钉微应用"><span class="nav-number">1.2.</span> <span class="nav-text">钉钉微应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建"><span class="nav-number">1.2.1.</span> <span class="nav-text">创建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#免登"><span class="nav-number">1.2.2.</span> <span class="nav-text">免登</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前端-vue-element-ui"><span class="nav-number">1.3.</span> <span class="nav-text">前端:vue+element ui</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主展示页面"><span class="nav-number">1.3.1.</span> <span class="nav-text">主展示页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编辑页面"><span class="nav-number">1.3.2.</span> <span class="nav-text">编辑页面</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL数据库"><span class="nav-number">1.4.</span> <span class="nav-text">MySQL数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后端：egg-js"><span class="nav-number">1.5.</span> <span class="nav-text">后端：egg.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nginx"><span class="nav-number">1.6.</span> <span class="nav-text">nginx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.7.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Evelyn"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Evelyn</p>
+  <div class="site-description" itemprop="description">每天进步一点点</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Evelyn-lin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Evelyn-lin" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Evelyn</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">35k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">32 分钟</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='22,100,255' opacity='0.8' zIndex='-1' count='199' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'eWFwtwTyyAPdc5AT43eYqI7P-gzGzoHsz',
+      appKey     : '9ODylRP56OfCFluCAUcVKXdm',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
