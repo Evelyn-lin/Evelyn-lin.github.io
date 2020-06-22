@@ -191,27 +191,6 @@
       </tags>
   </entry>
   <entry>
-    <title>JavaScript继承的理解</title>
-    <url>/2020/04/12/JavaScript%E7%BB%A7%E6%89%BF/</url>
-    <content><![CDATA[<h3 id="继承的概念"><a href="#继承的概念" class="headerlink" title="继承的概念"></a>继承的概念</h3><p>通过某种方式让一个对象可以访问到另一个对象中的属性和方法，我们把这种方式称之为继承。</p>
-<a id="more"></a>
-<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><figure class="highlight haxe"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Father</span></span>(name) &#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">    sayHi: <span class="type">funtion</span>() &#123;</span><br><span class="line">        console.log(<span class="string">'Hi'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//Father是一个构造函数，通过 new 关键词可以创建Father实例</span></span><br><span class="line"><span class="keyword">var</span> father1 = <span class="keyword">new</span> <span class="type">Father</span>();实例会拥有构造函数的方法和属性；</span><br><span class="line"><span class="keyword">var</span> father2 = <span class="keyword">new</span> <span class="type">Father</span>();同样也有name属性和sayHi方法；</span><br><span class="line"><span class="comment">//每创建一个实例，就会给这个实例添加构造函数的属性和方法，但是每个实例的属性和方法是不可复用的；</span></span><br><span class="line"><span class="comment">//借助原型链，原型上的属性和方法是共享的。</span></span><br><span class="line">Father.prototype.age = <span class="number">18</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="继承方式"><a href="#继承方式" class="headerlink" title="继承方式"></a>继承方式</h3><h4 id="原型链继承"><a href="#原型链继承" class="headerlink" title="原型链继承"></a>原型链继承</h4><figure class="highlight delphi"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Father</span><span class="params">(<span class="keyword">name</span>)</span> <span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">    this.name = name;</span></span></span><br><span class="line"><span class="function"><span class="comment">    sayHi: funtion() &#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">        console.log('Hi')</span></span></span><br><span class="line"><span class="function"><span class="comment">    &#125;</span></span></span><br><span class="line"><span class="function">&#125;</span></span><br><span class="line"><span class="function"><span class="title">function</span> <span class="title">Son</span><span class="params">()</span> <span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment"></span></span></span><br><span class="line"><span class="function"><span class="comment">&#125;</span></span></span><br><span class="line"><span class="function"><span class="title">Son</span>.<span class="title">prototype</span> = <span class="title">new</span> <span class="title">Father</span><span class="params">()</span>;</span><span class="comment">//此时构造函数是变成了Father</span></span><br><span class="line">Son.peototype<span class="function">.<span class="keyword">constructor</span> = <span class="title">Son</span>;</span><span class="comment">//修正构造函数</span></span><br></pre></td></tr></table></figure>
-<p>要点：将子类的原型指向父类的实例，这样子类的实例在访问原型的时候回提供一个指向父类原型的指针。实现继承父类的属性和方法。<br>缺点:1.包含引用类型值的原型属性会被所有实例共享，这会导致对一个实例的修改会影响另一个实例。<br>     2.创建子类实例时，不能像父类传递参数</p>
-<h3 id="借用构造函数"><a href="#借用构造函数" class="headerlink" title="借用构造函数"></a>借用构造函数</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Father</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    sayHi: funtion() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Hi'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Son</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    Father.call(<span class="keyword">this</span>,argus)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>要点:在子类中使用call/apply方法，改变this的指向。<br>缺点：1.每次创建子类实例时，都会在函数中添加属性和方法；无法实现函数复用<br>      2.在父类原型中定义的方法，子类无法继承。</p>
-<h3 id="组合继承"><a href="#组合继承" class="headerlink" title="组合继承"></a>组合继承</h3><figure class="highlight delphi"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Father</span><span class="params">(<span class="keyword">name</span>)</span> <span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">    this.name = name;</span></span></span><br><span class="line"><span class="function"><span class="comment">    sayHi: funtion() &#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">        console.log('Hi')</span></span></span><br><span class="line"><span class="function"><span class="comment">    &#125;</span></span></span><br><span class="line"><span class="function">&#125;</span></span><br><span class="line"><span class="function"><span class="title">function</span> <span class="title">Son</span><span class="params">()</span> <span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">    Father.call(this,argus)</span></span></span><br><span class="line"><span class="function"><span class="comment">&#125;</span></span></span><br><span class="line"><span class="function"><span class="title">Son</span>.<span class="title">prototype</span> = <span class="title">new</span> <span class="title">Father</span><span class="params">()</span>;</span><span class="comment">//此时构造函数是变成了Father</span></span><br><span class="line">Son.peototype<span class="function">.<span class="keyword">constructor</span> = <span class="title">Son</span>;</span><span class="comment">//修正构造函数</span></span><br></pre></td></tr></table></figure>
-<p>要点：其实就是以上两种方法的结合，既能向父类传递参数，又能够继承原型上的方法。</p>
-<h3 id="拷贝继承"><a href="#拷贝继承" class="headerlink" title="拷贝继承"></a>拷贝继承</h3><figure class="highlight fortran"><table><tr><td class="code"><pre><span class="line">//实现一</span><br><span class="line">var source=&#123;<span class="keyword">name</span>:<span class="string">"李白"</span>,age:<span class="number">15</span>&#125;</span><br><span class="line">    var <span class="keyword">target</span>=&#123;&#125;;</span><br><span class="line">    <span class="keyword">target</span>.<span class="keyword">name</span>=source.<span class="keyword">name</span></span><br><span class="line">    <span class="keyword">target</span>.age=source.age;</span><br><span class="line"></span><br><span class="line">//实现二</span><br><span class="line"> <span class="function"><span class="keyword">function</span></span> extend(<span class="keyword">target</span>,source)&#123;</span><br><span class="line">        for(key <span class="keyword">in</span> source)&#123;</span><br><span class="line">            <span class="keyword">target</span>[key]=source[key];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">target</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    extend(<span class="keyword">target</span>,source)</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>继承</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ES6（一）</title>
     <url>/2020/04/05/ES6/</url>
     <content><![CDATA[<p>今天来复习一下ES6的相关知识吧，打好每一个基础吧。那么开始吧</p>
@@ -412,57 +391,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Next主题优化配置</title>
-    <url>/2020/04/06/Next%E4%B8%BB%E9%A2%98%E4%BC%98%E5%8C%96/</url>
-    <content><![CDATA[<p>&emsp;&emsp;前几天使用Hexo搭了一个博客，在不断优化过程中去不断的搜集教程，在这里我把自己使用到的方面记录下来，方便今后的查阅。</p>
-<a id="more"></a>
-<h2 id="Markdown-语法"><a href="#Markdown-语法" class="headerlink" title="Markdown 语法"></a>Markdown 语法</h2><p>在写博客的过程中，对markdown语法还不是特别熟悉，记录几个语法吧。</p>
-<h3 id="空白符"><a href="#空白符" class="headerlink" title="空白符"></a>空白符</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">半方大的空白   <span class="symbol">&amp;ensp;</span>  或  <span class="symbol">&amp;#8194;</span></span><br><span class="line">全方大的空白   <span class="symbol">&amp;emsp;</span>  或  <span class="symbol">&amp;#8195;</span></span><br><span class="line">不断行的空白格 <span class="symbol">&amp;nbsp;</span>  或  <span class="symbol">&amp;#160;</span></span><br></pre></td></tr></table></figure>
-<h3 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">行内式链接形式：[<span class="string">超链接文字</span>](<span class="link">url</span>) </span><br><span class="line">[百度]https://www.baidu.com)</span><br></pre></td></tr></table></figure>
-<p><strong>在新窗口打开页面</strong></p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">&lt;a <span class="attribute">href</span>=<span class="string">"/work/manager/index.html"</span> <span class="attribute">target</span>=<span class="string">"_blank"</span>&gt;共享单车后台管理系统&lt;/a&gt;</span><br></pre></td></tr></table></figure>
-<p><a href="/work/manager/index.html" target="_blank">共享单车后台管理系统</a></p>
-<h3 id="添加图片"><a href="#添加图片" class="headerlink" title="添加图片"></a>添加图片</h3><figure class="highlight less"><table><tr><td class="code"><pre><span class="line">!<span class="selector-attr">[]</span>(<span class="number">1</span>.jpg)  <span class="comment">//图片放在与文章同名的文件夹中</span></span><br></pre></td></tr></table></figure>
-<h3 id="文字颜色"><a href="#文字颜色" class="headerlink" title="文字颜色"></a>文字颜色</h3><p>这是<label style="color:red">红色</label>字体</p>
-<figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line">这是&lt;<span class="built_in">label</span> <span class="built_in">style</span>=<span class="string">"color:red"</span>&gt;红色&lt;/<span class="built_in">label</span>&gt;字体</span><br></pre></td></tr></table></figure>
-<h2 id="Next主题优化"><a href="#Next主题优化" class="headerlink" title="Next主题优化"></a>Next主题优化</h2><h3 id="设置阅读全文"><a href="#设置阅读全文" class="headerlink" title="设置阅读全文"></a>设置阅读全文</h3><p>&emsp;&emsp;在首页显示一篇文章的部分内容，并提供一个链接跳转到全文页面是一个常见的需求。 NexT 提供三种方式来控制文章在首页的显示方式。 也就是说，在首页显示文章的摘录并显示 <strong>阅读全文</strong> 按钮，可以通过以下方法：<br>1.在文章中使用<code>&lt;!-- more --&gt;</code> 手动进行截断，Hexo 提供的方式<br>2.在文章的 <code>front-matter</code> 中添加 <code>description</code>，并提供文章摘录<br>3.自动形成摘要，在 <strong>主题配置文件</strong> 中添加：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">auto_excerpt:</span></span><br><span class="line"><span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">length:</span> <span class="number">150</span></span><br></pre></td></tr></table></figure>
-<p>默认截取的长度为 150 字符，可以根据需要自行设定</p>
-]]></content>
-      <categories>
-        <category>hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用hexo从零开始搭建博客</title>
-    <url>/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<p>&emsp;&emsp;之前做了一个个人主页，但是由于部署在github，导致国内网打开很慢的原因，因此上网搜索了一些解决的办法。看到很多搭建博客的方法，索性不如也把自己的博客搭建起来，于是乎，特此写一篇笔记记录一下心得以及踩过的大部分坑吧~</p>
-<a id="more"></a> 
-
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h3><p>打开<a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js官网</a>下载安装node.js<br><img src="/.com//1.png" alt></p>
-<h3 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h3><p>打开<a href="https://git-scm.com/download" target="_blank" rel="noopener">Git官网</a>,选择下载对应版本安装<br><img src="/.com//2.png" alt></p>
-<h3 id="cnpm"><a href="#cnpm" class="headerlink" title="cnpm"></a>cnpm</h3><p>由于npm的服务器位于国外可能影响安装，为了提高下载速度，我们来安装一个cnpm<br><code>npm install cnpm -g --registry=https://registry.npm.taobao.org</code></p>
-<h3 id="全局安装hexo"><a href="#全局安装hexo" class="headerlink" title="全局安装hexo"></a>全局安装hexo</h3><p><code>cnpm install -g hexo</code></p>
-<h2 id="搭建一个博客"><a href="#搭建一个博客" class="headerlink" title="搭建一个博客"></a>搭建一个博客</h2><h3 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h3><p>输入<code>hexo init</code>初始化项目<br>然后会出现这样一个目录<br><img src="/.com//3.png" alt></p>
-<h3 id="打包成静态文件"><a href="#打包成静态文件" class="headerlink" title="打包成静态文件"></a>打包成静态文件</h3><p>输入<code>hexo g</code>会将文件编译为静态文件，md格式会编译为html<br>此时文件中会多出一个<code>public</code>文件夹</p>
-<h3 id="本地运行"><a href="#本地运行" class="headerlink" title="本地运行"></a>本地运行</h3><p>输入<code>hexo s</code> 运行，在浏览器中输入 <code>http://localhost:4000</code><br><img src="/.com//4.png" alt></p>
-<h2 id="部署到码云"><a href="#部署到码云" class="headerlink" title="部署到码云"></a>部署到码云</h2><h3 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h3><p>进入<a href="https://gitee.com/" target="_blank" rel="noopener">码云官网</a>，登录账号，创建一个仓库，注意仓库路径必须是<code>&lt;user-name&gt;.github.io</code>,<code>&lt;user-name&gt;</code>是自己的用户名<br><img src="/.com//5.png" alt><br><img src="/.com//6.png" alt></p>
-<h3 id="连接仓库"><a href="#连接仓库" class="headerlink" title="连接仓库"></a>连接仓库</h3><p>点击仓库旁的 克隆下载，复制https地址<br><img src="/.com//7.png" alt><br>然后打开blog文件夹中的<code>_config.yml</code>文件（项目配置文件），搜索<code>deploy</code><br>将repo:后面的网址改成你复制的地址，保存。<br><img src="/.com//8.png" alt></p>
-<h3 id="推送到仓库"><a href="#推送到仓库" class="headerlink" title="推送到仓库"></a>推送到仓库</h3><p>安装<code>hexo-deployer-git</code>模块，gitbash 运行 <code>cnpm install hexo-deployer-git --save</code></p>
-<p>安装好之后，文件夹会多出来一个.deploy_git,然后运行命令 <code>hexo g -d</code>,就可以把内容推送到码云了。</p>
-<h3 id="开启码云Page服务"><a href="#开启码云Page服务" class="headerlink" title="开启码云Page服务"></a>开启码云Page服务</h3><p>点击仓库右上角的服务，然后点击Gitee Pages<br><img src="/.com//9.png" alt><br><img src="/.com//10.png" alt><br>注意，以后每次提交至gitee后都要来手动更新哦~~也可以花钱购买自动部署服务</p>
-]]></content>
-      <categories>
-        <category>hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>js 编程题系列（一）</title>
     <url>/2020/04/15/JS%E7%BC%96%E7%A8%8B%E9%A2%98%E7%B3%BB%E5%88%97%EF%BC%88%E4%B8%80%EF%BC%89/</url>
     <content><![CDATA[<h3 id="求和"><a href="#求和" class="headerlink" title="求和"></a>求和</h3><p>方法一:使用ES6中的reduce</p>
@@ -489,36 +417,84 @@
       </categories>
   </entry>
   <entry>
-    <title>共享单车管理系统之框架之主页面架构设计</title>
-    <url>/2020/04/05/%E5%85%B1%E4%BA%AB%E5%8D%95%E8%BD%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>前一段时间跟着视频的学习一步一步完成了 共享单车管理系统 的开发，本次想要重新再回顾一遍，自己动手开始吧~</p>
-<a id="more"></a> 
+    <title>JavaScript继承的理解</title>
+    <url>/2020/04/12/JavaScript%E7%BB%A7%E6%89%BF/</url>
+    <content><![CDATA[<h3 id="继承的概念"><a href="#继承的概念" class="headerlink" title="继承的概念"></a>继承的概念</h3><p>通过某种方式让一个对象可以访问到另一个对象中的属性和方法，我们把这种方式称之为继承。</p>
+<a id="more"></a>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><figure class="highlight haxe"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Father</span></span>(name) &#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">    sayHi: <span class="type">funtion</span>() &#123;</span><br><span class="line">        console.log(<span class="string">'Hi'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//Father是一个构造函数，通过 new 关键词可以创建Father实例</span></span><br><span class="line"><span class="keyword">var</span> father1 = <span class="keyword">new</span> <span class="type">Father</span>();实例会拥有构造函数的方法和属性；</span><br><span class="line"><span class="keyword">var</span> father2 = <span class="keyword">new</span> <span class="type">Father</span>();同样也有name属性和sayHi方法；</span><br><span class="line"><span class="comment">//每创建一个实例，就会给这个实例添加构造函数的属性和方法，但是每个实例的属性和方法是不可复用的；</span></span><br><span class="line"><span class="comment">//借助原型链，原型上的属性和方法是共享的。</span></span><br><span class="line">Father.prototype.age = <span class="number">18</span>;</span><br></pre></td></tr></table></figure>
 
-<h2 id="两种方式创建一个react应用"><a href="#两种方式创建一个react应用" class="headerlink" title="两种方式创建一个react应用"></a>两种方式创建一个react应用</h2><figure class="highlight dsconfig"><table><tr><td class="code"><pre><span class="line"><span class="string">npm </span><span class="string">install </span><span class="built_in">create-react-app</span> -g</span><br><span class="line"><span class="built_in">create-react-app</span> <span class="string">my-app</span></span><br></pre></td></tr></table></figure>
-<p>或者</p>
-<figure class="highlight dsconfig"><table><tr><td class="code"><pre><span class="line"><span class="string">npx </span><span class="string">install </span><span class="built_in">create-react-app</span> <span class="string">my-app</span></span><br></pre></td></tr></table></figure>
-<p>直接使用官方的脚手架吧~<br><code>npm start</code>运行</p>
-<h2 id="安装相关依赖"><a href="#安装相关依赖" class="headerlink" title="安装相关依赖"></a>安装相关依赖</h2><h3 id="全局安装yarn"><a href="#全局安装yarn" class="headerlink" title="全局安装yarn"></a>全局安装yarn</h3><figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">npm <span class="keyword">install</span> yarn -g</span><br></pre></td></tr></table></figure>
-<h3 id="安装react-router"><a href="#安装react-router" class="headerlink" title="安装react-router"></a>安装<code>react-router</code></h3><figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line">yarn <span class="keyword">add</span><span class="bash"> react-router-dom --save</span></span><br></pre></td></tr></table></figure>
-<h3 id="安装AntD"><a href="#安装AntD" class="headerlink" title="安装AntD"></a>安装AntD</h3><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">yarn add <span class="symbol">antd@</span><span class="number">3.4</span><span class="number">.3</span> --save-dev</span><br></pre></td></tr></table></figure>
-<h3 id="安装less-less-loader-因为ant-d是基于less开发的"><a href="#安装less-less-loader-因为ant-d是基于less开发的" class="headerlink" title="安装less less-loader 因为ant-d是基于less开发的"></a>安装less less-loader 因为ant-d是基于less开发的</h3><figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">yarn add <span class="keyword">less</span> <span class="keyword">less</span>-loader --save-dev</span><br></pre></td></tr></table></figure>
-<h3 id="初始化git并且提交"><a href="#初始化git并且提交" class="headerlink" title="初始化git并且提交"></a>初始化git并且提交</h3><figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line">git init</span><br><span class="line">git <span class="keyword">add</span><span class="bash"> ./</span></span><br><span class="line">git commit -m <span class="string">'1 commit'</span></span><br></pre></td></tr></table></figure>
-<h3 id="暴露webpack配置文件"><a href="#暴露webpack配置文件" class="headerlink" title="暴露webpack配置文件"></a>暴露webpack配置文件</h3><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">yarn eject  <span class="regexp">//</span>执行之前必须先提交,否则会报以下错误</span><br><span class="line"></span><br><span class="line">Remove untracked files, stash or commit any changes, and try again.</span><br><span class="line">error Command failed with <span class="keyword">exit</span> code <span class="number">1</span>.</span><br></pre></td></tr></table></figure>
-<h3 id="修改配置文件，使用less-loader去解析less文件"><a href="#修改配置文件，使用less-loader去解析less文件" class="headerlink" title="修改配置文件，使用less-loader去解析less文件"></a>修改配置文件，使用<code>less-loader</code>去解析<code>less</code>文件</h3><p>  找到<code>config</code>文件下的<code>webpack.config.js</code>文件,找到并修改第48和110行<br>  <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// style files regexes</span></span><br><span class="line"><span class="keyword">const</span> cssRegex = <span class="regexp">/\.(css|less)$/</span>; <span class="comment">//修改第48行</span></span><br><span class="line"><span class="keyword">const</span> cssModuleRegex = <span class="regexp">/\.module\.css$/</span>;</span><br><span class="line"><span class="keyword">const</span> sassRegex = <span class="regexp">/\.(scss|sass)$/</span>;</span><br><span class="line"><span class="keyword">const</span> sassModuleRegex = <span class="regexp">/\.module\.(scss|sass)$/</span>;</span><br></pre></td></tr></table></figure><br>  <figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Adds PostCSS Normalize as the reset css with default options,</span></span><br><span class="line">           <span class="comment">// so that it honors browserslist config in package.json</span></span><br><span class="line">           <span class="comment">// which in turn let's users customize the target behavior as per their needs.</span></span><br><span class="line">           <span class="selector-tag">postcssNormalize</span>(),</span><br><span class="line">         ],</span><br><span class="line">         <span class="selector-tag">sourceMap</span>: <span class="selector-tag">isEnvProduction</span> <span class="selector-tag">&amp;</span><span class="selector-tag">&amp;</span> <span class="selector-tag">shouldUseSourceMap</span>,</span><br><span class="line">       &#125;,</span><br><span class="line">     &#125;,</span><br><span class="line">     &#123;</span><br><span class="line">       <span class="attribute">loader</span>:require.resolve(<span class="string">'less-loader'</span>)    <span class="comment">//修改行</span></span><br><span class="line">     &#125;</span><br><span class="line">   ]<span class="selector-class">.filter</span>(Boolean);</span><br></pre></td></tr></table></figure><br>由于use数组的执行顺序是从后到前，故在最下方添加<code>less-loader</code>加载则会被最先执行。修改完文件内容后需要重启项目<code>yarn start</code>生效。</p>
-<h2 id="按需加载"><a href="#按需加载" class="headerlink" title="按需加载"></a>按需加载</h2><p>因为每次使用ant-d组件的时候，都要引入ant-d.css样式文件，但实际上我们并不需要所有组件的样式。<br>为了提高性能，我们希望只引入我们使用到的组件的样式，实现<strong>按需加载</strong></p>
-<h3 id="安装-react-app-rewired-插件"><a href="#安装-react-app-rewired-插件" class="headerlink" title="安装 react-app-rewired 插件"></a>安装 react-app-rewired 插件</h3><figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line">yarn <span class="keyword">add</span><span class="bash"> react-app-rewired customize-cra</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight actionscript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* package.json */</span></span><br><span class="line"><span class="string">"scripts"</span>: &#123;</span><br><span class="line">-   <span class="string">"start"</span>: <span class="string">"react-scripts start"</span>,</span><br><span class="line">+   <span class="string">"start"</span>: <span class="string">"react-app-rewired start"</span>,</span><br><span class="line">-   <span class="string">"build"</span>: <span class="string">"react-scripts build"</span>,</span><br><span class="line">+   <span class="string">"build"</span>: <span class="string">"react-app-rewired build"</span>,</span><br><span class="line">-   <span class="string">"test"</span>: <span class="string">"react-scripts test"</span>,</span><br><span class="line">+   <span class="string">"test"</span>: <span class="string">"react-app-rewired test"</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后在项目根目录创建一个 <code>config-overrides.js</code> 用于修改默认配置。</p>
-<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span>.exports = function <span class="keyword">override</span>(<span class="built_in">config</span>, env) &#123;</span><br><span class="line">  <span class="comment">// do stuff with the webpack config...</span></span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">config</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>使用 <code>yarn start</code>命令运行之后报错：</p>
-<figure class="highlight subunit"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Error: </span>Cannot find module 'react-scripts/package.json'</span><br></pre></td></tr></table></figure>
-<p><strong>原因</strong>：缺少react-scripts插件<br><strong>解决方案</strong>：安装 react-scripts 插件</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">npm <span class="keyword">install</span> <span class="comment">--save react-scripts</span></span><br></pre></td></tr></table></figure>]]></content>
+<h3 id="继承方式"><a href="#继承方式" class="headerlink" title="继承方式"></a>继承方式</h3><h4 id="原型链继承"><a href="#原型链继承" class="headerlink" title="原型链继承"></a>原型链继承</h4><figure class="highlight delphi"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Father</span><span class="params">(<span class="keyword">name</span>)</span> <span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">    this.name = name;</span></span></span><br><span class="line"><span class="function"><span class="comment">    sayHi: funtion() &#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">        console.log('Hi')</span></span></span><br><span class="line"><span class="function"><span class="comment">    &#125;</span></span></span><br><span class="line"><span class="function">&#125;</span></span><br><span class="line"><span class="function"><span class="title">function</span> <span class="title">Son</span><span class="params">()</span> <span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment"></span></span></span><br><span class="line"><span class="function"><span class="comment">&#125;</span></span></span><br><span class="line"><span class="function"><span class="title">Son</span>.<span class="title">prototype</span> = <span class="title">new</span> <span class="title">Father</span><span class="params">()</span>;</span><span class="comment">//此时构造函数是变成了Father</span></span><br><span class="line">Son.peototype<span class="function">.<span class="keyword">constructor</span> = <span class="title">Son</span>;</span><span class="comment">//修正构造函数</span></span><br></pre></td></tr></table></figure>
+<p>要点：将子类的原型指向父类的实例，这样子类的实例在访问原型的时候回提供一个指向父类原型的指针。实现继承父类的属性和方法。<br>缺点:1.包含引用类型值的原型属性会被所有实例共享，这会导致对一个实例的修改会影响另一个实例。<br>     2.创建子类实例时，不能像父类传递参数</p>
+<h3 id="借用构造函数"><a href="#借用构造函数" class="headerlink" title="借用构造函数"></a>借用构造函数</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Father</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    sayHi: funtion() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Hi'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Son</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    Father.call(<span class="keyword">this</span>,argus)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>要点:在子类中使用call/apply方法，改变this的指向。<br>缺点：1.每次创建子类实例时，都会在函数中添加属性和方法；无法实现函数复用<br>      2.在父类原型中定义的方法，子类无法继承。</p>
+<h3 id="组合继承"><a href="#组合继承" class="headerlink" title="组合继承"></a>组合继承</h3><figure class="highlight delphi"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Father</span><span class="params">(<span class="keyword">name</span>)</span> <span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">    this.name = name;</span></span></span><br><span class="line"><span class="function"><span class="comment">    sayHi: funtion() &#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">        console.log('Hi')</span></span></span><br><span class="line"><span class="function"><span class="comment">    &#125;</span></span></span><br><span class="line"><span class="function">&#125;</span></span><br><span class="line"><span class="function"><span class="title">function</span> <span class="title">Son</span><span class="params">()</span> <span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">    Father.call(this,argus)</span></span></span><br><span class="line"><span class="function"><span class="comment">&#125;</span></span></span><br><span class="line"><span class="function"><span class="title">Son</span>.<span class="title">prototype</span> = <span class="title">new</span> <span class="title">Father</span><span class="params">()</span>;</span><span class="comment">//此时构造函数是变成了Father</span></span><br><span class="line">Son.peototype<span class="function">.<span class="keyword">constructor</span> = <span class="title">Son</span>;</span><span class="comment">//修正构造函数</span></span><br></pre></td></tr></table></figure>
+<p>要点：其实就是以上两种方法的结合，既能向父类传递参数，又能够继承原型上的方法。</p>
+<h3 id="拷贝继承"><a href="#拷贝继承" class="headerlink" title="拷贝继承"></a>拷贝继承</h3><figure class="highlight fortran"><table><tr><td class="code"><pre><span class="line">//实现一</span><br><span class="line">var source=&#123;<span class="keyword">name</span>:<span class="string">"李白"</span>,age:<span class="number">15</span>&#125;</span><br><span class="line">    var <span class="keyword">target</span>=&#123;&#125;;</span><br><span class="line">    <span class="keyword">target</span>.<span class="keyword">name</span>=source.<span class="keyword">name</span></span><br><span class="line">    <span class="keyword">target</span>.age=source.age;</span><br><span class="line"></span><br><span class="line">//实现二</span><br><span class="line"> <span class="function"><span class="keyword">function</span></span> extend(<span class="keyword">target</span>,source)&#123;</span><br><span class="line">        for(key <span class="keyword">in</span> source)&#123;</span><br><span class="line">            <span class="keyword">target</span>[key]=source[key];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">target</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    extend(<span class="keyword">target</span>,source)</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>React</category>
+        <category>JavaScript</category>
       </categories>
       <tags>
-        <tag>React</tag>
+        <tag>继承</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Next主题优化配置</title>
+    <url>/2020/04/06/Next%E4%B8%BB%E9%A2%98%E4%BC%98%E5%8C%96/</url>
+    <content><![CDATA[<p>&emsp;&emsp;前几天使用Hexo搭了一个博客，在不断优化过程中去不断的搜集教程，在这里我把自己使用到的方面记录下来，方便今后的查阅。</p>
+<a id="more"></a>
+<h2 id="Markdown-语法"><a href="#Markdown-语法" class="headerlink" title="Markdown 语法"></a>Markdown 语法</h2><p>在写博客的过程中，对markdown语法还不是特别熟悉，记录几个语法吧。</p>
+<h3 id="空白符"><a href="#空白符" class="headerlink" title="空白符"></a>空白符</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">半方大的空白   <span class="symbol">&amp;ensp;</span>  或  <span class="symbol">&amp;#8194;</span></span><br><span class="line">全方大的空白   <span class="symbol">&amp;emsp;</span>  或  <span class="symbol">&amp;#8195;</span></span><br><span class="line">不断行的空白格 <span class="symbol">&amp;nbsp;</span>  或  <span class="symbol">&amp;#160;</span></span><br></pre></td></tr></table></figure>
+<h3 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">行内式链接形式：[<span class="string">超链接文字</span>](<span class="link">url</span>) </span><br><span class="line">[百度]https://www.baidu.com)</span><br></pre></td></tr></table></figure>
+<p><strong>在新窗口打开页面</strong></p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">&lt;a <span class="attribute">href</span>=<span class="string">"/work/manager/index.html"</span> <span class="attribute">target</span>=<span class="string">"_blank"</span>&gt;共享单车后台管理系统&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+<p><a href="/work/manager/index.html" target="_blank">共享单车后台管理系统</a></p>
+<h3 id="添加图片"><a href="#添加图片" class="headerlink" title="添加图片"></a>添加图片</h3><figure class="highlight less"><table><tr><td class="code"><pre><span class="line">!<span class="selector-attr">[]</span>(<span class="number">1</span>.jpg)  <span class="comment">//图片放在与文章同名的文件夹中</span></span><br></pre></td></tr></table></figure>
+<h3 id="文字颜色"><a href="#文字颜色" class="headerlink" title="文字颜色"></a>文字颜色</h3><p>这是<label style="color:red">红色</label>字体</p>
+<figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line">这是&lt;<span class="built_in">label</span> <span class="built_in">style</span>=<span class="string">"color:red"</span>&gt;红色&lt;/<span class="built_in">label</span>&gt;字体</span><br></pre></td></tr></table></figure>
+<h2 id="Next主题优化"><a href="#Next主题优化" class="headerlink" title="Next主题优化"></a>Next主题优化</h2><h3 id="设置阅读全文"><a href="#设置阅读全文" class="headerlink" title="设置阅读全文"></a>设置阅读全文</h3><p>&emsp;&emsp;在首页显示一篇文章的部分内容，并提供一个链接跳转到全文页面是一个常见的需求。 NexT 提供三种方式来控制文章在首页的显示方式。 也就是说，在首页显示文章的摘录并显示 <strong>阅读全文</strong> 按钮，可以通过以下方法：<br>1.在文章中使用<code>&lt;!-- more --&gt;</code> 手动进行截断，Hexo 提供的方式<br>2.在文章的 <code>front-matter</code> 中添加 <code>description</code>，并提供文章摘录<br>3.自动形成摘要，在 <strong>主题配置文件</strong> 中添加：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">auto_excerpt:</span></span><br><span class="line"><span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">length:</span> <span class="number">150</span></span><br></pre></td></tr></table></figure>
+<p>默认截取的长度为 150 字符，可以根据需要自行设定</p>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Koa学习笔记（一）</title>
+    <url>/2020/06/21/Koa%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+    <content><![CDATA[<p>koa 学习笔记记录，以免忘记</p>
+<a id="more"></a>
+
+<h3 id="安装与运行"><a href="#安装与运行" class="headerlink" title="安装与运行"></a>安装与运行</h3><p>npm install -S koa 安装 koa 模块<br>新建 index.js 文件</p>
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> Koa = require(<span class="string">'koa'</span>) <span class="comment">//引入koa模块</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa() <span class="comment">//实例化创建一个app</span></span><br><span class="line"></span><br><span class="line">app.use(<span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">    ctx.body = <span class="string">'Hello world'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>) <span class="comment">//监听3000端口</span></span><br></pre></td></tr></table></figure>
+
+<p>运行</p>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line"><span class="keyword">node</span> <span class="title">index</span>.js</span><br></pre></td></tr></table></figure>
+
+<h3 id="中间件-middleware"><a href="#中间件-middleware" class="headerlink" title="中间件 middleware"></a>中间件 middleware</h3><p>新建一个 middleware.js 文件</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">'koa'</span>) <span class="comment">//引入koa模块</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa() <span class="comment">//实例化创建一个app</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> middleware1 = <span class="function"><span class="keyword">function</span> <span class="title">async</span>(<span class="params">ctx, next</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'middleware1'</span>)</span><br><span class="line">    next() <span class="comment">//遇见next会直接跳到下一个中间件处理</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'middleware1'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> middleware2= <span class="function"><span class="keyword">function</span> <span class="title">async</span>(<span class="params">ctx, next</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'middleware2'</span>)</span><br><span class="line">    next()</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'middleware2'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> middleware3 = <span class="function"><span class="keyword">function</span> <span class="title">async</span>(<span class="params">ctx, next</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'middleware3'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app.use(middleware1)</span><br><span class="line">app.use(middleware2)</span><br><span class="line">app.use(middleware3)</span><br><span class="line">app.listen(<span class="number">3000</span>) <span class="comment">//监听3000端口</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出</span></span><br><span class="line"><span class="comment">// middleware1</span></span><br><span class="line"><span class="comment">// middleware2</span></span><br><span class="line"><span class="comment">// middleware3</span></span><br><span class="line"><span class="comment">// middleware2</span></span><br><span class="line"><span class="comment">// middleware1</span></span><br></pre></td></tr></table></figure>
+
+<p>运行时，首先交给第一个中间件处理，如果没有 next()就直接结束。<br>如果有 next()，直接跳到下一个中间件处理。<br>所有中间件处理完毕后，在倒过来运行 next()之后的代码，先进后出原则。</p>
+<h3 id="koa-router"><a href="#koa-router" class="headerlink" title="koa-router"></a>koa-router</h3><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">npm <span class="keyword">install</span> -S koa-router</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> Koa = require(<span class="string">'koa'</span>) <span class="comment">//引入koa模块</span></span><br><span class="line"><span class="keyword">const</span> Router = require(<span class="string">'koa-router'</span>) <span class="comment">//引入koa-router</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa() <span class="comment">//实例化创建一个app</span></span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> Router()</span><br><span class="line"></span><br><span class="line">router.<span class="keyword">get</span>(<span class="string">'/'</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">    ctx.body = <span class="string">'hello world'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">router.<span class="keyword">get</span>(<span class="string">'/api'</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">    ctx.body = <span class="string">'hello api'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.use(router.routes().use(router.allowedMethods()) <span class="comment">//找不到时返回404</span></span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>) <span class="comment">//监听3000端口</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="koa-body-amp-koa-cors"><a href="#koa-body-amp-koa-cors" class="headerlink" title="koa-body &amp; @koa/cors"></a>koa-body &amp; @koa/cors</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> koaBody = <span class="keyword">require</span>(<span class="string">'koa-body'</span>)</span><br><span class="line"><span class="keyword">const</span> cors = <span class="keyword">require</span>(<span class="string">'@koa/cors'</span>)</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">app.<span class="keyword">use</span>(<span class="title">koaBody</span>());</span><br><span class="line">app.<span class="keyword">use</span>(<span class="title">cors</span>());</span><br></pre></td></tr></table></figure>
+
+<h3 id="koa-json"><a href="#koa-json" class="headerlink" title="koa-json"></a>koa-json</h3><p>主要用来格式化 json</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">'koa'</span>);</span><br><span class="line"><span class="keyword">const</span> Router = <span class="built_in">require</span>(<span class="string">'koa-router'</span>);</span><br><span class="line"><span class="keyword">const</span> cors = <span class="built_in">require</span>(<span class="string">'@koa/cors'</span>);</span><br><span class="line"><span class="keyword">const</span> koaBody = <span class="built_in">require</span>(<span class="string">'koa-body'</span>);</span><br><span class="line"><span class="keyword">const</span> json = <span class="built_in">require</span>(<span class="string">'koa-json'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> Router();</span><br><span class="line"></span><br><span class="line"><span class="comment">//1. request, method, respond</span></span><br><span class="line"><span class="comment">//2. api url =&gt; function, router</span></span><br><span class="line"><span class="comment">//3. ctx async</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// app.use(async (ctx) =&gt; &#123;</span></span><br><span class="line"><span class="comment">//   ctx.body = 'hello world';</span></span><br><span class="line"><span class="comment">// &#125;);</span></span><br><span class="line"></span><br><span class="line">router.prefix(<span class="string">'/api'</span>);</span><br><span class="line">router.get(<span class="string">'/'</span>, <span class="function">(<span class="params">ctx</span>) =&gt;</span> &#123;</span><br><span class="line">  ctx.body = <span class="string">'Hello world!!'</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">router.get(<span class="string">'/api'</span>, <span class="function">(<span class="params">ctx</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> params = ctx.request.query;</span><br><span class="line">  <span class="built_in">console</span>.log(params);</span><br><span class="line">  ctx.body = &#123;</span><br><span class="line">    name: params.name,</span><br><span class="line">    age: params.age,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">router.get(<span class="string">'/async'</span>, <span class="keyword">async</span> (ctx) =&gt; &#123;</span><br><span class="line">  <span class="keyword">let</span> result = <span class="keyword">await</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      resolve(<span class="string">'Hello world 2s later'</span>);</span><br><span class="line">    &#125;, <span class="number">2000</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">  ctx.body = result;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">router.post(<span class="string">'/post'</span>, <span class="keyword">async</span> (ctx) =&gt; &#123;</span><br><span class="line">  <span class="keyword">let</span> &#123; body &#125; = ctx.request;</span><br><span class="line">  <span class="built_in">console</span>.log(body);</span><br><span class="line">  <span class="built_in">console</span>.log(ctx.request);</span><br><span class="line">  ctx.body = &#123;</span><br><span class="line">    ...body,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br><span class="line">app.use(koaBody());</span><br><span class="line">app.use(cors());</span><br><span class="line">app.use(json(&#123; pretty: <span class="literal">false</span>, param: <span class="string">'pretty'</span> &#125;)); <span class="comment">//格式化params</span></span><br><span class="line"></span><br><span class="line">app.use(router.routes()).use(router.allowedMethods());</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+
+<p>运行后浏览器输入</p>
+<figure class="highlight dts"><table><tr><td class="code"><pre><span class="line"><span class="symbol">http:</span><span class="comment">//localhost:3000/api/api?name=zhangjinlin&amp;age=18&amp;pretty</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"name"</span>: <span class="string">"zhangjinlin"</span>,</span><br><span class="line">  <span class="string">"age"</span>: <span class="string">"18"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>koa</tag>
       </tags>
   </entry>
   <entry>
@@ -566,6 +542,60 @@
       </tags>
   </entry>
   <entry>
+    <title>Vuex学习笔记（一）</title>
+    <url>/2020/06/22/Vuex%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>Vuex相关笔记，记录一下请求如何编辑吧~</p>
+<a id="more"></a>
+
+<h3 id="文件目录结构"><a href="#文件目录结构" class="headerlink" title="文件目录结构"></a>文件目录结构</h3><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">vue-template</span><br><span class="line">├── dist <span class="comment">// 编译输出目录</span></span><br><span class="line">├── public <span class="comment">// 放置任何需要绝对路径引入的静态资源</span></span><br><span class="line">├── src</span><br><span class="line">│   ├── api <span class="comment">// 封装后的 API 接口</span></span><br><span class="line">│   ├── assets <span class="comment">// 直接引用的静态资源</span></span><br><span class="line">│   ├── components <span class="comment">// 通用组件</span></span><br><span class="line">│   ├── pages  <span class="comment">// 页面</span></span><br><span class="line">│   ├── plugins <span class="comment">// 通用插件</span></span><br><span class="line">│   ├── router  <span class="comment">// 路由管理</span></span><br><span class="line">│   ├── store  <span class="comment">// 状态管理</span></span><br><span class="line">│   ├── utils  <span class="comment">// 通用工具方法</span></span><br><span class="line">│   ├── App<span class="selector-class">.vue</span> </span><br><span class="line">│   ├── main<span class="selector-class">.js</span> <span class="comment">// 项目入口文件</span></span><br><span class="line">├── <span class="selector-class">.browserslistrc</span> <span class="comment">// 浏览器兼容列表</span></span><br><span class="line">├── <span class="selector-class">.editorconfig</span> <span class="comment">// 编辑器配置</span></span><br><span class="line">├── <span class="selector-class">.env</span> <span class="comment">// 环境变量配置</span></span><br><span class="line">├── <span class="selector-class">.eslintrc</span> <span class="comment">// eslint配置</span></span><br><span class="line">├── <span class="selector-class">.gitignore</span> <span class="comment">// git上传忽略列表</span></span><br><span class="line">├── babel<span class="selector-class">.config</span><span class="selector-class">.js</span> <span class="comment">// babel配置</span></span><br><span class="line">├── package.json</span><br><span class="line">├── postcss<span class="selector-class">.config</span><span class="selector-class">.js</span> <span class="comment">// postcss配置</span></span><br><span class="line">├── vue<span class="selector-class">.config</span><span class="selector-class">.js</span> <span class="comment">// 项目vue配置</span></span><br></pre></td></tr></table></figure>
+<h3 id="api文件"><a href="#api文件" class="headerlink" title="api文件"></a>api文件</h3><p>引入 get/put/post等方法<br>定义接口方法，返回的是res<br>export 导出</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="keyword">get</span>, put, post &#125; <span class="keyword">from</span> <span class="string">'@/utils/request.js'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取我的评价-分页查询</span></span><br><span class="line"><span class="keyword">const</span> getMyEvaluateList = <span class="function">(<span class="params">data</span>) =&gt;</span> <span class="keyword">get</span>(<span class="string">'/myScore/list'</span>, data)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取评分模版</span></span><br><span class="line"><span class="keyword">const</span> getEvaluateModel = <span class="function">(<span class="params">data</span>) =&gt;</span> <span class="keyword">get</span>(<span class="string">'/evaluationTemplate/evaluationTemplate/getWeek'</span>, data)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">  getMyEvaluateList,</span><br><span class="line">  getEvaluateModel,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="store文件"><a href="#store文件" class="headerlink" title="store文件"></a>store文件</h3><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">├── index<span class="selector-class">.js</span> <span class="comment">// 引入modules并导出整个store</span></span><br><span class="line">├── modules</span><br><span class="line">│   ├── evaluate<span class="selector-class">.js</span> <span class="comment">// 定义actions等并导出</span></span><br><span class="line">│   ├── index<span class="selector-class">.js</span> <span class="comment">// 引入上面的文件并导出</span></span><br></pre></td></tr></table></figure>
+
+<p>store/modules/evaluate.js</p>
+<figure class="highlight cs"><table><tr><td class="code"><pre><span class="line">import &#123; getMyEvaluateList, getEvaluateModel&#125; <span class="keyword">from</span> <span class="string">'@/api/evaluate.js'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> state = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> actions = &#123;</span><br><span class="line">  <span class="comment">// 获取我的评价</span></span><br><span class="line">  <span class="function"><span class="keyword">async</span> <span class="title">fetchGetMyEvaluateList</span>(<span class="params">&#123; commit &#125;, payload</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> data = payload</span><br><span class="line">    <span class="keyword">let</span> res = <span class="keyword">await</span> getMyEvaluateList(data)</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 获取评分模版</span></span><br><span class="line">  <span class="function"><span class="keyword">async</span> <span class="title">fetchGetEvaluateModel</span>(<span class="params">&#123; commit &#125;, payload</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> data = payload</span><br><span class="line">    <span class="keyword">let</span> res = <span class="keyword">await</span> getEvaluateModel(data)</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> mutations = &#123;&#125;</span><br><span class="line"></span><br><span class="line">export <span class="keyword">default</span> &#123;</span><br><span class="line">  namespaced: <span class="literal">true</span>,</span><br><span class="line">  state,</span><br><span class="line">  actions,</span><br><span class="line">  mutations</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>store/modules/index.js</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">import evaluate <span class="keyword">from</span> <span class="string">'./evaluate'</span></span><br><span class="line"><span class="builtin-name">export</span><span class="built_in"> default </span>&#123;</span><br><span class="line">  evaluate</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>store/index.js</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">import Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line">import Vuex <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line">import moduleStore <span class="keyword">from</span> <span class="string">'./modules'</span></span><br><span class="line"></span><br><span class="line">Vue.use(Vuex)</span><br><span class="line"></span><br><span class="line"><span class="builtin-name">export</span><span class="built_in"> default </span>new Vuex.Store(&#123;</span><br><span class="line">  modules: &#123;</span><br><span class="line">    <span class="built_in">..</span>.moduleStore</span><br><span class="line">  &#125;,</span><br><span class="line">  state: &#123;&#125;,</span><br><span class="line">  mutations: &#123;&#125;,</span><br><span class="line">  actions: &#123;&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>axios</tag>
+        <tag>Vuex</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用hexo从零开始搭建博客</title>
+    <url>/2020/04/04/hexo%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<p>&emsp;&emsp;之前做了一个个人主页，但是由于部署在github，导致国内网打开很慢的原因，因此上网搜索了一些解决的办法。看到很多搭建博客的方法，索性不如也把自己的博客搭建起来，于是乎，特此写一篇笔记记录一下心得以及踩过的大部分坑吧~</p>
+<a id="more"></a> 
+
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h3><p>打开<a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js官网</a>下载安装node.js<br><img src="/.com//1.png" alt></p>
+<h3 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h3><p>打开<a href="https://git-scm.com/download" target="_blank" rel="noopener">Git官网</a>,选择下载对应版本安装<br><img src="/.com//2.png" alt></p>
+<h3 id="cnpm"><a href="#cnpm" class="headerlink" title="cnpm"></a>cnpm</h3><p>由于npm的服务器位于国外可能影响安装，为了提高下载速度，我们来安装一个cnpm<br><code>npm install cnpm -g --registry=https://registry.npm.taobao.org</code></p>
+<h3 id="全局安装hexo"><a href="#全局安装hexo" class="headerlink" title="全局安装hexo"></a>全局安装hexo</h3><p><code>cnpm install -g hexo</code></p>
+<h2 id="搭建一个博客"><a href="#搭建一个博客" class="headerlink" title="搭建一个博客"></a>搭建一个博客</h2><h3 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h3><p>输入<code>hexo init</code>初始化项目<br>然后会出现这样一个目录<br><img src="/.com//3.png" alt></p>
+<h3 id="打包成静态文件"><a href="#打包成静态文件" class="headerlink" title="打包成静态文件"></a>打包成静态文件</h3><p>输入<code>hexo g</code>会将文件编译为静态文件，md格式会编译为html<br>此时文件中会多出一个<code>public</code>文件夹</p>
+<h3 id="本地运行"><a href="#本地运行" class="headerlink" title="本地运行"></a>本地运行</h3><p>输入<code>hexo s</code> 运行，在浏览器中输入 <code>http://localhost:4000</code><br><img src="/.com//4.png" alt></p>
+<h2 id="部署到码云"><a href="#部署到码云" class="headerlink" title="部署到码云"></a>部署到码云</h2><h3 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h3><p>进入<a href="https://gitee.com/" target="_blank" rel="noopener">码云官网</a>，登录账号，创建一个仓库，注意仓库路径必须是<code>&lt;user-name&gt;.github.io</code>,<code>&lt;user-name&gt;</code>是自己的用户名<br><img src="/.com//5.png" alt><br><img src="/.com//6.png" alt></p>
+<h3 id="连接仓库"><a href="#连接仓库" class="headerlink" title="连接仓库"></a>连接仓库</h3><p>点击仓库旁的 克隆下载，复制https地址<br><img src="/.com//7.png" alt><br>然后打开blog文件夹中的<code>_config.yml</code>文件（项目配置文件），搜索<code>deploy</code><br>将repo:后面的网址改成你复制的地址，保存。<br><img src="/.com//8.png" alt></p>
+<h3 id="推送到仓库"><a href="#推送到仓库" class="headerlink" title="推送到仓库"></a>推送到仓库</h3><p>安装<code>hexo-deployer-git</code>模块，gitbash 运行 <code>cnpm install hexo-deployer-git --save</code></p>
+<p>安装好之后，文件夹会多出来一个.deploy_git,然后运行命令 <code>hexo g -d</code>,就可以把内容推送到码云了。</p>
+<h3 id="开启码云Page服务"><a href="#开启码云Page服务" class="headerlink" title="开启码云Page服务"></a>开启码云Page服务</h3><p>点击仓库右上角的服务，然后点击Gitee Pages<br><img src="/.com//9.png" alt><br><img src="/.com//10.png" alt><br>注意，以后每次提交至gitee后都要来手动更新哦~~也可以花钱购买自动部署服务</p>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>js实现斐波那契数列</title>
     <url>/2020/04/12/js%E5%AE%9E%E7%8E%B0%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97/</url>
     <content><![CDATA[<p>使用JavaScript实现斐波那契数列[1,1,2,3,5,8…]</p>
@@ -575,20 +605,6 @@
         <category>JavaScript</category>
         <category>编程题</category>
       </categories>
-  </entry>
-  <entry>
-    <title>promise</title>
-    <url>/2020/04/10/%E6%80%BB%E7%BB%93%E5%87%A0%E4%B8%AA%E5%AE%B9%E6%98%93%E9%81%97%E5%BF%98%E7%9A%84%E7%82%B9/</url>
-    <content><![CDATA[<p>总结ES6中的promise的用法，以及相关的概念。</p>
-<a id="more"></a>
-
-<h2 id><a href="#" class="headerlink" title></a></h2>]]></content>
-      <categories>
-        <category>promise</category>
-      </categories>
-      <tags>
-        <tag>promise</tag>
-      </tags>
   </entry>
   <entry>
     <title>安恒信息笔试总结</title>
@@ -610,6 +626,71 @@
       </categories>
       <tags>
         <tag>笔试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>共享单车管理系统之框架之主页面架构设计</title>
+    <url>/2020/04/05/%E5%85%B1%E4%BA%AB%E5%8D%95%E8%BD%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>前一段时间跟着视频的学习一步一步完成了 共享单车管理系统 的开发，本次想要重新再回顾一遍，自己动手开始吧~</p>
+<a id="more"></a> 
+
+<h2 id="两种方式创建一个react应用"><a href="#两种方式创建一个react应用" class="headerlink" title="两种方式创建一个react应用"></a>两种方式创建一个react应用</h2><figure class="highlight dsconfig"><table><tr><td class="code"><pre><span class="line"><span class="string">npm </span><span class="string">install </span><span class="built_in">create-react-app</span> -g</span><br><span class="line"><span class="built_in">create-react-app</span> <span class="string">my-app</span></span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight dsconfig"><table><tr><td class="code"><pre><span class="line"><span class="string">npx </span><span class="string">install </span><span class="built_in">create-react-app</span> <span class="string">my-app</span></span><br></pre></td></tr></table></figure>
+<p>直接使用官方的脚手架吧~<br><code>npm start</code>运行</p>
+<h2 id="安装相关依赖"><a href="#安装相关依赖" class="headerlink" title="安装相关依赖"></a>安装相关依赖</h2><h3 id="全局安装yarn"><a href="#全局安装yarn" class="headerlink" title="全局安装yarn"></a>全局安装yarn</h3><figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">npm <span class="keyword">install</span> yarn -g</span><br></pre></td></tr></table></figure>
+<h3 id="安装react-router"><a href="#安装react-router" class="headerlink" title="安装react-router"></a>安装<code>react-router</code></h3><figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line">yarn <span class="keyword">add</span><span class="bash"> react-router-dom --save</span></span><br></pre></td></tr></table></figure>
+<h3 id="安装AntD"><a href="#安装AntD" class="headerlink" title="安装AntD"></a>安装AntD</h3><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">yarn add <span class="symbol">antd@</span><span class="number">3.4</span><span class="number">.3</span> --save-dev</span><br></pre></td></tr></table></figure>
+<h3 id="安装less-less-loader-因为ant-d是基于less开发的"><a href="#安装less-less-loader-因为ant-d是基于less开发的" class="headerlink" title="安装less less-loader 因为ant-d是基于less开发的"></a>安装less less-loader 因为ant-d是基于less开发的</h3><figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">yarn add <span class="keyword">less</span> <span class="keyword">less</span>-loader --save-dev</span><br></pre></td></tr></table></figure>
+<h3 id="初始化git并且提交"><a href="#初始化git并且提交" class="headerlink" title="初始化git并且提交"></a>初始化git并且提交</h3><figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line">git init</span><br><span class="line">git <span class="keyword">add</span><span class="bash"> ./</span></span><br><span class="line">git commit -m <span class="string">'1 commit'</span></span><br></pre></td></tr></table></figure>
+<h3 id="暴露webpack配置文件"><a href="#暴露webpack配置文件" class="headerlink" title="暴露webpack配置文件"></a>暴露webpack配置文件</h3><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">yarn eject  <span class="regexp">//</span>执行之前必须先提交,否则会报以下错误</span><br><span class="line"></span><br><span class="line">Remove untracked files, stash or commit any changes, and try again.</span><br><span class="line">error Command failed with <span class="keyword">exit</span> code <span class="number">1</span>.</span><br></pre></td></tr></table></figure>
+<h3 id="修改配置文件，使用less-loader去解析less文件"><a href="#修改配置文件，使用less-loader去解析less文件" class="headerlink" title="修改配置文件，使用less-loader去解析less文件"></a>修改配置文件，使用<code>less-loader</code>去解析<code>less</code>文件</h3><p>  找到<code>config</code>文件下的<code>webpack.config.js</code>文件,找到并修改第48和110行<br>  <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// style files regexes</span></span><br><span class="line"><span class="keyword">const</span> cssRegex = <span class="regexp">/\.(css|less)$/</span>; <span class="comment">//修改第48行</span></span><br><span class="line"><span class="keyword">const</span> cssModuleRegex = <span class="regexp">/\.module\.css$/</span>;</span><br><span class="line"><span class="keyword">const</span> sassRegex = <span class="regexp">/\.(scss|sass)$/</span>;</span><br><span class="line"><span class="keyword">const</span> sassModuleRegex = <span class="regexp">/\.module\.(scss|sass)$/</span>;</span><br></pre></td></tr></table></figure><br>  <figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Adds PostCSS Normalize as the reset css with default options,</span></span><br><span class="line">           <span class="comment">// so that it honors browserslist config in package.json</span></span><br><span class="line">           <span class="comment">// which in turn let's users customize the target behavior as per their needs.</span></span><br><span class="line">           <span class="selector-tag">postcssNormalize</span>(),</span><br><span class="line">         ],</span><br><span class="line">         <span class="selector-tag">sourceMap</span>: <span class="selector-tag">isEnvProduction</span> <span class="selector-tag">&amp;</span><span class="selector-tag">&amp;</span> <span class="selector-tag">shouldUseSourceMap</span>,</span><br><span class="line">       &#125;,</span><br><span class="line">     &#125;,</span><br><span class="line">     &#123;</span><br><span class="line">       <span class="attribute">loader</span>:require.resolve(<span class="string">'less-loader'</span>)    <span class="comment">//修改行</span></span><br><span class="line">     &#125;</span><br><span class="line">   ]<span class="selector-class">.filter</span>(Boolean);</span><br></pre></td></tr></table></figure><br>由于use数组的执行顺序是从后到前，故在最下方添加<code>less-loader</code>加载则会被最先执行。修改完文件内容后需要重启项目<code>yarn start</code>生效。</p>
+<h2 id="按需加载"><a href="#按需加载" class="headerlink" title="按需加载"></a>按需加载</h2><p>因为每次使用ant-d组件的时候，都要引入ant-d.css样式文件，但实际上我们并不需要所有组件的样式。<br>为了提高性能，我们希望只引入我们使用到的组件的样式，实现<strong>按需加载</strong></p>
+<h3 id="安装-react-app-rewired-插件"><a href="#安装-react-app-rewired-插件" class="headerlink" title="安装 react-app-rewired 插件"></a>安装 react-app-rewired 插件</h3><figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line">yarn <span class="keyword">add</span><span class="bash"> react-app-rewired customize-cra</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight actionscript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* package.json */</span></span><br><span class="line"><span class="string">"scripts"</span>: &#123;</span><br><span class="line">-   <span class="string">"start"</span>: <span class="string">"react-scripts start"</span>,</span><br><span class="line">+   <span class="string">"start"</span>: <span class="string">"react-app-rewired start"</span>,</span><br><span class="line">-   <span class="string">"build"</span>: <span class="string">"react-scripts build"</span>,</span><br><span class="line">+   <span class="string">"build"</span>: <span class="string">"react-app-rewired build"</span>,</span><br><span class="line">-   <span class="string">"test"</span>: <span class="string">"react-scripts test"</span>,</span><br><span class="line">+   <span class="string">"test"</span>: <span class="string">"react-app-rewired test"</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后在项目根目录创建一个 <code>config-overrides.js</code> 用于修改默认配置。</p>
+<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span>.exports = function <span class="keyword">override</span>(<span class="built_in">config</span>, env) &#123;</span><br><span class="line">  <span class="comment">// do stuff with the webpack config...</span></span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">config</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>使用 <code>yarn start</code>命令运行之后报错：</p>
+<figure class="highlight subunit"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Error: </span>Cannot find module 'react-scripts/package.json'</span><br></pre></td></tr></table></figure>
+<p><strong>原因</strong>：缺少react-scripts插件<br><strong>解决方案</strong>：安装 react-scripts 插件</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">npm <span class="keyword">install</span> <span class="comment">--save react-scripts</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>promise</title>
+    <url>/2020/04/10/%E6%80%BB%E7%BB%93%E5%87%A0%E4%B8%AA%E5%AE%B9%E6%98%93%E9%81%97%E5%BF%98%E7%9A%84%E7%82%B9/</url>
+    <content><![CDATA[<p>总结ES6中的promise的用法，以及相关的概念。</p>
+<a id="more"></a>
+
+<h2 id><a href="#" class="headerlink" title></a></h2>]]></content>
+      <categories>
+        <category>promise</category>
+      </categories>
+      <tags>
+        <tag>promise</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>写给自己的话</title>
+    <url>/2020/04/02/%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</url>
+    <content><![CDATA[<p>&emsp;&emsp;每天都是新的开始，做好准备，才能迎接更好的未来。</p>
+<a id="more"></a> 
+
+<h3 id="不安"><a href="#不安" class="headerlink" title="不安"></a>不安</h3><p>临近毕业，很多事情不断的涌进脑海。<br>毕设，工作，父母，建筑，学习……<br>仿佛人生到了一个转折点，不再是一个无忧无虑的时刻了。今后的日子应该如何，选择很重要。</p>
+<h3 id="建筑-VS-前端"><a href="#建筑-VS-前端" class="headerlink" title="建筑 VS 前端"></a>建筑 VS 前端</h3><p>和朋友聊聊天，说到转行的不易，有多少份简历石沉大海，就有多少次怀疑直击内心。<br>要不要先找到一份建筑的工作让自己安下这颗不稳定的心，以及要不要放手一搏不留退路。</p>
+<h3 id="我的选择"><a href="#我的选择" class="headerlink" title="我的选择"></a>我的选择</h3><p>我想要选择放手一搏，既然心是向往的，就不要给自己一个松懈的借口。身边有支持着你的人，如果就这样选择放弃了，回过头，好像都是些可笑的回忆。</p>
+<h4 id="心之所及，就是远方"><a href="#心之所及，就是远方" class="headerlink" title="心之所及，就是远方"></a>心之所及，就是远方</h4><p>不抛弃，不放弃，好好做好每一件事，相信自己，就一定可以的！加油！</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
       </tags>
   </entry>
   <entry>
@@ -676,24 +757,6 @@
       <categories>
         <category>笔试</category>
       </categories>
-  </entry>
-  <entry>
-    <title>写给自己的话</title>
-    <url>/2020/04/02/%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</url>
-    <content><![CDATA[<p>&emsp;&emsp;每天都是新的开始，做好准备，才能迎接更好的未来。</p>
-<a id="more"></a> 
-
-<h3 id="不安"><a href="#不安" class="headerlink" title="不安"></a>不安</h3><p>临近毕业，很多事情不断的涌进脑海。<br>毕设，工作，父母，建筑，学习……<br>仿佛人生到了一个转折点，不再是一个无忧无虑的时刻了。今后的日子应该如何，选择很重要。</p>
-<h3 id="建筑-VS-前端"><a href="#建筑-VS-前端" class="headerlink" title="建筑 VS 前端"></a>建筑 VS 前端</h3><p>和朋友聊聊天，说到转行的不易，有多少份简历石沉大海，就有多少次怀疑直击内心。<br>要不要先找到一份建筑的工作让自己安下这颗不稳定的心，以及要不要放手一搏不留退路。</p>
-<h3 id="我的选择"><a href="#我的选择" class="headerlink" title="我的选择"></a>我的选择</h3><p>我想要选择放手一搏，既然心是向往的，就不要给自己一个松懈的借口。身边有支持着你的人，如果就这样选择放弃了，回过头，好像都是些可笑的回忆。</p>
-<h4 id="心之所及，就是远方"><a href="#心之所及，就是远方" class="headerlink" title="心之所及，就是远方"></a>心之所及，就是远方</h4><p>不抛弃，不放弃，好好做好每一件事，相信自己，就一定可以的！加油！</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-      </tags>
   </entry>
   <entry>
     <title>网易互娱二面总结</title>
@@ -856,6 +919,31 @@
 <figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">var arr = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">23</span>, <span class="number">54</span>, <span class="number">4</span>, <span class="number">45</span>, <span class="number">3</span>, <span class="number">54</span>, <span class="number">34</span>, <span class="number">23</span>, <span class="number">77</span>];</span><br><span class="line">var a = arr[<span class="number">0</span>];</span><br><span class="line">var b = arr[<span class="number">1</span>];</span><br><span class="line">var result = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (let i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (let j = i + <span class="number">1</span>; j &lt; arr.length; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (arr[j] - arr[i] &gt; result) &#123;</span><br><span class="line">                result = arr[j] - arr[i];</span><br><span class="line">                a = arr[i];</span><br><span class="line">                b = arr[j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(`a为$&#123;a&#125;,b为$&#123;b&#125;,结果是$&#123;result&#125;`); <span class="comment">//a为1,b为77,结果是76</span></span><br></pre></td></tr></table></figure>
 <p>方法二：用一次循环实现，时间复杂度为O(N)</p>
 <figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">arr = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">23</span>, <span class="number">54</span>, <span class="number">4</span>, <span class="number">45</span>, <span class="number">3</span>, <span class="number">54</span>, <span class="number">34</span>, <span class="number">23</span>, <span class="number">77</span>]</span><br><span class="line">        var a = arr[<span class="number">0</span>];</span><br><span class="line">        var b = arr[<span class="number">1</span>];</span><br><span class="line">        var result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (let i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (arr[i] &lt; a) &#123;</span><br><span class="line">                a = arr[i]</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (arr[i] - a &gt; result) &#123;</span><br><span class="line">                b = arr[i];</span><br><span class="line">                result = b - a</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        console.log(`a为$&#123;a&#125;,b为$&#123;b&#125;,结果是$&#123;result&#125;`); <span class="comment">//a为1,b为77,结果是76</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>几日面试回顾</title>
+    <url>/2020/06/10/%E9%9D%A2%E8%AF%95%E5%B0%8F%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<p>几日面试总结，回顾回顾，复习复习。</p>
+<a id="more"></a>
+<h2 id="1-React生命周期？"><a href="#1-React生命周期？" class="headerlink" title="1.React生命周期？"></a>1.React生命周期？</h2><p>参考链接 <a href="https://www.jianshu.com/p/b331d0e4b398" target="_blank" rel="noopener">https://www.jianshu.com/p/b331d0e4b398</a><br>1.挂载卸载过程<br>1.1 constructor()<br>1.2 componentWillMount()<br>1.3 componentdidMount()<br>1.4 componentWillUnmount()</p>
+<p>2.更新过程<br>2.1 componentWillReceiveProps(nextProps)<br>2.2 shouldComponentUpdate(nextProps,nextState)<br>2.3 componentWillUpdate(nextProps,nextState)<br>2.4 componentDidUpdate(prevProps,prevState)<br>2.5 render()</p>
+<h2 id="2-MVVM是什么？"><a href="#2-MVVM是什么？" class="headerlink" title="2.MVVM是什么？"></a>2.MVVM是什么？</h2><p>MVVM是Model-View-ViewModel的缩写<br>M - 数据模型 Model<br>VM - 视图模型 ViewModel<br>V - 视图层 View<br>在MVVM中View和Model是不可以直接进行通信的，它们之间存在这ViewModel这个中介充当着观察者的角色。当用户操作View，ViewModel感知到变化，然后通知Model发生相应改变，反之亦然。ViewModel向上与视图层View进行双向数据绑定，向下与Model通过接口请求进行数据交互，起到承上启下的作用。</p>
+<p>View 指看到的页面。<br>Model 指后端传递的数据。<br>ViewModel 视图模型是 mvvm 模式的核心，它是连接 view 和 model 的桥梁。它有两个方向：</p>
+<p>一个是将视图转化成数据模型，将所看到的页面转化成后端的数据，实现方式：DOM 事件监听；<br>另一个方向是将模型转化成视图，即将后台传递的数据转化成页面，实现方式：数据绑定。<br>两种方式都能实现称为双向数据绑定。</p>
+<p>在 MVVM 模式下视图和模型是不能直接通信的，通过 ViewModel 进行通信， ViewModel 通常要实现一个 observer 观察者，当数据发生变化时， ViewModel 能够监听到数据的变化，然后对视图进行更新。当视图发生变化，ViewModel 也能监听到视图的变化，然后通知数据进行改动，这就是数据的双向绑定。</p>
+<h2 id="3-var的缺陷是什么？"><a href="#3-var的缺陷是什么？" class="headerlink" title="3.var的缺陷是什么？"></a>3.var的缺陷是什么？</h2><p>var定义的变量没有块作用域。<br>var定义的全局变量会自动添加全局window对象的属性。<br>var定义的变量会被提升。</p>
+<h2 id="4-箭头函数的特点？"><a href="#4-箭头函数的特点？" class="headerlink" title="4.箭头函数的特点？"></a>4.箭头函数的特点？</h2><ul>
+<li>没有自己的this</li>
+<li>不存在arguments对象</li>
+<li>没有prototype属性</li>
+<li>不可以使用yield命令</li>
+<li>箭头函数返回对象时，要加一个小括号</li>
+<li>箭头函数在ES6 class中声明的方法为实例方法，不是原型方法</li>
+</ul>
 ]]></content>
       <categories>
         <category>面试</category>
